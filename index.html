@@ -554,8 +554,11 @@
 <title>Resetar Select para 0</title>
 <script>
 function resetSelect() {
-  document.getElementById('salgadoCoxinha').value = '0';
-}
+  document.getElementById('salgadoCoxinha').value = '0',
+  document.getElementById('salgadoRisoleCarne').value = '0',
+  document.getElementById('salgadoRisolePresuntoQueijo').value = '0',
+  document.getElementById('salgadoCoxinhaPernil').value = '0'
+};
 </script>
 </head>
 <body>
@@ -922,7 +925,7 @@ function calcularTroco() {
             salgadoCoxinha: 7.00,
             salgadoRisoleCarne: 7.00,
             salgadoRisolePresuntoQueijo: 7.00,
-            salgadoCoxinhaPerfil: 7.00,  
+            salgadoCoxinhaPernil: 7.00,  
             pastelCarne: 8.00,
             pastelQueijoPresunto: 8.00,
             pastelPizza: 8.00,
