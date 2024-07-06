@@ -561,36 +561,74 @@ function resetSelect() {
 <body>
 <h2> Salgados</h2>
 <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-    <label for="salgadoCoxinha">Salgado - Coxinha (R$ 7,00):</label>
+    <label for="salgadoCoxinha"> Coxinha de Frango (R$ 7,00):</label>
     <select id="salgadoCoxinha">
-        <option value="0">0</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
+    <option value="0">0</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
     </select>
 </div>
-<button onclick="resetSelect()">Resetar para 0</button>
-</body>
-</html>
-
-<div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="salgadoRisoleCarne">Salgado - Risole de Carne (R$ 7,00):</label>
+    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
+  <label for="salgadoRisoleCarne">Risole de Carne (R$ 7,00):</label>
   <select id="salgadoRisoleCarne">
     <option value="0">0</option>
     <option value="1">1</option>
     <option value="2">2</option>
     <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
   </select>
 </div>
-<div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="salgadoRisolePresuntoQueijo">Salgado - Risole Presunto e Queijo (R$ 7,00):</label>
+    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
+  <label for="salgadoRisolePresuntoQueijo">Risole Presunto e Queijo (R$ 7,00):</label>
   <select id="salgadoRisolePresuntoQueijo">
     <option value="0">0</option>
     <option value="1">1</option>
     <option value="2">2</option>
     <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
   </select>
 </div>
+    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
+  <label for="salgadoCoxinhaPernil">Coxinha de Pernil (R$ 7,00):</label>
+  <select id="salgadoCoxinhaPernil">
+    <option value="0">0</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+  </select>
+</div>
+    
+<button onclick="resetSelect()">Resetar para 0</button>
+</body>
+</html>
+
         
      <h2>Pastéis Tradicionais</h2>
         <div class="item" bis_skin_checked="1">
@@ -884,6 +922,7 @@ function calcularTroco() {
             salgadoCoxinha: 7.00,
             salgadoRisoleCarne: 7.00,
             salgadoRisolePresuntoQueijo: 7.00,
+            salgadoCoxinhaPerfil: 7.00,  
             pastelCarne: 8.00,
             pastelQueijoPresunto: 8.00,
             pastelPizza: 8.00,
@@ -956,6 +995,7 @@ function calcularTroco() {
               coxinha: document.getElementById('salgadoCoxinha').value,
               risoleCarne: document.getElementById('salgadoRisoleCarne').value,
               risolePresuntoQueijo: document.getElementById('salgadoRisolePresuntoQueijo').value,
+              coxinhapernil: document.getElementById('salgadoCoxinhaPernil').value,
               carne: document.getElementById('pastelCarne').value,
               queijoPresunto: document.getElementById('pastelQueijoPresunto').value,
               pizza: document.getElementById('pastelPizza').value,
