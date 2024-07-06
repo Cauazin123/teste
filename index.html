@@ -546,16 +546,33 @@
           <input type="text" id="nomeCliente">
         </div>
   
-        <h2> Salgados</h2>
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resetar Select para 0</title>
+<script>
+function resetSelect() {
+  document.getElementById('salgadoCoxinha').value = '0';
+}
+</script>
+</head>
+<body>
+<h2> Salgados</h2>
 <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
     <label for="salgadoCoxinha">Salgado - Coxinha (R$ 7,00):</label>
-  <select id="salgadoCoxinha">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-  </select>
+    <select id="salgadoCoxinha">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+    </select>
 </div>
+<button onclick="resetSelect()">Resetar para 0</button>
+</body>
+</html>
+
 <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
   <label for="salgadoRisoleCarne">Salgado - Risole de Carne (R$ 7,00):</label>
   <select id="salgadoRisoleCarne">
