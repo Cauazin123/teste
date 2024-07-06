@@ -540,92 +540,27 @@
 
     <div class="container" bis_skin_checked="1">
         <h1><img src="https://i.imgur.com/dBaLJbE.png" alt="Ícone Casa do Pastel" style="vertical-align: middle; width: 40px; height: auto;"> CASA DO PASTEL</h1>
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Salgados</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-    }
-    .itens-container {
-      display: flex;
-      gap: 20px; /* Espaço entre os itens */
-    }
-    .item {
-      flex: 1; /* Ocupa espaço igual dentro do flex container */
-      max-width: 300px; /* Largura máxima para cada item */
-    }
-    label {
-      display: block; /* Faz o label ocupar toda a largura disponível */
-      margin-bottom: 5px; /* Espaçamento inferior para separar os itens */
-    }
-    select {
-      width: 100%; /* Faz o select ocupar toda a largura do container pai */
-      padding: 5px;
-    }
-  </style>
-</head>
-<body>
+    
         <div class="item" bis_skin_checked="1">
           <label for="nomeCliente">Nome do Cliente:</label>
           <input type="text" id="nomeCliente">
         </div>
-    
-  <h2>Salgados</h2>
-  <div class="itens-container">
+  
+       <h2>Pastéis e Salgados</h2>
+<div class="items-container">
     <div class="item">
-      <label for="salgadoCoxinha">Salgado - Coxinha (R$ 7,00):</label>
-      <select id="salgadoCoxinha">
-        <option value="0">Nenhum</option>
-        <option value="1">1 unidade</option>
-        <option value="2">2 unidades</option>
-        <option value="3">3 unidades</option>
-        <option value="4">4 unidades</option>
-        <option value="5">5 unidades</option>
-        <option value="6">6 unidades</option>
-        <option value="7">7 unidades</option>
-        <option value="8">8 unidades</option>
-        <option value="9">9 unidades</option>
-        <option value="10">10 unidades</option>
-      </select>
+        <label for="salgadoCoxinha">Salgado - Coxinha (R$ 7,00):</label>
+        <input type="number" id="salgadoCoxinha" value="0" min="0">
     </div>
-    
     <div class="item">
-      <label for="salgadoRisoleCarne">Salgado - Risole de Carne (R$ 7,00):</label>
-      <select id="salgadoRisoleCarne">
-        <option value="0">Nenhum</option>
-        <option value="1">1 unidade</option>
-        <option value="2">2 unidades</option>
-        <option value="3">3 unidades</option>
-        <option value="4">4 unidades</option>
-        <option value="5">5 unidades</option>
-        <option value="6">6 unidades</option>
-        <option value="7">7 unidades</option>
-        <option value="8">8 unidades</option>
-        <option value="9">9 unidades</option>
-        <option value="10">10 unidades</option>
-      </select>
+        <label for="salgadoRisoleCarne">Salgado - Risole de Carne (R$ 7,00):</label>
+        <input type="number" id="salgadoRisoleCarne" value="0" min="0">
     </div>
-      </body>
-</html>
-        
- <h2>Pastéis Tradicionais</h2>      
-        <div class="item" bis_skin_checked="1">
-          <label for="salgadoCoxinha">Salgado - Coxinha (R$ 7,00):</label>
-          <input type="number" id="salgadoCoxinha" value="0" min="0">
-        </div>
-        <div class="item" bis_skin_checked="1">
-          <label for="salgadoRisoleCarne">Salgado - Risole de Carne (R$ 7,00):</label>
-          <input type="number" id="salgadoRisoleCarne" value="0" min="0">
-        </div>
-        <div class="item" bis_skin_checked="1">
-          <label for="salgadoRisolePresuntoQueijo">Salgado - Risole Presunto e Queijo (R$ 7,00):</label>
-          <input type="number" id="salgadoRisolePresuntoQueijo" value="0" min="0">
-        </div>
+    <div class="item">
+        <label for="salgadoRisolePresuntoQueijo">Salgado - Risole Presunto e Queijo (R$ 7,00):</label>
+        <input type="number" id="salgadoRisolePresuntoQueijo" value="0" min="0">
+    </div>
+</div>
         <div class="item" bis_skin_checked="1">
           <label for="pastelCarne">Pastel de Carne (R$ 8,00):</label>
           <input type="number" id="pastelCarne" value="0" min="0">
@@ -783,7 +718,7 @@
             <option value="uairango">UaiRango</option>
           </select>
         </div>
-
+  
         <h2>Taxa</h2>
         <div class="item" bis_skin_checked="1">
           <label for="taxa">Escolha a opção de taxa:</label>
@@ -793,8 +728,9 @@
             <option value="delivery">Delivery (R$ 4,00)</option>
           </select>
         </div>
+  
 
-        <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -871,13 +807,11 @@ function calcularTroco() {
 </body>
 </html>
 
-        
         <div class="item" id="enderecoContainer" style="display: none;" bis_skin_checked="1">
           <label for="endereco">Endereço:</label>
           <input type="text" id="endereco">
         </div>
-
-        
+  
         <button onclick="adicionarPedido()">Adicionar Pedido</button>
         <div class="total" id="total" bis_skin_checked="1">Total: R$ 0.00</div>
         <div id="listaPedidos" bis_skin_checked="1"></div>
