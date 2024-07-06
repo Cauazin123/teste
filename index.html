@@ -546,79 +546,43 @@
           <input type="text" id="nomeCliente">
         </div>
 
-        <!DOCTYPE html>
-<html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sistema de Seleção de Produtos</title>
+<title>Seleção de Produtos</title>
 <style>
-  body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    padding: 20px;
-  }
-  .produto {
-    margin-bottom: 15px;
-  }
-  label {
-    display: inline-block;
-    width: 300px;
-  }
-  .valor {
-    font-weight: bold;
-    margin-left: 10px;
-  }
-  .total {
-    margin-top: 20px;
-    font-size: 1.2em;
-    font-weight: bold;
-  }
+    /* Estilo básico para melhor visualização */
+    .product-list {
+        list-style-type: none;
+        padding: 0;
+    }
+    .product-list li {
+        margin-bottom: 5px;
+    }
 </style>
 </head>
 <body>
-  <h2>Seleção de Produtos</h2>
-  
-  <div class="produto">
-    <input type="checkbox" id="coxinha" name="produto" value="7.00">
-    <label for="coxinha">Salgado - Coxinha <span class="valor">(R$ 7,00)</span></label>
-  </div>
-
-  <div class="produto">
-    <input type="checkbox" id="risolePresuntoQueijo" name="produto" value="7.00">
-    <label for="risolePresuntoQueijo">Salgado - Risole de Presunto e Queijo <span class="valor">(R$ 7,00)</span></label>
-  </div>
-
-  <div class="produto">
-    <input type="checkbox" id="risoleCarne" name="produto" value="7.00">
-    <label for="risoleCarne">Salgado - Risole de Carne <span class="valor">(R$ 7,00)</span></label>
-  </div>
-
-  <div class="total">
-    Total: R$ <span id="total">0.00</span>
-  </div>
-
-  <script>
-    // Adiciona um listener para os checkboxes
-    const checkboxes = document.querySelectorAll('input[name="produto"]');
-    checkboxes.forEach(checkbox => {
-      checkbox.addEventListener('change', function() {
-        calcularTotal();
-      });
-    });
-
-    // Função para calcular o total baseado nos checkboxes selecionados
-    function calcularTotal() {
-      let total = 0;
-      checkboxes.forEach(checkbox => {
-        if (checkbox.checked) {
-          total += parseFloat(checkbox.value);
-        }
-      });
-      document.getElementById('total').textContent = total.toFixed(2);
-    }
-  </script>
-
+    <h2>Selecione seus produtos:</h2>
+    <form action="#">
+        <ul class="product-list">
+            <li>
+                <input type="checkbox" id="produto1" name="produto" value="produto1">
+                <label for="produto1">Produto 1</label>
+            </li>
+            <li>
+                <input type="checkbox" id="produto2" name="produto" value="produto2">
+                <label for="produto2">Produto 2</label>
+            </li>
+            <li>
+                <input type="checkbox" id="produto3" name="produto" value="produto3">
+                <label for="produto3">Produto 3</label>
+            </li>
+            <!-- Adicione mais itens conforme necessário -->
+        </ul>
+        <button type="submit">Enviar</button>
+    </form>
 </body>
 </html>
         
