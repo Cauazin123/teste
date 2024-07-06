@@ -564,7 +564,7 @@ function resetSelect() {
 <body>
 <h2> Salgados</h2>
 <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-    <label for="salgadoCoxinha"> Coxinha de Frango (R$ 7,00):</label>
+    <label for="salgadoCoxinha"> Coxinha de Frango     (R$ 7,00):</label>
     <select id="salgadoCoxinha">
     <option value="0">0</option>
     <option value="1">1</option>
@@ -580,7 +580,7 @@ function resetSelect() {
     </select>
 </div>
     <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="salgadoRisoleCarne">Risole de Carne (R$ 7,00):</label>
+  <label for="salgadoRisoleCarne">Risole de Carne     (R$ 7,00):</label>
   <select id="salgadoRisoleCarne">
     <option value="0">0</option>
     <option value="1">1</option>
@@ -612,8 +612,24 @@ function resetSelect() {
   </select>
 </div>
     <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="salgadoCoxinhaPernil">Coxinha de Pernil (R$ 7,00):</label>
+  <label for="salgadoCoxinhaPernil">Coxinha de Pernil     (R$ 7,00):</label>
   <select id="salgadoCoxinhaPernil">
+    <option value="0">0</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+  </select>
+</div>
+    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
+  <label for="salgadoBolinhaQueijo">Bolinha de Queijo     (R$ 9,00):</label>
+  <select id="salgadoBolinhaQueijo">
     <option value="0">0</option>
     <option value="1">1</option>
     <option value="2">2</option>
@@ -926,6 +942,7 @@ function calcularTroco() {
             salgadoRisoleCarne: 7.00,
             salgadoRisolePresuntoQueijo: 7.00,
             salgadoCoxinhaPernil: 7.00,  
+            salgadoBolinhaQueijo: 9.00,  
             pastelCarne: 8.00,
             pastelQueijoPresunto: 8.00,
             pastelPizza: 8.00,
@@ -999,6 +1016,7 @@ function calcularTroco() {
               risoleCarne: document.getElementById('salgadoRisoleCarne').value,
               risolePresuntoQueijo: document.getElementById('salgadoRisolePresuntoQueijo').value,
               coxinhapernil: document.getElementById('salgadoCoxinhaPernil').value,
+              bolinhaqueijo: document.getElementById('salgadoBolinhaQueijo').value,  
               carne: document.getElementById('pastelCarne').value,
               queijoPresunto: document.getElementById('pastelQueijoPresunto').value,
               pizza: document.getElementById('pastelPizza').value,
