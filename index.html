@@ -547,6 +547,35 @@
         </div>
   
         <h2>Salgados</h2>
+ <html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo de Produtos</title>
+    <style>
+        .item {
+            display: inline-block;
+            margin-right: 25px;
+            width: 250px; /* largura fixa para o item */
+        }
+
+        .item label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .item select {
+            width: 100%; /* largura de 100% do elemento pai (item) */
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+
 <div class="item" bis_skin_checked="1">
     <label for="salgadoCoxinha">Coxinha de Frango (R$ 7,00):</label>
     <select id="salgadoCoxinha">
@@ -563,7 +592,9 @@
         <option value="10">10</option>
     </select>
 </div>
- <div class="item" bis_skin_checked="1">
+    </body>
+</html>
+     <div class="item" bis_skin_checked="1" style="display: inline-block; margin-right: 25px;">
        <label for="salgadoRisoleCarne">Risole de Carne (R$ 7,00):</label>
     <select id="salgadoRisoleCarne">
             <option value="0">0</option>
@@ -579,7 +610,7 @@
             <option value="10">10</option>
         </select>
     </div>
- <div class="item" bis_skin_checked="1">
+     <div class="item" bis_skin_checked="1" style="display: inline-block; margin-right: 25px;">
        <label for="salgadoRisolePresuntoQueijo">Presunto e Queijo (R$ 7,00):</label>
     <select id="salgadoPresuntoQueijo">
             <option value="0">0</option>
@@ -595,7 +626,7 @@
             <option value="10">10</option>
         </select>
     </div>
- <div class="item" bis_skin_checked="1">
+     <div class="item" bis_skin_checked="1" style="display: inline-block; margin-right: 25px;">
        <label for="salgadoBolinhaQueijo">Bolinha de Queijo (R$ 9,00):</label>
     <select id="salgadoBolinhaQueijo">
             <option value="0">0</option>
