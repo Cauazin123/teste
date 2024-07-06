@@ -102,6 +102,14 @@
           transform: scale(1.02);
       }
 
+      .total {
+          margin-top: 20px;
+          font-size: 1.8em;
+          text-align: center;
+          color: #e3bc21;
+          font-weight: bold;
+      }
+
       .pedido {
           margin-top: 20px;
           padding: 15px;
@@ -537,8 +545,7 @@
           <label for="nomeCliente">Nome do Cliente:</label>
           <input type="text" id="nomeCliente">
         </div>
-
-        
+  
         <h2>Pastéis e Salgados</h2>
         <div class="item" bis_skin_checked="1">
           <label for="salgadoCoxinha">Salgado - Coxinha (R$ 7,00):</label>
@@ -628,7 +635,7 @@
           <label for="pastelDoceLeiteBanana">Pastel de Doce de Leite com Banana (R$ 12,00):</label>
           <input type="number" id="pastelDoceLeiteBanana" value="0" min="0">
         </div>
-
+  
         <h2>Adicionais</h2>
         <div class="item" bis_skin_checked="1">
           <label for="adicionalBombom">Bombom (R$ 3,00):</label>
@@ -666,7 +673,6 @@
           <label for="adicionalVinagrete">Vinagrete (R$ 3,00):</label>
           <input type="number" id="adicionalVinagrete" value="0" min="0">
         </div>
-        
   
         <h2>Bebidas</h2>
         <div class="item" bis_skin_checked="1">
@@ -693,14 +699,13 @@
           <label for="bebidaSuco">Suco (R$ 4,00):</label>
           <input type="number" id="bebidaSuco" value="0" min="0">
         </div>
-        
+  
         <h2>Observações</h2>
         <div class="item" bis_skin_checked="1">
           <label for="observacoes">Observações:</label>
           <input type="text" id="observacoes">
         </div>
-
-        
+  
         <h2>Forma de Pagamento</h2>
         <div class="item" bis_skin_checked="1">
           <label for="pagamento">Escolha a forma de pagamento:</label>
@@ -711,7 +716,8 @@
             <option value="uairango">UaiRango</option>
           </select>
         </div>
-  
+
+        <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -786,7 +792,9 @@ function calcularTroco() {
 </script>
 
 </body>
+</html>
 
+  
         <h2>Taxa</h2>
         <div class="item" bis_skin_checked="1">
           <label for="taxa">Escolha a opção de taxa:</label>
@@ -805,110 +813,8 @@ function calcularTroco() {
         <button onclick="adicionarPedido()">Adicionar Pedido</button>
         <div class="total" id="total" bis_skin_checked="1">Total: R$ 0.00</div>
         <div id="listaPedidos" bis_skin_checked="1"></div>
+        <button onclick="gerarRelatorio()">Gerar Relatório do Dia</button>
       </div>
-
-    <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calculadora de Compra</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
-<style>
-    body {
-        font-family: 'Poppins', Arial, sans-serif;
-        text-align: center;
-    }
-    .container {
-        max-width: 700px;
-        width: 80%;
-        margin: 50px auto;
-        padding: 30px;
-        border-radius: 15px;
-        box-shadow: 0 0 0 5px rgba(227, 188, 33, 0.5);
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-    }
-    .item {
-        width: calc(50% - 20px);
-        margin-bottom: 20px;
-    }
-    .item label, .item input {
-        display: block;
-        margin-bottom: 10px;
-    }
-    input[type="number"] {
-        width: calc(100% - 16px);
-        padding: 8px;
-        box-sizing: border-box;
-    }
-    button {
-        background-color: #FFD700; /* Amarelo */
-        color: white;
-        padding: 10px 20px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-family: 'Poppins', Arial, sans-serif;
-    }
-    .total {
-        margin-top: 20px;
-        font-size: 1.8em;
-        text-align: center;
-        color: #e3bc21;
-        font-weight: bold;
-    }
-</style>
-</head>
-<body>
-<div class="container">
-    <div class="item">
-        <h2>Calculadora de Compra</h2>
-    </div>
-    <div class="item">
-        <label for="salgadoCoxinha">Salgado - Coxinha (R$ 7,00):</label>
-        <input type="number" id="salgadoCoxinha" value="0" min="0">
-    </div>
-    <div class="item">
-        <label for="salgadoRisoleCarne">Salgado - Risole de Carne (R$ 7,00):</label>
-        <input type="number" id="salgadoRisoleCarne" value="0" min="0">
-    </div>
-    <div class="item">
-        <label for="salgadoRisolePresuntoQueijo">Salgado - Risole Presunto e Queijo (R$ 7,00):</label>
-        <input type="number" id="salgadoRisolePresuntoQueijo" value="0" min="0">
-    </div>
-    <div class="item">
-        <button onclick="calcularTotal()">Calcular Total</button>
-    </div>
-    <div class="item">
-        <p id="totalCalculado" class="total"></p>
-    </div>
-</div>
-
-<script>
-function calcularTotal() {
-    var precoCoxinha = 7.00;
-    var precoRisoleCarne = 7.00;
-    var precoRisolePresuntoQueijo = 7.00;
-
-    var quantidadeCoxinha = parseInt(document.getElementById('salgadoCoxinha').value);
-    var quantidadeRisoleCarne = parseInt(document.getElementById('salgadoRisoleCarne').value);
-    var quantidadeRisolePresuntoQueijo = parseInt(document.getElementById('salgadoRisolePresuntoQueijo').value);
-
-    var total = (precoCoxinha * quantidadeCoxinha) + (precoRisoleCarne * quantidadeRisoleCarne) + (precoRisolePresuntoQueijo * quantidadeRisolePresuntoQueijo);
-
-    document.getElementById('totalCalculado').innerText = 'Total: R$ ' + total.toFixed(2);
-}
-</script>
-
-</body>
-</html>
   
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
       <script>
@@ -1173,5 +1079,6 @@ function calcularTotal() {
           }, 2000);
         });
       </script>
+  
 
 </body></html>
