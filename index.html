@@ -578,6 +578,7 @@ function resetSelect() {
   document.getElementById('pastelDuplo').value = '0',
   document.getElementById('pastelHamburguer').value = '0',
   document.getElementById('pastelHotDog').value = '0',
+  document.getElementById('pastelPalmito').value = '0',  
   document.getElementById('pastelChocolateNinho').value = '0',
   document.getElementById('pastelDoceLeiteBanana').value = '0',
   document.getElementById('adicionalBombom').value = '0',
@@ -649,7 +650,7 @@ function resetSelect() {
   </select>
 </div>
     <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="salgadoCoxinhaPernil">Coxinha de Pernil</label>
+  <label for="salgadoCoxinhaPernil">Coxinha de Costela</label>
   <select id="salgadoCoxinhaPernil">
     <option value="0">0</option>
     <option value="1">1</option>
@@ -763,7 +764,7 @@ function resetSelect() {
   </select>
 </div>
     <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="pastelQueijo">Queijo</label>
+  <label for="pastelQueijo"> Queijo</label>
   <select id="pastelQueijo">
     <option value="0">0</option>
     <option value="1">1</option>
@@ -781,7 +782,7 @@ function resetSelect() {
 
     <h2>Pastéis Especiais</h2>
     <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="pastelCarneQueijo">Carne com Queijo</label>
+  <label for="pastelCarneQueijo"> Carne com Queijo</label>
   <select id="pastelCarneQueijo">
     <option value="0">0</option>
     <option value="1">1</option>
@@ -925,8 +926,8 @@ function resetSelect() {
   </select>
 </div>
     <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="pastelCostelacomQueijo">Costela com Queijo</label>
-  <select id="pastelCostelacomQueijo">
+  <label for="pastelCostelaQueijo">Costela com Queijo</label>
+  <select id="pastelCostelaQueijo">
     <option value="0">0</option>
     <option value="1">1</option>
     <option value="2">2</option>
@@ -975,6 +976,22 @@ function resetSelect() {
     <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
   <label for="pastelHotDog">Hot Dog</label>
   <select id="pastelHotDog">
+    <option value="0">0</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+  </select>
+</div>
+    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
+  <label for="pastelPalmito">Palmito</label>
+  <select id="pastelPalmito">
     <option value="0">0</option>
     <option value="1">1</option>
     <option value="2">2</option>
@@ -1266,6 +1283,17 @@ function resetSelect() {
 </div>
     
 <button onclick="resetSelect()">Resetar</button>
+
+    <script>
+function atualizarValorSelecionado() {
+    var valor = document.getElementById('salgadoCoxinha').value;
+    
+    document.getElementById('valorSelecionado').textContent = "Valor selecionado: " + valor;
+}
+
+document.getElementById('salgadoCoxinha').addEventListener('change', atualizarValorSelecionado);
+</script>
+    
 </body>
 </html>
   
@@ -1285,9 +1313,24 @@ function resetSelect() {
             <option value="uairango">UaiRango</option>
           </select>
         </div>
+  
+        <h2>Taxa</h2>
+        <div class="item" bis_skin_checked="1">
+          <label for="taxa">Escolha a opção de taxa:</label>
+          <select id="taxa" onchange="mostrarEndereco()">
+            <option value="retirada">Retirada</option>
+            <option value="mesa">Mesa</option>
+            <option value="delivery">Delivery (R$ 4,00)</option>
+          </select>
+        </div>
+
+        <div class="item" id="enderecoContainer" style="display: none;" bis_skin_checked="1">
+          <label for="endereco">Endereço:</label>
+          <input type="text" id="endereco">
+        </div>
 
 
-<!DOCTYPE html>
+        <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -1363,22 +1406,8 @@ function calcularTroco() {
 
 </body>
 </html>
-        
-  
-        <h2>Taxa</h2>
-        <div class="item" bis_skin_checked="1">
-          <label for="taxa">Escolha a opção de taxa:</label>
-          <select id="taxa" onchange="mostrarEndereco()">
-            <option value="retirada">Retirada</option>
-            <option value="mesa">Mesa</option>
-            <option value="delivery">Delivery (R$ 4,00)</option>
-          </select>
-        </div>
 
-        <div class="item" id="enderecoContainer" style="display: none;" bis_skin_checked="1">
-          <label for="endereco">Endereço:</label>
-          <input type="text" id="endereco">
-        </div>
+        
   
         <button onclick="adicionarPedido()">Adicionar Pedido</button>
         <div class="total" id="total" bis_skin_checked="1">Total: R$ 0.00</div>
@@ -1420,7 +1449,7 @@ function calcularTroco() {
             salgadoCoxinha: 7.00,
             salgadoRisoleCarne: 7.00,
             salgadoRisolePresuntoQueijo: 7.00,
-            salgadoCoxinhaPernil: 7.00,  
+            salgadoCoxinhaPernil: 9.00,
             salgadoBolinhaQueijo: 9.00,  
             pastelCarne: 8.00,
             pastelQueijoPresunto: 8.00,
@@ -1437,10 +1466,11 @@ function calcularTroco() {
             pastelCarneSecaQueijo: 20.00,  
             pastelCostela: 16.00,
             pastelCostelaAcebolada: 18.00,
-            pastelCostelacomQueijo: 20.00,
+            pastelCostelaQueijo: 20.00,
             pastelDuplo: 18.00,
             pastelHamburguer: 12.00,
             pastelHotDog: 12.00,  
+            pastelPalmito: 12.00,  
             pastelChocolateNinho: 12.00,
             pastelDoceLeiteBanana: 12.00,
             adicionalBombom: 3.00,
@@ -1457,7 +1487,7 @@ function calcularTroco() {
             bebidaLatinha: 5.00,
             bebidaCerveja: 5.00,
             bebidaSuco: 4.00,
-            bebidaaguagas: 5.00  
+            bebidaaguagas: 3.00  
           };
 
           let total = 0;
@@ -1513,10 +1543,11 @@ function calcularTroco() {
               carneSecaQueijo: document.getElementById('pastelCarneSecaQueijo').value,
               costela: document.getElementById('pastelCostela').value,
               costelaAcebolada: document.getElementById('pastelCostelaAcebolada').value,
-              costelaComQueijo: document.getElementById('pastelCostelacomQueijo').value,
+              costelaComQueijo: document.getElementById('pastelCostelaQueijo').value,
               pastelDuplo: document.getElementById('pastelDuplo').value,
               hamburguer: document.getElementById('pastelHamburguer').value,
               hotDog: document.getElementById('pastelHotDog').value,
+              palmito: document.getElementById('pastelPalmito').value,  
               chocolateNinho: document.getElementById('pastelChocolateNinho').value,
               doceLeiteBanana: document.getElementById('pastelDoceLeiteBanana').value
             };
