@@ -547,59 +547,147 @@
         </div>
   
         <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Resetar Select para 0</title>
+<title>Calculadora de Compra</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+<style>
+    body {
+        font-family: 'Poppins', Arial, sans-serif; /* Prioriza a fonte Poppins */
+        text-align: center;
+    }
+    .container {
+        max-width: 700px;
+        width: 80%;
+        margin: 0 auto;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 0 0 5px rgba(227, 188, 33, 0.5);
+    }
+    input[type="number"] {
+        width: 100%;
+        padding: 8px;
+        margin: 5px 0;
+        box-sizing: border-box;
+    }
+    button {
+        background-color: #FFD700; /* Amarelo */
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin-top: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-family: 'Poppins', Arial, sans-serif; /* Prioriza a fonte Poppins */
+    }
+</style>
 <script>
+// Função para resetar todos os selects de produtos
 function resetSelect() {
-  document.getElementById('salgadoCoxinha').value = '0',
-  document.getElementById('salgadoRisoleCarne').value = '0',
-  document.getElementById('salgadoRisolePresuntoQueijo').value = '0',
-  document.getElementById('salgadoCoxinhaPernil').value = '0',
-  document.getElementById('salgadoBolinhaQueijo').value = '0',
-  document.getElementById('pastelCarne').value = '0',
-  document.getElementById('pastelQueijoPresunto').value = '0',
-  document.getElementById('pastelPizza').value = '0',
-  document.getElementById('pastelFrango').value = '0',
-  document.getElementById('pastelFrangoCatupiry').value = '0',
-  document.getElementById('pastelQueijo').value = '0',
-  document.getElementById('pastelCarneQueijo').value = '0',
-  document.getElementById('pastelFrangoQueijo').value = '0',
-  document.getElementById('pastelCalabresa').value = '0',
-  document.getElementById('pastelCalabresaQueijo').value = '0',
-  document.getElementById('pastelQueijoBacon').value = '0',
-  document.getElementById('pastelCarneSeca').value = '0',
-  document.getElementById('pastelCarneSecaQueijo').value = '0',
-  document.getElementById('pastelCostela').value = '0',
-  document.getElementById('pastelCostelaAcebolada').value = '0',
-  document.getElementById('pastelCostelaQueijo').value = '0',
-  document.getElementById('pastelDuplo').value = '0',
-  document.getElementById('pastelHamburguer').value = '0',
-  document.getElementById('pastelHotDog').value = '0',
-  document.getElementById('pastelPalmito').value = '0',  
-  document.getElementById('pastelChocolateNinho').value = '0',
-  document.getElementById('pastelDoceLeiteBanana').value = '0',
-  document.getElementById('adicionalBombom').value = '0',
-  document.getElementById('adicionalCocoRalado').value = '0',
-  document.getElementById('adicionalQueijo').value = '0',
-  document.getElementById('adicionalCatupiry').value = '0',
-  document.getElementById('adicionalCalabresa').value = '0',
-  document.getElementById('adicionalBacon').value = '0',
-  document.getElementById('adicionalMilho').value = '0',
-  document.getElementById('adicionalVinagrete').value = '0',
-  document.getElementById('bebidaGuarana').value = '0',
-  document.getElementById('bebidaCocaCola').value = '0',
-  document.getElementById('bebidaLatinha').value = '0',
-  document.getElementById('bebidaCoca').value = '0',
-  document.getElementById('bebidaCerveja').value = '0',
-  document.getElementById('bebidaSuco').value = '0',
-  document.getElementById('bebidaaguagas').value = '0'
-};
+    document.getElementById('salgadoCoxinha').value = '0';
+    document.getElementById('salgadoRisoleCarne').value = '0';
+    document.getElementById('salgadoRisolePresuntoQueijo').value = '0';
+    document.getElementById('salgadoCoxinhaPernil').value = '0';
+    document.getElementById('salgadoBolinhaQueijo').value = '0';
+    document.getElementById('pastelCarne').value = '0';
+    document.getElementById('pastelQueijoPresunto').value = '0';
+    document.getElementById('pastelPizza').value = '0';
+    document.getElementById('pastelFrango').value = '0';
+    document.getElementById('pastelFrangoCatupiry').value = '0';
+    document.getElementById('pastelQueijo').value = '0';
+    document.getElementById('pastelCarneQueijo').value = '0';
+    document.getElementById('pastelFrangoQueijo').value = '0';
+    document.getElementById('pastelCalabresa').value = '0';
+    document.getElementById('pastelCalabresaQueijo').value = '0';
+    document.getElementById('pastelQueijoBacon').value = '0';
+    document.getElementById('pastelCarneSeca').value = '0';
+    document.getElementById('pastelCarneSecaQueijo').value = '0';
+    document.getElementById('pastelCostela').value = '0';
+    document.getElementById('pastelCostelaAcebolada').value = '0';
+    document.getElementById('pastelCostelaQueijo').value = '0';
+    document.getElementById('pastelDuplo').value = '0';
+    document.getElementById('pastelHamburguer').value = '0';
+    document.getElementById('pastelHotDog').value = '0';
+    document.getElementById('pastelPalmito').value = '0';  
+    document.getElementById('pastelChocolateNinho').value = '0';
+    document.getElementById('pastelDoceLeiteBanana').value = '0';
+    document.getElementById('adicionalBombom').value = '0';
+    document.getElementById('adicionalCocoRalado').value = '0';
+    document.getElementById('adicionalQueijo').value = '0';
+    document.getElementById('adicionalCatupiry').value = '0';
+    document.getElementById('adicionalCalabresa').value = '0';
+    document.getElementById('adicionalBacon').value = '0';
+    document.getElementById('adicionalMilho').value = '0';
+    document.getElementById('adicionalVinagrete').value = '0';
+    document.getElementById('bebidaGuarana').value = '0';
+    document.getElementById('bebidaCocaCola').value = '0';
+    document.getElementById('bebidaLatinha').value = '0';
+    document.getElementById('bebidaCoca').value = '0';
+    document.getElementById('bebidaCerveja').value = '0';
+    document.getElementById('bebidaSuco').value = '0';
+    document.getElementById('bebidaaguagas').value = '0';
+}
+
+// Função para atualizar o total da compra conforme a quantidade selecionada
+function atualizarTotal() {
+    var produtos = document.querySelectorAll('.produtos select');
+    var totalCompra = 0;
+
+    produtos.forEach(function(produtoSelect) {
+        var quantidade = parseInt(produtoSelect.value);
+        var precoPorUnidade = parseFloat(produtoSelect.options[produtoSelect.selectedIndex].getAttribute('data-preco'));
+        
+        totalCompra += quantidade * precoPorUnidade;
+    });
+
+    document.getElementById('quantidade').value = getTotalQuantidade();
+    document.getElementById('total').value = totalCompra.toFixed(2);
+}
+
+// Função para calcular o troco
+function calcularTroco() {
+    var totalCompra = parseFloat(document.getElementById('total').value);
+    var valorPago = parseFloat(document.getElementById('pago').value);
+
+    if (isNaN(totalCompra) || isNaN(valorPago)) {
+        alert('Por favor, digite valores numéricos válidos.');
+        return;
+    }
+
+    var troco = valorPago - totalCompra;
+
+    if (troco < 0) {
+        alert('O valor pago é menor que o total da compra.');
+        return;
+    }
+
+    document.getElementById('troco').innerText = 'Troco a ser dado: R$ ' + troco.toFixed(2);
+}
+
+// Função para obter o total de quantidade selecionada
+function getTotalQuantidade() {
+    var produtos = document.querySelectorAll('.produtos select');
+    var totalQuantidade = 0;
+
+    produtos.forEach(function(produtoSelect) {
+        totalQuantidade += parseInt(produtoSelect.value);
+    });
+
+    return totalQuantidade;
+}
+
+// Chama a função para atualizar o total inicialmente
+atualizarTotal();
 </script>
 </head>
 <body>
+    
 <h2> Salgados</h2>
 <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
     <label for="salgadoCoxinha"> Coxinha de Frango</label>
@@ -1284,16 +1372,22 @@ function resetSelect() {
     
 <button onclick="resetSelect()">Resetar</button>
 
-    <script>
-function atualizarValorSelecionado() {
-    var valor = document.getElementById('salgadoCoxinha').value;
-    
-    document.getElementById('valorSelecionado').textContent = "Valor selecionado: " + valor;
-}
+    <div class="container">
+    <h2>Calculadora de Compra</h2>
 
-document.getElementById('salgadoCoxinha').addEventListener('change', atualizarValorSelecionado);
-</script>
-    
+    <label for="quantidade">Quantidade:</label>
+    <input type="number" id="quantidade" value="0" min="0" onchange="atualizarTotal()"><br>
+
+    <label for="total">Total da compra:</label>
+    <input type="number" id="total" placeholder="0.00" readonly><br>
+
+    <label for="pago">Valor pago:</label>
+    <input type="number" id="pago" placeholder="Digite o valor pago"><br>
+
+    <button onclick="calcularTroco(); resetSelect();">Calcular Troco e Resetar</button><br>
+    <p id="troco"></p>
+</div>
+
 </body>
 </html>
   
@@ -1328,143 +1422,6 @@ document.getElementById('salgadoCoxinha').addEventListener('change', atualizarVa
           <label for="endereco">Endereço:</label>
           <input type="text" id="endereco">
         </div>
-
-
-        <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calculadora de Compra</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
-<style>
-    body {
-        font-family: 'Poppins', Arial, sans-serif; /* Prioriza a fonte Poppins */
-        text-align: center;
-    }
-    .container {
-        max-width: 700px;
-        width: 80%;
-        margin: 0 auto;
-        padding: 30px;
-        border-radius: 15px;
-        box-shadow: 0 0 0 5px rgba(227, 188, 33, 0.5);
-    }
-    input[type="number"] {
-        width: 100%;
-        padding: 8px;
-        margin: 5px 0;
-        box-sizing: border-box;
-    }
-    button {
-        background-color: #FFD700; /* Amarelo */
-        color: white;
-        padding: 10px 20px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin-top: 10px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-family: 'Poppins', Arial, sans-serif; /* Prioriza a fonte Poppins */
-    }
-</style>
-</head>
-<body>
-<!-- Produtos acima da calculadora -->
-<div class="produtos">
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-        <label for="salgadoCoxinha">Coxinha de Frango</label>
-        <select id="salgadoCoxinha" onchange="atualizarTotal()">
-            <option value="0">0</option>
-            <option value="1" data-preco="3.50">1</option>
-            <option value="2" data-preco="7.00">2</option>
-            <option value="3" data-preco="10.50">3</option>
-            <option value="4" data-preco="14.00">4</option>
-            <option value="5" data-preco="17.50">5</option>
-            <option value="6" data-preco="21.00">6</option>
-            <option value="7" data-preco="24.50">7</option>
-            <option value="8" data-preco="28.00">8</option>
-            <option value="9" data-preco="31.50">9</option>
-            <option value="10" data-preco="35.00">10</option>
-        </select>
-    </div>
-    <!-- Adicione mais produtos conforme necessário -->
-</div>
-
-<div class="container">
-    <h2>Calculadora de Compra</h2>
-
-    <label for="quantidade">Quantidade:</label>
-    <input type="number" id="quantidade" value="0" min="0" onchange="atualizarTotal()"><br>
-
-    <label for="total">Total da compra:</label>
-    <input type="number" id="total" placeholder="0.00" readonly><br>
-
-    <label for="pago">Valor pago:</label>
-    <input type="number" id="pago" placeholder="Digite o valor pago"><br>
-
-    <button onclick="calcularTroco()">Calcular Troco</button><br>
-    <p id="troco"></p>
-</div>
-
-<script>
-// Função para atualizar o total da compra conforme a quantidade selecionada
-function atualizarTotal() {
-    var produtos = document.querySelectorAll('.produtos select');
-    var totalCompra = 0;
-
-    produtos.forEach(function(produtoSelect) {
-        var quantidade = parseInt(produtoSelect.value);
-        var precoPorUnidade = parseFloat(produtoSelect.options[produtoSelect.selectedIndex].getAttribute('data-preco'));
-        
-        totalCompra += quantidade * precoPorUnidade;
-    });
-
-    document.getElementById('quantidade').value = getTotalQuantidade();
-    document.getElementById('total').value = totalCompra.toFixed(2);
-}
-
-// Função para calcular o troco
-function calcularTroco() {
-    var totalCompra = parseFloat(document.getElementById('total').value);
-    var valorPago = parseFloat(document.getElementById('pago').value);
-
-    if (isNaN(totalCompra) || isNaN(valorPago)) {
-        alert('Por favor, digite valores numéricos válidos.');
-        return;
-    }
-
-    var troco = valorPago - totalCompra;
-
-    if (troco < 0) {
-        alert('O valor pago é menor que o total da compra.');
-        return;
-    }
-
-    document.getElementById('troco').innerText = 'Troco a ser dado: R$ ' + troco.toFixed(2);
-}
-
-// Função para obter o total de quantidade selecionada
-function getTotalQuantidade() {
-    var produtos = document.querySelectorAll('.produtos select');
-    var totalQuantidade = 0;
-
-    produtos.forEach(function(produtoSelect) {
-        totalQuantidade += parseInt(produtoSelect.value);
-    });
-
-    return totalQuantidade;
-}
-
-// Chama a função para atualizar o total inicialmente
-atualizarTotal();
-</script>
-
-</body>
-</html>
         
   
         <button onclick="adicionarPedido()">Adicionar Pedido</button>
