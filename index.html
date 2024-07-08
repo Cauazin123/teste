@@ -1375,15 +1375,43 @@ document.getElementById('salgadoCoxinha').addEventListener('change', atualizarVa
 <body>
 <div class="container">
     <h2>Calculadora de Compra</h2>
+
+    <div class="item" bis_skin_checked="1" style="width: 100%; margin-bottom: 10px;">
+        <label for="produto">Produto:</label>
+        <select id="produto" onchange="atualizarTotal()">
+            <option value="coxinha" data-preco="3.50">Coxinha de Frango</option>
+            <option value="salgado" data-preco="4.00">Salgado de Carne</option>
+            <option value="pastel" data-preco="5.00">Pastel de Queijo</option>
+        </select>
+    </div>
+
+    <label for="quantidade">Quantidade:</label>
+    <input type="number" id="quantidade" value="0" min="0" onchange="atualizarTotal()"><br>
+
     <label for="total">Total da compra:</label>
-    <input type="number" id="total" placeholder="Digite o total da compra"><br>
+    <input type="number" id="total" placeholder="0.00" readonly><br>
+
     <label for="pago">Valor pago:</label>
     <input type="number" id="pago" placeholder="Digite o valor pago"><br>
+
     <button onclick="calcularTroco()">Calcular Troco</button><br>
     <p id="troco"></p>
 </div>
 
 <script>
+// Função para atualizar o total da compra conforme a seleção de produto e quantidade
+function atualizarTotal() {
+    var produto = document.getElementById('produto').value;
+    var quantidade = parseInt(document.getElementById('quantidade').value);
+    
+    var precoPorUnidade = parseFloat(document.querySelector('#produto option:checked').getAttribute('data-preco'));
+    
+    var totalCompra = quantidade * precoPorUnidade;
+    
+    document.getElementById('total').value = totalCompra.toFixed(2);
+}
+
+// Função para calcular o troco
 function calcularTroco() {
     var totalCompra = parseFloat(document.getElementById('total').value);
     var valorPago = parseFloat(document.getElementById('pago').value);
@@ -1406,7 +1434,6 @@ function calcularTroco() {
 
 </body>
 </html>
-
         
   
         <button onclick="adicionarPedido()">Adicionar Pedido</button>
