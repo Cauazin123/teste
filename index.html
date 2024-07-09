@@ -589,32 +589,30 @@
 </style>
 </head>
 <body>
-<!-- Produtos acima da calculadora -->
-<div class="produtos">
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-        <label for="salgadoCoxinha">Coxinha de Frango</label>
-        <select id="salgadoCoxinha" onchange="atualizarTotal()">
-            <option value="0">0</option>
-            <option value="1" data-preco="3.50">1</option>
-            <option value="2" data-preco="7.00">2</option>
-            <option value="3" data-preco="10.50">3</option>
-            <option value="4" data-preco="14.00">4</option>
-            <option value="5" data-preco="17.50">5</option>
-            <option value="6" data-preco="21.00">6</option>
-            <option value="7" data-preco="24.50">7</option>
-            <option value="8" data-preco="28.00">8</option>
-            <option value="9" data-preco="31.50">9</option>
-            <option value="10" data-preco="35.00">10</option>
-        </select>
-    </div>
-    <!-- Adicione mais produtos conforme necessário -->
-</div>
 
 <div class="container">
     <h2>Calculadora de Compra</h2>
 
+    <div class="item">
+        <label for="salgadoCoxinha">Coxinha de Frango</label>
+        <select id="salgadoCoxinha">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select>
+    </div>
+    <!-- Adicione mais produtos conforme necessário -->
+
     <label for="quantidade">Quantidade:</label>
-    <input type="number" id="quantidade" value="0" min="0" onchange="atualizarTotal()"><br>
+    <input type="number" id="quantidade" value="0" min="0"><br>
 
     <label for="total">Total da compra:</label>
     <input type="number" id="total" placeholder="0.00" readonly><br>
@@ -622,21 +620,68 @@
     <label for="pago">Valor pago:</label>
     <input type="number" id="pago" placeholder="Digite o valor pago"><br>
 
+    <button onclick="calcularTotal()">Calcular Total</button><br>
     <button onclick="calcularTroco()">Calcular Troco</button><br>
     <p id="troco"></p>
 </div>
 
 <script>
-// Função para atualizar o total da compra conforme a quantidade selecionada
-function atualizarTotal() {
-    var produtos = document.querySelectorAll('.produtos select');
+// Objeto com os preços dos produtos
+const precos = {
+    salgadoCoxinha: 7.00,
+    salgadoRisoleCarne: 7.00,
+    salgadoRisolePresuntoQueijo: 7.00,
+    salgadoCoxinhaPernil: 9.00,
+    salgadoBolinhaQueijo: 9.00,
+    // Adicione mais produtos conforme necessário
+    pastelCarne: 8.00,
+    pastelQueijoPresunto: 8.00,
+    pastelPizza: 8.00,
+    pastelFrango: 8.00,
+    pastelFrangoCatupiry: 8.00,
+    pastelQueijo: 10.00,
+    pastelCarneQueijo: 12.00,
+    pastelFrangoQueijo: 12.00,
+    pastelCalabresa: 10.00,
+    pastelCalabresaQueijo: 14.00,
+    pastelQueijoBacon: 13.00,
+    pastelCarneSeca: 16.00,
+    pastelCarneSecaQueijo: 20.00,
+    pastelCostela: 16.00,
+    pastelCostelaAcebolada: 18.00,
+    pastelCostelaQueijo: 20.00,
+    pastelDuplo: 18.00,
+    pastelHamburguer: 12.00,
+    pastelHotDog: 12.00,
+    pastelPalmito: 12.00,
+    pastelChocolateNinho: 12.00,
+    pastelDoceLeiteBanana: 12.00,
+    adicionalBombom: 3.00,
+    adicionalCocoRalado: 3.00,
+    adicionalQueijo: 4.00,
+    adicionalCatupiry: 3.00,
+    adicionalCalabresa: 3.00,
+    adicionalBacon: 3.00,
+    adicionalMilho: 3.00,
+    adicionalVinagrete: 3.00,
+    bebidaGuarana: 8.00,
+    bebidaCocaCola: 14.00,
+    bebidaCoca: 7.00,
+    bebidaLatinha: 5.00,
+    bebidaCerveja: 5.00,
+    bebidaSuco: 4.00,
+    bebidaaguagas: 3.00
+};
+
+// Função para calcular o total da compra
+function calcularTotal() {
     var totalCompra = 0;
+    var produtos = document.querySelectorAll('.item select');
 
     produtos.forEach(function(produtoSelect) {
+        var produtoId = produtoSelect.id;
         var quantidade = parseInt(produtoSelect.value);
-        var precoPorUnidade = parseFloat(produtoSelect.options[produtoSelect.selectedIndex].getAttribute('data-preco'));
-        
-        totalCompra += quantidade * precoPorUnidade;
+        totalCompra += quantidade * precos[produtoId];
     });
 
     document.getElementById('quantidade').value = getTotalQuantidade();
@@ -665,7 +710,7 @@ function calcularTroco() {
 
 // Função para obter o total de quantidade selecionada
 function getTotalQuantidade() {
-    var produtos = document.querySelectorAll('.produtos select');
+    var produtos = document.querySelectorAll('.item select');
     var totalQuantidade = 0;
 
     produtos.forEach(function(produtoSelect) {
@@ -674,9 +719,6 @@ function getTotalQuantidade() {
 
     return totalQuantidade;
 }
-
-// Chama a função para atualizar o total inicialmente
-atualizarTotal();
 </script>
 
 </body>
