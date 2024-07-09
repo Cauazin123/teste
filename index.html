@@ -546,7 +546,8 @@
           <input type="text" id="nomeCliente">
         </div>
   
-        <html lang="en">
+       <!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -586,6 +587,14 @@ select {
     border-radius: 3px;
 }
 
+.input-field {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-bottom: 10px;
+}
+
 .button {
     display: inline-block;
     margin-top: 20px;
@@ -611,10 +620,21 @@ select {
 .reset-button:hover {
     background-color: #da190b;
 }
+
+.total {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #333;
+    padding: 10px;
+    background-color: #ddd;
+    border-radius: 5px;
+    display: inline-block;
+}
 </style>
 <script>
 function resetSelect() {
     document.querySelectorAll('select').forEach(select => select.value = '0');
+    atualizarTotal();
 }
 
 function calcularTotal() {
@@ -622,7 +642,31 @@ function calcularTotal() {
     document.querySelectorAll('select').forEach(select => {
         total += parseInt(select.value);
     });
-    alert(`Total de itens selecionados: ${total}`);
+    atualizarTotal(total);
+}
+
+function calcularTroco() {
+    let total = 0;
+    document.querySelectorAll('select').forEach(select => {
+        total += parseInt(select.value);
+    });
+
+    let valorPago = parseFloat(document.getElementById('valor-pago').value);
+    if (isNaN(valorPago)) {
+        alert('Por favor, insira um valor válido para o pagamento.');
+        return;
+    }
+
+    let troco = valorPago - total;
+    if (troco < 0) {
+        alert('O valor pago é insuficiente para cobrir o total dos itens.');
+    } else {
+        alert(`Troco a ser devolvido: ${troco.toFixed(2)} R$`);
+    }
+}
+
+function atualizarTotal(total = 0) {
+    document.getElementById('total').textContent = `Total: R$ ${total.toFixed(2)}`;
 }
 </script>
 </head>
@@ -1327,9 +1371,15 @@ function calcularTotal() {
         </div>
 
 
+        <button onclick="adicionarPedido()">Adicionar Pedido</button>
+    <div>
+    <label for="valor-pago">Valor Pago:</label>
+    <input type="number" id="valor-pago" class="input-field" step="0.01" min="0">
+</div>
         <div class="button" onclick="calcularTotal()">Calcular Total</div>
         <div class="button reset-button" onclick="resetSelect()">Limpar Seleção</div>
-        <button onclick="adicionarPedido()">Adicionar Pedido</button>
+        <div class="button" onclick="calcularTroco()">Calcular Troco</div>
+    
         <div class="total" id="total" bis_skin_checked="1">Total: R$ 0.00</div>
         <div id="listaPedidos" bis_skin_checked="1"></div>   
         <button onclick="gerarRelatorio()">Gerar Relatório do Dia</button>
