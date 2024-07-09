@@ -546,25 +546,41 @@
           <input type="text" id="nomeCliente">
         </div>
   
-        <!DOCTYPE html>
+        <<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calculadora de Pedidos</title>
+<title>Calculadora de Pedidos com Troco</title>
 <script>
 function resetSelect() {
   document.querySelectorAll('select').forEach(select => select.value = '0');
+  document.getElementById('valorPago').value = '';
+  document.getElementById('troco').innerText = '';
 }
 
-function calcularTotal() {
+function calcularTotalETroco() {
   let total = 0;
+  let valorPago = parseFloat(document.getElementById('valorPago').value);
+  
   document.querySelectorAll('select').forEach(select => {
     total += parseInt(select.value);
   });
-  alert(`Total de itens selecionados: ${total}`);
-}
 
+  if (isNaN(valorPago)) {
+    alert('Por favor, insira um valor válido para o pagamento.');
+    return;
+  }
+
+  let troco = valorPago - total;
+  
+  if (troco < 0) {
+    alert('O valor pago é insuficiente para cobrir o total.');
+    return;
+  }
+
+  document.getElementById('troco').innerText = `Troco: R$ ${troco.toFixed(2)}`;
+}
 </script>
 </head>
 <body>
@@ -1234,10 +1250,6 @@ function calcularTotal() {
   </select>
 </div>
     
-<button onclick="resetSelect()">Resetar</button>
-<button onclick="calcularTotal()">Calcular Total</button>
-</body>
-</html>
   
         <h2>Observações</h2>
         <div class="item" bis_skin_checked="1">
@@ -1270,12 +1282,20 @@ function calcularTotal() {
           <label for="endereco">Endereço:</label>
           <input type="text" id="endereco">
         </div>
-  
+
+
+        <label for="valorPago">Valor Pago:</label>
+        <input type="number" id="valorPago" step="0.01" />
+        <button onclick="calcularTotalETroco()">Calcular Total e Troco</button>
+        <div id="troco"></div> 
         <button onclick="adicionarPedido()">Adicionar Pedido</button>
         <div class="total" id="total" bis_skin_checked="1">Total: R$ 0.00</div>
         <div id="listaPedidos" bis_skin_checked="1"></div>
+        <button onclick="resetSelect()">Limpar Seleção</button>    
         <button onclick="gerarRelatorio()">Gerar Relatório do Dia</button>
       </div>
+    </body>
+</html>
   
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
       <script>
