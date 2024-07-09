@@ -1377,6 +1377,7 @@ function atualizarTroco(troco = 0) {
     <label for="valor-pago">Valor Pago:</label>
     <input type="number" id="valor-pago" class="input-field" step="0.01" min="0">
 </div>
+    
         <div class="button" onclick="calcularTotal()">Calcular Total</div>
         <div class="total" id="total" bis_skin_checked="1">Total: R$ 0.00</div>
     
@@ -1384,8 +1385,10 @@ function atualizarTroco(troco = 0) {
         <div class="troco" id="troco">Troco: R$ 0.00</div> 
     
         <div class="button reset-button" onclick="resetSelect()">Limpar Seleção</div>
+    
         <div id="listaPedidos" bis_skin_checked="1"></div>   
 
+    
         <button onclick="adicionarPedido()">Adicionar Pedido</button>
         <button onclick="gerarRelatorio()">Gerar Relatório do Dia</button>
       </div>
