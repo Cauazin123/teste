@@ -588,11 +588,12 @@ select {
 }
 
 .input-field {
-    width: 100%;
-    padding: 8px;
+    width: 150px; /* Largura ajustada */
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 3px;
-    margin-bottom: 10px;
+    font-size: 16px;
+    text-align: center;
 }
 
 .button {
@@ -642,6 +643,11 @@ select {
 #troco {
     font-weight: bold; /* Deixar o troco em negrito */
 }
+
+.lista-pedidos {
+    text-align: left;
+    margin-top: 20px;
+}
 </style>
 <script>
 const precos = {
@@ -688,6 +694,8 @@ const precos = {
     bebidaaguagas: 5.00  
 };
 
+let pedidos = [];
+
 function resetSelect() {
     document.querySelectorAll('select').forEach(select => select.value = '0');
     atualizarTotal();
@@ -724,12 +732,37 @@ function calcularTroco() {
     atualizarTroco(troco);
 }
 
-function atualizarTotal(total = 0) {
-    document.getElementById('total').textContent = `Total: R$ ${total.toFixed(2)}`;
+function adicionarPedido() {
+    let pedido = {};
+
+    for (let item in precos) {
+        const quantidade = parseFloat(document.getElementById(item).value) || 0;
+        if (quantidade > 0) {
+            pedido[item] = quantidade;
+        }
+    }
+
+    if (Object.keys(pedido).length > 0) {
+        pedidos.push(pedido);
+        mostrarPedidos();
+        resetSelect();
+    } else {
+        alert('Selecione ao menos um produto para adicionar ao pedido.');
+    }
 }
 
-function atualizarTroco(troco = 0) {
-    document.getElementById('troco').textContent = `Troco: R$ ${troco.toFixed(2)}`;
+function mostrarPedidos() {
+    let listaPedidos = document.getElementById('lista-pedidos');
+    listaPedidos.innerHTML = '';
+
+    pedidos.forEach((pedido, index) => {
+        let pedidoHTML = `<p><strong>Pedido ${index + 1}:</strong><br>`;
+        for (let item in pedido) {
+            pedidoHTML += `${item}: ${pedido[item]} unidades<br>`;
+        }
+        pedidoHTML += `</p>`;
+        listaPedidos.innerHTML += pedidoHTML;
+    });
 }
 </script>
 </head>
@@ -1446,11 +1479,8 @@ function atualizarTroco(troco = 0) {
         <div class="troco" id="troco">Troco: R$ 0.00</div> 
     
         <div class="button reset-button" onclick="resetSelect()">Limpar Seleção</div>
-    
+        <div class="button" onclick="adicionarPedido()">Adicionar Pedido</div>
         <div id="listaPedidos" bis_skin_checked="1"></div>   
-
-    
-        <button onclick="adicionarPedido()">Adicionar Pedido</button>
         <button onclick="gerarRelatorio()">Gerar Relatório do Dia</button>
       </div>
     </body>
@@ -1500,7 +1530,6 @@ function atualizarTroco(troco = 0) {
             .map(([chave, valor]) => `${chave}: ${valor}`)
             .join(', ');
         }
-
 
         function adicionarPedido() {
           const nomeCliente = document.getElementById('nomeCliente').value.trim();
