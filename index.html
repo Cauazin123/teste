@@ -546,873 +546,219 @@
           <input type="text" id="nomeCliente">
         </div>
   
-        <!DOCTYPE html>
-<html lang="pt-BR">
+ <!DOCTYPE html>
+<html lang="pt-br">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calculadora de Compra</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+<title>Calculadora de Pedidos</title>
 <style>
-    body {
-        font-family: 'Poppins', Arial, sans-serif; /* Prioriza a fonte Poppins */
-        text-align: center;
-    }
-    .container {
-        max-width: 700px;
-        width: 80%;
-        margin: 0 auto;
-        padding: 30px;
-        border-radius: 15px;
-        box-shadow: 0 0 0 5px rgba(227, 188, 33, 0.5);
-    }
-    input[type="number"] {
-        width: 100%;
-        padding: 8px;
-        margin: 5px 0;
-        box-sizing: border-box;
-    }
-    button {
-        background-color: #FFD700; /* Amarelo */
-        color: white;
-        padding: 10px 20px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin-top: 10px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-family: 'Poppins', Arial, sans-serif; /* Prioriza a fonte Poppins */
-    }
+  .item {
+    display: inline-block;
+    width: 300px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
 </style>
-</head>
-<body>
-
-<div class="container">
-    <h2>Calculadora de Compra</h2>
-
-    <div class="item">
-        <label for="salgadoCoxinha">Coxinha de Frango</label>
-        <select id="salgadoCoxinha">
-            <option value="0">0</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-        </select>
-    </div>
-    <!-- Adicione mais produtos conforme necessário -->
-
-    <label for="quantidade">Quantidade:</label>
-    <input type="number" id="quantidade" value="0" min="0"><br>
-
-    <label for="total">Total da compra:</label>
-    <input type="number" id="total" placeholder="0.00" readonly><br>
-
-    <label for="pago">Valor pago:</label>
-    <input type="number" id="pago" placeholder="Digite o valor pago"><br>
-
-    <button onclick="calcularTotal()">Calcular Total</button><br>
-    <button onclick="calcularTroco()">Calcular Troco</button><br>
-    <p id="troco"></p>
-</div>
-
-<script>
-// Objeto com os preços dos produtos
-const precos = {
-    salgadoCoxinha: 7.00
-};
-
-// Função para calcular o total da compra
-function calcularTotal() {
-    var totalCompra = 0;
-    var produtos = document.querySelectorAll('.item select');
-
-    produtos.forEach(function(produtoSelect) {
-        var produtoId = produtoSelect.id;
-        var quantidade = parseInt(produtoSelect.value);
-        totalCompra += quantidade * precos[produtoId];
-    });
-
-    document.getElementById('quantidade').value = getTotalQuantidade();
-    document.getElementById('total').value = totalCompra.toFixed(2);
-}
-
-// Função para calcular o troco
-function calcularTroco() {
-    var totalCompra = parseFloat(document.getElementById('total').value);
-    var valorPago = parseFloat(document.getElementById('pago').value);
-
-    if (isNaN(totalCompra) || isNaN(valorPago)) {
-        alert('Por favor, digite valores numéricos válidos.');
-        return;
-    }
-
-    var troco = valorPago - totalCompra;
-
-    if (troco < 0) {
-        alert('O valor pago é menor que o total da compra.');
-        return;
-    }
-
-    document.getElementById('troco').innerText = 'Troco a ser dado: R$ ' + troco.toFixed(2);
-}
-
-// Função para obter o total de quantidade selecionada
-function getTotalQuantidade() {
-    var produtos = document.querySelectorAll('.item select');
-    var totalQuantidade = 0;
-
-    produtos.forEach(function(produtoSelect) {
-        totalQuantidade += parseInt(produtoSelect.value);
-    });
-
-    return totalQuantidade;
-}
-</script>
-
-</body>
-</html>
 <script>
 function resetSelect() {
-  document.getElementById('salgadoCoxinha').value = '0',
-  document.getElementById('salgadoRisoleCarne').value = '0',
-  document.getElementById('salgadoRisolePresuntoQueijo').value = '0',
-  document.getElementById('salgadoCoxinhaPernil').value = '0',
-  document.getElementById('salgadoBolinhaQueijo').value = '0',
-  document.getElementById('pastelCarne').value = '0',
-  document.getElementById('pastelQueijoPresunto').value = '0',
-  document.getElementById('pastelPizza').value = '0',
-  document.getElementById('pastelFrango').value = '0',
-  document.getElementById('pastelFrangoCatupiry').value = '0',
-  document.getElementById('pastelQueijo').value = '0',
-  document.getElementById('pastelCarneQueijo').value = '0',
-  document.getElementById('pastelFrangoQueijo').value = '0',
-  document.getElementById('pastelCalabresa').value = '0',
-  document.getElementById('pastelCalabresaQueijo').value = '0',
-  document.getElementById('pastelQueijoBacon').value = '0',
-  document.getElementById('pastelCarneSeca').value = '0',
-  document.getElementById('pastelCarneSecaQueijo').value = '0',
-  document.getElementById('pastelCostela').value = '0',
-  document.getElementById('pastelCostelaAcebolada').value = '0',
-  document.getElementById('pastelCostelaQueijo').value = '0',
-  document.getElementById('pastelDuplo').value = '0',
-  document.getElementById('pastelHamburguer').value = '0',
-  document.getElementById('pastelHotDog').value = '0',
-  document.getElementById('pastelPalmito').value = '0',  
-  document.getElementById('pastelChocolateNinho').value = '0',
-  document.getElementById('pastelDoceLeiteBanana').value = '0',
-  document.getElementById('adicionalBombom').value = '0',
-  document.getElementById('adicionalCocoRalado').value = '0',
-  document.getElementById('adicionalQueijo').value = '0',
-  document.getElementById('adicionalCatupiry').value = '0',
-  document.getElementById('adicionalCalabresa').value = '0',
-  document.getElementById('adicionalBacon').value = '0',
-  document.getElementById('adicionalMilho').value = '0',
-  document.getElementById('adicionalVinagrete').value = '0',
-  document.getElementById('bebidaGuarana').value = '0',
-  document.getElementById('bebidaCocaCola').value = '0',
-  document.getElementById('bebidaLatinha').value = '0',
-  document.getElementById('bebidaCoca').value = '0',
-  document.getElementById('bebidaCerveja').value = '0',
-  document.getElementById('bebidaSuco').value = '0',
-  document.getElementById('bebidaaguagas').value = '0'
-};
+  const selects = document.querySelectorAll('select');
+  selects.forEach(select => select.value = '0');
+  calculateTotal();
+}
+
+function calculateTotal() {
+  const prices = {
+    salgadoCoxinha: 3.5,
+    salgadoRisoleCarne: 4,
+    salgadoRisolePresuntoQueijo: 4,
+    salgadoCoxinhaPernil: 4.5,
+    salgadoBolinhaQueijo: 3,
+    pastelCarne: 5,
+    pastelQueijoPresunto: 5,
+    pastelPizza: 5.5,
+    pastelFrango: 5.5,
+    pastelFrangoCatupiry: 6,
+    pastelQueijo: 4.5,
+    pastelCarneQueijo: 6,
+    pastelFrangoQueijo: 6.5,
+    pastelCalabresa: 5,
+    pastelCalabresaQueijo: 5.5,
+    pastelQueijoBacon: 5,
+    pastelCarneSeca: 6,
+    pastelCarneSecaQueijo: 6.5,
+    pastelCostela: 6,
+    pastelCostelaAcebolada: 6.5,
+    pastelCostelaQueijo: 7,
+    pastelDuplo: 7.5,
+    pastelHamburguer: 7,
+    pastelHotDog: 6,
+    pastelPalmito: 5,
+    pastelChocolateNinho: 5,
+    pastelDoceLeiteBanana: 5,
+    adicionalBombom: 1.5,
+    adicionalCocoRalado: 1,
+    adicionalQueijo: 1.5,
+    adicionalCatupiry: 1.5,
+    adicionalCalabresa: 1.5,
+    adicionalBacon: 1.5,
+    adicionalMilho: 1,
+    adicionalVinagrete: 1,
+    bebidaGuarana: 3,
+    bebidaCocaCola: 3,
+    bebidaLatinha: 3,
+    bebidaCoca: 3.5,
+    bebidaCerveja: 4.5,
+    bebidaSuco: 3.5,
+    bebidaaguagas: 3
+  };
+
+  let total = 0;
+  const selects = document.querySelectorAll('select');
+  selects.forEach(select => {
+    const itemId = select.id;
+    const quantity = parseInt(select.value);
+    total += quantity * prices[itemId];
+  });
+
+  const valorPago = parseFloat(document.getElementById('valorPago').value);
+  const troco = valorPago - total;
+
+  document.getElementById('total').innerText = `Total: R$ ${total.toFixed(2)}`;
+  document.getElementById('troco').innerText = `Troco: R$ ${troco.toFixed(2)}`;
+}
 </script>
 </head>
 <body>
-<h2> Salgados</h2>
-<div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-    <label for="salgadoCoxinha"> Coxinha de Frango</label>
-    <select id="salgadoCoxinha">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
+
+<h2>Salgados</h2>
+<div class="item">
+    <label for="salgadoCoxinha">Coxinha de Frango - R$ 3,50</label>
+    <select id="salgadoCoxinha" onchange="calculateTotal()">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
     </select>
 </div>
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="salgadoRisoleCarne">Risole de Carne</label>
-  <select id="salgadoRisoleCarne">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
+
+<div class="item">
+    <label for="salgadoRisoleCarne">Risole de Carne - R$ 4,00</label>
+    <select id="salgadoRisoleCarne" onchange="calculateTotal()">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+    </select>
 </div>
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="salgadoRisolePresuntoQueijo">Risole Presunto e Queijo</label>
-  <select id="salgadoRisolePresuntoQueijo">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
-</div>
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="salgadoCoxinhaPernil">Coxinha de Costela</label>
-  <select id="salgadoCoxinhaPernil">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
-</div>
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="salgadoBolinhaQueijo">Bolinha de Queijo</label>
-  <select id="salgadoBolinhaQueijo">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
-</div>
+
+<!-- Adicione os outros itens de salgados aqui, seguindo o mesmo padrão -->
 
 <h2>Pastéis Tradicionais</h2>
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="pastelCarne">Carne</label>
-  <select id="pastelCarne">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
-</div>
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="pastelQueijoPresunto">Presunto e Queijo</label>
-  <select id="pastelQueijoPresunto">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
-</div>
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="pastelPizza">Pizza</label>
-  <select id="pastelPizza">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
-</div>
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="pastelFrango">Frango</label>
-  <select id="pastelFrango">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
-</div>
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="pastelFrangoCatupiry">Frango com Catupiry</label>
-  <select id="pastelFrangoCatupiry">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
-</div>
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="pastelQueijo"> Queijo</label>
-  <select id="pastelQueijo">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
+<div class="item">
+    <label for="pastelCarne">Pastel de Carne - R$ 5,00</label>
+    <select id="pastelCarne" onchange="calculateTotal()">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+    </select>
 </div>
 
-    <h2>Pastéis Especiais</h2>
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="pastelCarneQueijo"> Carne com Queijo</label>
-  <select id="pastelCarneQueijo">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
-</div>
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="pastelFrangoQueijo">Frango com Queijo</label>
-  <select id="pastelFrangoQueijo">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
-</div>
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="pastelCalabresa">Calabresa</label>
-  <select id="pastelCalabresa">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
-</div>
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="pastelCalabresaQueijo">Calabresa com Queijo</label>
-  <select id="pastelCalabresaQueijo">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
-</div>
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="pastelQueijoBacon">Queijo com Bacon</label>
-  <select id="pastelQueijoBacon">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
-</div>
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="pastelCarneSeca">Carne Seca</label>
-  <select id="pastelCarneSeca">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
-</div>
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="pastelCarneSecaQueijo">Carne Seca com Queijo</label>
-  <select id="pastelCarneSecaQueijo">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
-</div>
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="pastelCostela">Costela</label>
-  <select id="pastelCostela">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
-</div>
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="pastelCostelaAcebolada">Costela Acebolada</label>
-  <select id="pastelCostelaAcebolada">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
-</div>
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="pastelCostelaQueijo">Costela com Queijo</label>
-  <select id="pastelCostelaQueijo">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
-</div>
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="pastelDuplo">Duplo</label>
-  <select id="pastelDuplo">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
-</div>
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="pastelHamburguer">Hamburguer</label>
-  <select id="pastelHamburguer">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
-</div>
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="pastelHotDog">Hot Dog</label>
-  <select id="pastelHotDog">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
-</div>
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="pastelPalmito">Palmito</label>
-  <select id="pastelPalmito">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
-</div>
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="pastelChocolateNinho">Chocolate com Ninho</label>
-  <select id="pastelChocolateNinho">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
-</div>
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="pastelDoceLeiteBanana">Pastel de Doce de Leite com Banana</label>
-  <select id="pastelDoceLeiteBanana">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
+<div class="item">
+    <label for="pastelQueijoPresunto">Pastel de Queijo e Presunto - R$ 5,00</label>
+    <select id="pastelQueijoPresunto" onchange="calculateTotal()">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+    </select>
 </div>
 
-    <h2>Adicionais</h2>
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="adicionalBombom">Bombom</label>
-  <select id="adicionalBombom">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
-</div>
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="adicionalCocoRalado">Coco Ralado</label>
-  <select id="adicionalCocoRalado">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
-</div>
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="adicionalQueijo">Queijo</label>
-  <select id="adicionalQueijo">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
-</div>
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="adicionalCatupiry">Catupiry</label>
-  <select id="adicionalCatupiry">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
-</div>
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="adicionalCalabresa">Calabresa</label>
-  <select id="adicionalCalabresa">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
-</div>
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="adicionalBacon">Bacon</label>
-  <select id="adicionalBacon">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
-</div>
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="adicionalMilho">Milho</label>
-  <select id="adicionalMilho">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
-</div>
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="adicionalVinagrete">Vinagrete/Tomate</label>
-  <select id="adicionalVinagrete">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
+<!-- Adicione os outros itens de pastéis tradicionais aqui, seguindo o mesmo padrão -->
+
+<h2>Adicionais</h2>
+<div class="item">
+    <label for="adicionalBombom">Bombom - R$ 1,50</label>
+    <select id="adicionalBombom" onchange="calculateTotal()">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+    </select>
 </div>
 
-    <h2>Bebidas</h2>
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="bebidaGuarana">Guaraná 2L</label>
-  <select id="bebidaGuarana">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
+<!-- Adicione os outros itens de adicionais aqui, seguindo o mesmo padrão -->
+
+<h2>Bebidas</h2>
+<div class="item">
+    <label for="bebidaGuarana">Guaraná - R$ 3,00</label>
+    <select id="bebidaGuarana" onchange="calculateTotal()">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+    </select>
 </div>
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="bebidaCocaCola">Coca Cola 2L</label>
-  <select id="bebidaCocaCola">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
+
+<!-- Adicione os outros itens de bebidas aqui, seguindo o mesmo padrão -->
+
+<div style="margin-top: 20px;">
+    <button onclick="resetSelect()">Limpar Seleção</button>
 </div>
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="bebidaLatinha">Guaraná Lata (Sabores)</label>
-  <select id="bebidaLatinha">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
+
+<div style="margin-top: 20px;">
+    <label for="valorPago">Valor Pago: </label>
+    <input type="number" id="valorPago" step="0.01" min="0" value="0" oninput="calculateTotal()">
 </div>
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="bebidaCoca">Coca Cola 600ML</label>
-  <select id="bebidaCoca">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
+
+<div style="margin-top: 10px;">
+    <p id="total">Total: R$ 0,00</p>
+    <p id="troco">Troco: R$ 0,00</p>
 </div>
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="bebidaCerveja">Cerveja</label>
-  <select id="bebidaCerveja">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
-</div>
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="bebidaSuco">Suco (Sabores)</label>
-  <select id="bebidaSuco">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
-</div>
-    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
-  <label for="bebidaaguagas">Água com Gás</label>
-  <select id="bebidaaguagas">
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
-</div>
-    
-<button onclick="resetSelect()">Resetar</button>
-    
+
 </body>
 </html>
   
@@ -1555,12 +901,47 @@ function resetSelect() {
         }
 
         function adicionarPedido() {
-          const nomeCliente = document.getElementById('nomeCliente').value.trim();
-          const total = calcularTotal();
-          const observacoes = document.getElementById('observacoes').value.trim();
-          const pagamento = document.getElementById('pagamento').value;
-          const taxa = document.getElementById('taxa').value;
-          const endereco = taxa === 'delivery' ? document.getElementById('endereco').value.trim() : '';
+            const selects = document.querySelectorAll('select');
+            const nomeCliente = document.getElementById('nomeCliente').value.trim();
+            const observacoes = document.getElementById('observacoes').value.trim();
+            const pagamento = document.getElementById('pagamento').value;
+            const taxa = document.getElementById('taxa').value;
+            const endereco = taxa === 'delivery' ? document.getElementById('endereco').value.trim() : '';
+
+            selects.forEach(function(select) {
+                select.value = '0'; // Zera o valor selecionado para todos os selects
+            });
+
+            // Exemplo de cálculo do total (adaptar conforme sua lógica)
+            const total = calcularTotal();
+
+            // Exibindo informações (apenas para demonstração)
+            console.log('Nome do Cliente:', nomeCliente);
+            console.log('Observações:', observacoes);
+            console.log('Método de Pagamento:', pagamento);
+            console.log('Taxa de entrega:', taxa);
+            console.log('Endereço:', endereco);
+            console.log('Total:', total);
+
+            // Lógica para exibir o campo de endereço apenas se for delivery
+            const enderecoContainer = document.getElementById('enderecoContainer');
+            if (taxa === 'delivery') {
+                enderecoContainer.style.display = 'block';
+            } else {
+                enderecoContainer.style.display = 'none';
+            }
+        }
+
+        function calcularTotal() {
+            // Lógica de cálculo do total aqui (adaptar conforme necessidade)
+            // Exemplo simples: somar os valores selecionados nos selects
+            const selects = document.querySelectorAll('select');
+            let total = 0;
+            selects.forEach(function(select) {
+                total += parseInt(select.value);
+            });
+            return total;
+        }
 
           if (nomeCliente && total > 0) {
             const pasteis = {
