@@ -692,7 +692,6 @@ const precos = {
     bebidaCerveja: 5.00,
     bebidaSuco: 4.00,
     bebidaaguagas: 5.00,
-    delivery: 4.00
 };
 
 let pedidos = [];
@@ -711,9 +710,9 @@ function calcularTotal() {
         total += quantidade * precos[item];
     }
 
-    const taxaSelecionada = document.getElementById('taxa').value;
+    const taxa = document.getElementById('taxa').value;
 
-    if (taxaSelecionada === 'delivery') {
+    if (taxa === 'delivery') {
         total += 4; // Adiciona a taxa de entrega ao total
     }
 
@@ -726,12 +725,6 @@ function calcularTroco() {
     for (let item in precos) {
         const quantidade = parseFloat(document.getElementById(item).value) || 0;
         total += quantidade * precos[item];
-    }
-
-    const taxaSelecionada = document.getElementById('taxa').value;
-
-    if (taxaSelecionada === 'delivery') {
-        total += 4; // Adiciona a taxa de entrega ao total
     }
 
     let valorPago = parseFloat(document.getElementById('valor-pago').value);
