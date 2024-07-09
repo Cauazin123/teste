@@ -780,6 +780,7 @@ function atualizarTroco(troco = 0) {
 </script>
 </head>
 <body>
+    
 <h2> Salgados</h2>
 <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
     <label for="salgadoCoxinha"> Coxinha de Frango</label>
@@ -1465,14 +1466,14 @@ function atualizarTroco(troco = 0) {
         </div>
   
                <h2>Taxa</h2>
-        <div class="item" bis_skin_checked="1">
-          <label for="taxa">Escolha a opção de taxa:</label>
-            <option value="retirada">Retirada</option>
-            <option value="mesa">Mesa</option>
-            <option value="delivery">Delivery</option>
-            <select id="taxa" onchange="mostrarEndereco()">
-          </select>
-        </div>
+<div class="item">
+  <label for="select-taxa">Escolha a opção de taxa:</label>
+  <select id="select-taxa" onchange="mostrarEndereco()">
+    <option value="retirada">Retirada</option>
+    <option value="mesa">Mesa</option>
+    <option value="delivery">Delivery</option>
+  </select>
+</div>
 
         <div class="item" id="enderecoContainer" style="display: none;" bis_skin_checked="1">
           <label for="endereco">Endereço:</label>
