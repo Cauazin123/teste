@@ -546,7 +546,7 @@
           <input type="text" id="nomeCliente">
         </div>
   
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
@@ -569,47 +569,47 @@ function resetSelect() {
 
 function calculateTotal() {
   const prices = {
-    salgadoCoxinha: 3.5,
-    salgadoRisoleCarne: 4,
-    salgadoRisolePresuntoQueijo: 4,
-    salgadoCoxinhaPernil: 4.5,
-    salgadoBolinhaQueijo: 3,
-    pastelCarne: 5,
-    pastelQueijoPresunto: 5,
-    pastelPizza: 5.5,
-    pastelFrango: 5.5,
-    pastelFrangoCatupiry: 6,
-    pastelQueijo: 4.5,
-    pastelCarneQueijo: 6,
-    pastelFrangoQueijo: 6.5,
-    pastelCalabresa: 5,
-    pastelCalabresaQueijo: 5.5,
-    pastelQueijoBacon: 5,
-    pastelCarneSeca: 6,
-    pastelCarneSecaQueijo: 6.5,
-    pastelCostela: 6,
-    pastelCostelaAcebolada: 6.5,
-    pastelCostelaQueijo: 7,
-    pastelDuplo: 7.5,
-    pastelHamburguer: 7,
-    pastelHotDog: 6,
-    pastelPalmito: 5,
-    pastelChocolateNinho: 5,
-    pastelDoceLeiteBanana: 5,
-    adicionalBombom: 1.5,
-    adicionalCocoRalado: 1,
-    adicionalQueijo: 1.5,
-    adicionalCatupiry: 1.5,
-    adicionalCalabresa: 1.5,
-    adicionalBacon: 1.5,
-    adicionalMilho: 1,
-    adicionalVinagrete: 1,
-    bebidaGuarana: 3,
-    bebidaCocaCola: 3,
-    bebidaLatinha: 3,
-    bebidaCoca: 3.5,
-    bebidaCerveja: 4.5,
-    bebidaSuco: 3.5,
+    salgadoCoxinha: 7,
+    salgadoRisoleCarne: 7,
+    salgadoRisolePresuntoQueijo: 7,
+    salgadoCoxinhaPernil: 9,
+    salgadoBolinhaQueijo: 9,
+    pastelCarne: 8,
+    pastelQueijoPresunto: 8,
+    pastelPizza: 8,
+    pastelFrango: 8,
+    pastelFrangoCatupiry: 8,
+    pastelQueijo: 9,
+    pastelCarneQueijo: 12,
+    pastelFrangoQueijo: 12,
+    pastelCalabresa: 10,
+    pastelCalabresaQueijo: 14,
+    pastelQueijoBacon: 14,
+    pastelCarneSeca: 16,
+    pastelCarneSecaQueijo: 20,
+    pastelCostela: 16,
+    pastelCostelaAcebolada: 18,
+    pastelCostelaQueijo: 20,
+    pastelDuplo: 18,
+    pastelHamburguer: 12,
+    pastelHotDog: 12,
+    pastelPalmito: 12,
+    pastelChocolateNinho: 12,
+    pastelDoceLeiteBanana: 12,
+    adicionalBombom: 3,
+    adicionalCocoRalado: 3,
+    adicionalQueijo: 4,
+    adicionalCatupiry: 3,
+    adicionalCalabresa: 4,
+    adicionalBacon: 3,
+    adicionalMilho: 3,
+    adicionalVinagrete: 3,
+    bebidaGuarana: 8,
+    bebidaCocaCola: 14,
+    bebidaLatinha: 5,
+    bebidaCoca: 7,
+    bebidaCerveja: 5,
+    bebidaSuco: 4,
     bebidaaguagas: 3
   };
 
@@ -621,11 +621,27 @@ function calculateTotal() {
     total += quantity * prices[itemId];
   });
 
-  const valorPago = parseFloat(document.getElementById('valorPago').value);
-  const troco = valorPago - total;
-
   document.getElementById('total').innerText = `Total: R$ ${total.toFixed(2)}`;
-  document.getElementById('troco').innerText = `Troco: R$ ${troco.toFixed(2)}`;
+}
+
+function enviarPedido() {
+  const selects = document.querySelectorAll('select');
+  let pedido = '';
+
+  selects.forEach(select => {
+    const itemId = select.id;
+    const itemName = select.getAttribute('data-name');
+    const quantity = parseInt(select.value);
+
+    if (quantity > 0) {
+      pedido += `${itemName}: ${quantity}\n`;
+    }
+  });
+
+  // Simular envio para uma planilha (exibido no console para demonstração)
+  console.log('Pedido enviado:\n', pedido);
+
+  // Poderia adicionar código para enviar para uma planilha real via backend/API
 }
 </script>
 </head>
@@ -633,8 +649,8 @@ function calculateTotal() {
 
 <h2>Salgados</h2>
 <div class="item">
-    <label for="salgadoCoxinha">Coxinha de Frango - R$ 3,50</label>
-    <select id="salgadoCoxinha" onchange="calculateTotal()">
+    <label for="salgadoCoxinha">Coxinha de Frango - R$ 7,00</label>
+    <select id="salgadoCoxinha" data-name="Coxinha de Frango" onchange="calculateTotal()">
         <option value="0">0</option>
         <option value="1">1</option>
         <option value="2">2</option>
@@ -650,8 +666,8 @@ function calculateTotal() {
 </div>
 
 <div class="item">
-    <label for="salgadoRisoleCarne">Risole de Carne - R$ 4,00</label>
-    <select id="salgadoRisoleCarne" onchange="calculateTotal()">
+    <label for="salgadoRisoleCarne">Risole de Carne - R$ 7,00</label>
+    <select id="salgadoRisoleCarne" data-name="Risole de Carne" onchange="calculateTotal()">
         <option value="0">0</option>
         <option value="1">1</option>
         <option value="2">2</option>
@@ -668,10 +684,10 @@ function calculateTotal() {
 
 <!-- Adicione os outros itens de salgados aqui, seguindo o mesmo padrão -->
 
-<h2>Pastéis Tradicionais</h2>
+<h2>Pastéis</h2>
 <div class="item">
-    <label for="pastelCarne">Pastel de Carne - R$ 5,00</label>
-    <select id="pastelCarne" onchange="calculateTotal()">
+    <label for="pastelCarne">Pastel de Carne - R$ 8,00</label>
+    <select id="pastelCarne" data-name="Pastel de Carne" onchange="calculateTotal()">
         <option value="0">0</option>
         <option value="1">1</option>
         <option value="2">2</option>
@@ -687,8 +703,8 @@ function calculateTotal() {
 </div>
 
 <div class="item">
-    <label for="pastelQueijoPresunto">Pastel de Queijo e Presunto - R$ 5,00</label>
-    <select id="pastelQueijoPresunto" onchange="calculateTotal()">
+    <label for="pastelQueijoPresunto">Pastel de Queijo e Presunto - R$ 8,00</label>
+    <select id="pastelQueijoPresunto" data-name="Pastel de Queijo e Presunto" onchange="calculateTotal()">
         <option value="0">0</option>
         <option value="1">1</option>
         <option value="2">2</option>
@@ -703,12 +719,12 @@ function calculateTotal() {
     </select>
 </div>
 
-<!-- Adicione os outros itens de pastéis tradicionais aqui, seguindo o mesmo padrão -->
+<!-- Adicione os outros itens de pastéis aqui, seguindo o mesmo padrão -->
 
 <h2>Adicionais</h2>
 <div class="item">
-    <label for="adicionalBombom">Bombom - R$ 1,50</label>
-    <select id="adicionalBombom" onchange="calculateTotal()">
+    <label for="adicionalBombom">Bombom - R$ 3,00</label>
+    <select id="adicionalBombom" data-name="Bombom" onchange="calculateTotal()">
         <option value="0">0</option>
         <option value="1">1</option>
         <option value="2">2</option>
@@ -727,8 +743,8 @@ function calculateTotal() {
 
 <h2>Bebidas</h2>
 <div class="item">
-    <label for="bebidaGuarana">Guaraná - R$ 3,00</label>
-    <select id="bebidaGuarana" onchange="calculateTotal()">
+    <label for="bebidaGuarana">Guaraná - R$ 8,00</label>
+    <select id="bebidaGuarana" data-name="Guaraná" onchange="calculateTotal()">
         <option value="0">0</option>
         <option value="1">1</option>
         <option value="2">2</option>
@@ -747,20 +763,16 @@ function calculateTotal() {
 
 <div style="margin-top: 20px;">
     <button onclick="resetSelect()">Limpar Seleção</button>
-</div>
-
-<div style="margin-top: 20px;">
-    <label for="valorPago">Valor Pago: </label>
-    <input type="number" id="valorPago" step="0.01" min="0" value="0" oninput="calculateTotal()">
+    <button onclick="enviarPedido()">Enviar Pedido</button>
 </div>
 
 <div style="margin-top: 10px;">
     <p id="total">Total: R$ 0,00</p>
-    <p id="troco">Troco: R$ 0,00</p>
 </div>
 
 </body>
 </html>
+
   
         <h2>Observações</h2>
         <div class="item" bis_skin_checked="1">
