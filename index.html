@@ -546,7 +546,7 @@
           <input type="text" id="nomeCliente">
         </div>
   
-       <!DOCTYPE html>
+      <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -629,8 +629,65 @@ select {
     border-radius: 5px;
     display: inline-block;
 }
+
+#valor-pago {
+    width: 150px; /* Ajuste para largura do campo */
+    padding: 10px; /* Espaçamento interno */
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 16px; /* Tamanho da fonte */
+    text-align: center; /* Centralizar texto */
+}
+
+#troco {
+    font-weight: bold; /* Deixar o troco em negrito */
+}
 </style>
 <script>
+const precos = {
+    salgadoCoxinha: 7.00,
+    salgadoRisoleCarne: 7.00,
+    salgadoRisolePresuntoQueijo: 7.00,
+    salgadoCoxinhaPernil: 7.00,  
+    salgadoBolinhaQueijo: 9.00,  
+    pastelCarne: 8.00,
+    pastelQueijoPresunto: 8.00,
+    pastelPizza: 8.00,
+    pastelFrango: 8.00,
+    pastelFrangoCatupiry: 8.00,
+    pastelQueijo: 10.00,
+    pastelCarneQueijo: 12.00,
+    pastelFrangoQueijo: 12.00,
+    pastelCalabresa: 10.00,  
+    pastelCalabresaQueijo: 14.00,
+    pastelQueijoBacon: 13.00,
+    pastelCarneSeca: 16.00,  
+    pastelCarneSecaQueijo: 20.00,  
+    pastelCostela: 16.00,
+    pastelCostelaAcebolada: 18.00,
+    pastelCostelacomQueijo: 20.00,
+    pastelDuplo: 18.00,
+    pastelHamburguer: 12.00,
+    pastelHotDog: 12.00,  
+    pastelChocolateNinho: 12.00,
+    pastelDoceLeiteBanana: 12.00,
+    adicionalBombom: 3.00,
+    adicionalCocoRalado: 3.00,
+    adicionalQueijo: 4.00,
+    adicionalCatupiry: 3.00,
+    adicionalCalabresa: 3.00,
+    adicionalBacon: 3.00,
+    adicionalMilho: 3.00,
+    adicionalVinagrete: 3.00,
+    bebidaGuarana: 8.00,
+    bebidaCocaCola: 14.00,
+    bebidaCoca: 7.00,
+    bebidaLatinha: 5.00,
+    bebidaCerveja: 5.00,
+    bebidaSuco: 4.00,
+    bebidaaguagas: 5.00  
+};
+
 function resetSelect() {
     document.querySelectorAll('select').forEach(select => select.value = '0');
     atualizarTotal();
@@ -639,17 +696,22 @@ function resetSelect() {
 
 function calcularTotal() {
     let total = 0;
-    document.querySelectorAll('select').forEach(select => {
-        total += parseFloat(select.value);
-    });
+
+    for (let item in precos) {
+        const quantidade = parseFloat(document.getElementById(item).value) || 0;
+        total += quantidade * precos[item];
+    }
+
     atualizarTotal(total);
 }
 
 function calcularTroco() {
     let total = 0;
-    document.querySelectorAll('select').forEach(select => {
-        total += parseFloat(select.value);
-    });
+
+    for (let item in precos) {
+        const quantidade = parseFloat(document.getElementById(item).value) || 0;
+        total += quantidade * precos[item];
+    }
 
     let valorPago = parseFloat(document.getElementById('valor-pago').value);
     let troco = valorPago - total;
@@ -677,16 +739,16 @@ function atualizarTroco(troco = 0) {
     <label for="salgadoCoxinha"> Coxinha de Frango</label>
     <select id="salgadoCoxinha">
     <option value="0">Selecione...</option>
-    <option value="7">1</option>
-    <option value="14">2</option>
-    <option value="21">3</option>
-    <option value="28">4</option>
-    <option value="35">5</option>
-    <option value="42">6</option>
-    <option value="49">7</option>
-    <option value="56">8</option>
-    <option value="63">9</option>
-    <option value="70">10</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
     </select>
 </div>
     <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
@@ -1438,6 +1500,58 @@ function atualizarTroco(troco = 0) {
             .map(([chave, valor]) => `${chave}: ${valor}`)
             .join(', ');
         }
+
+           function calcularTotal() {
+          const precos = {
+            salgadoCoxinha: 7.00,
+            salgadoRisoleCarne: 7.00,
+            salgadoRisolePresuntoQueijo: 7.00,
+            salgadoCoxinhaPernil: 7.00,  
+            salgadoBolinhaQueijo: 9.00,  
+            pastelCarne: 8.00,
+            pastelQueijoPresunto: 8.00,
+            pastelPizza: 8.00,
+            pastelFrango: 8.00,
+            pastelFrangoCatupiry: 8.00,
+            pastelQueijo: 10.00,
+            pastelCarneQueijo: 12.00,
+            pastelFrangoQueijo: 12.00,
+            pastelCalabresa: 10.00,  
+            pastelCalabresaQueijo: 14.00,
+            pastelQueijoBacon: 13.00,
+            pastelCarneSeca: 16.00,  
+            pastelCarneSecaQueijo: 20.00,  
+            pastelCostela: 16.00,
+            pastelCostelaAcebolada: 18.00,
+            pastelCostelacomQueijo: 20.00,
+            pastelDuplo: 18.00,
+            pastelHamburguer: 12.00,
+            pastelHotDog: 12.00,  
+            pastelChocolateNinho: 12.00,
+            pastelDoceLeiteBanana: 12.00,
+            adicionalBombom: 3.00,
+            adicionalCocoRalado: 3.00,
+            adicionalQueijo: 4.00,
+            adicionalCatupiry: 3.00,
+            adicionalCalabresa: 3.00,
+            adicionalBacon: 3.00,
+            adicionalMilho: 3.00,
+            adicionalVinagrete: 3.00,
+            bebidaGuarana: 8.00,
+            bebidaCocaCola: 14.00,
+            bebidaCoca: 7.00,
+            bebidaLatinha: 5.00,
+            bebidaCerveja: 5.00,
+            bebidaSuco: 4.00,
+            bebidaaguagas: 5.00  
+          };
+
+          let total = 0;
+
+          for (let item in precos) {
+            const quantidade = parseFloat(document.getElementById(item).value) || 0;
+            total += quantidade * precos[item];
+          }
 
         function adicionarPedido() {
           const nomeCliente = document.getElementById('nomeCliente').value.trim();
