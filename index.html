@@ -551,8 +551,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Resetar Select para 0</title>
+<title>Calculadora de Pedidos</title>
 <script>
+function resetSelect() {
+  document.querySelectorAll('select').forEach(select => select.value = '0');
+}
+
+function calcularTotal() {
+  let total = 0;
+  document.querySelectorAll('select').forEach(select => {
+    total += parseInt(select.value);
+  });
+  alert(`Total de itens selecionados: ${total}`);
+}
+
+<h2> Salgados</h2>
 function resetSelect() {
   document.getElementById('salgadoCoxinha').value = '0',
   document.getElementById('salgadoRisoleCarne').value = '0',
@@ -1266,6 +1279,7 @@ function resetSelect() {
 </div>
     
 <button onclick="resetSelect()">Resetar</button>
+<button onclick="calcularTotal()">Calcular Total</button>
 </body>
 </html>
   
