@@ -738,7 +738,7 @@ function atualizarTroco(troco = 0) {
 <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
     <label for="salgadoCoxinha"> Coxinha de Frango</label>
     <select id="salgadoCoxinha">
-    <option value="0">0</option>
+    <option value="0">Selecione...</option>
     <option value="1">1</option>
     <option value="2">2</option>
     <option value="3">3</option>
@@ -754,7 +754,7 @@ function atualizarTroco(troco = 0) {
     <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
   <label for="salgadoRisoleCarne">Risole de Carne</label>
   <select id="salgadoRisoleCarne">
-    <option value="0">0</option>
+    <option value="0">Selecione...</option>
     <option value="1">1</option>
     <option value="2">2</option>
     <option value="3">3</option>
@@ -770,7 +770,7 @@ function atualizarTroco(troco = 0) {
     <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
   <label for="salgadoRisolePresuntoQueijo">Risole Presunto e Queijo</label>
   <select id="salgadoRisolePresuntoQueijo">
-    <option value="0">0</option>
+    <option value="0">Selecione...</option>
     <option value="1">1</option>
     <option value="2">2</option>
     <option value="3">3</option>
@@ -1481,6 +1481,58 @@ function atualizarTroco(troco = 0) {
             alert('Ocorreu um erro ao enviar o pedido para a planilha.');
           }
         }
+
+          function calcularTotal() {
+          const precos = {
+            salgadoCoxinha: 7.00,
+            salgadoRisoleCarne: 7.00,
+            salgadoRisolePresuntoQueijo: 7.00,
+            salgadoCoxinhaPernil: 7.00,  
+            salgadoBolinhaQueijo: 9.00,  
+            pastelCarne: 8.00,
+            pastelQueijoPresunto: 8.00,
+            pastelPizza: 8.00,
+            pastelFrango: 8.00,
+            pastelFrangoCatupiry: 8.00,
+            pastelQueijo: 10.00,
+            pastelCarneQueijo: 12.00,
+            pastelFrangoQueijo: 12.00,
+            pastelCalabresa: 10.00,  
+            pastelCalabresaQueijo: 14.00,
+            pastelQueijoBacon: 13.00,
+            pastelCarneSeca: 16.00,  
+            pastelCarneSecaQueijo: 20.00,  
+            pastelCostela: 16.00,
+            pastelCostelaAcebolada: 18.00,
+            pastelCostelacomQueijo: 20.00,
+            pastelDuplo: 18.00,
+            pastelHamburguer: 12.00,
+            pastelHotDog: 12.00,  
+            pastelChocolateNinho: 12.00,
+            pastelDoceLeiteBanana: 12.00,
+            adicionalBombom: 3.00,
+            adicionalCocoRalado: 3.00,
+            adicionalQueijo: 4.00,
+            adicionalCatupiry: 3.00,
+            adicionalCalabresa: 3.00,
+            adicionalBacon: 3.00,
+            adicionalMilho: 3.00,
+            adicionalVinagrete: 3.00,
+            bebidaGuarana: 8.00,
+            bebidaCocaCola: 14.00,
+            bebidaCoca: 7.00,
+            bebidaLatinha: 5.00,
+            bebidaCerveja: 5.00,
+            bebidaSuco: 4.00,
+            bebidaaguagas: 5.00  
+          };
+
+          let total = 0;
+
+          for (let item in precos) {
+            const quantidade = parseFloat(document.getElementById(item).value) || 0;
+            total += quantidade * precos[item];
+          }
 
           const taxa = document.getElementById('taxa').value;
           if (taxa === 'delivery') {
