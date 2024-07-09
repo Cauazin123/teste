@@ -546,40 +546,74 @@
           <input type="text" id="nomeCliente">
         </div>
   
-        <<!DOCTYPE html>
+        <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calculadora de Pedidos com Troco</title>
+<title>Calculadora de Pedidos</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    text-align: center;
+    margin: 20px;
+}
+
+h2 {
+    margin-top: 30px;
+}
+
+.item {
+    display: inline-block;
+    width: 200px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+</style>
 <script>
 function resetSelect() {
   document.querySelectorAll('select').forEach(select => select.value = '0');
-  document.getElementById('valorPago').value = '';
-  document.getElementById('troco').innerText = '';
 }
 
-function calcularTotalETroco() {
+function calcularTotal() {
   let total = 0;
-  let valorPago = parseFloat(document.getElementById('valorPago').value);
-  
   document.querySelectorAll('select').forEach(select => {
     total += parseInt(select.value);
   });
-
-  if (isNaN(valorPago)) {
-    alert('Por favor, insira um valor válido para o pagamento.');
-    return;
-  }
-
-  let troco = valorPago - total;
-  
-  if (troco < 0) {
-    alert('O valor pago é insuficiente para cobrir o total.');
-    return;
-  }
-
-  document.getElementById('troco').innerText = `Troco: R$ ${troco.toFixed(2)}`;
+  alert(`Total de itens selecionados: ${total}`);
 }
 </script>
 </head>
@@ -1284,14 +1318,11 @@ function calcularTotalETroco() {
         </div>
 
 
-        <label for="valorPago">Valor Pago:</label>
-        <input type="number" id="valorPago" step="0.01" />
-        <button onclick="calcularTotalETroco()">Calcular Total e Troco</button>
-        <div id="troco"></div> 
+        <button onclick="calcularTotal()">Calcular Total</button>
+        <button onclick="resetSelect()">Limpar Seleção</button>
         <button onclick="adicionarPedido()">Adicionar Pedido</button>
         <div class="total" id="total" bis_skin_checked="1">Total: R$ 0.00</div>
-        <div id="listaPedidos" bis_skin_checked="1"></div>
-        <button onclick="resetSelect()">Limpar Seleção</button>    
+        <div id="listaPedidos" bis_skin_checked="1"></div>   
         <button onclick="gerarRelatorio()">Gerar Relatório do Dia</button>
       </div>
     </body>
