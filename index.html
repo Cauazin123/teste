@@ -546,15 +546,15 @@
           <input type="text" id="nomeCliente">
         </div>
   
-      <!DOCTYPE html>
-<html lang="pt-BR">
+     <!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Calculadora de Pedidos</title>
 <style>
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: Arial, sans-serif;
     background-color: #f0f0f0;
     text-align: center;
     margin: 20px;
@@ -571,7 +571,7 @@ h2 {
     margin-bottom: 10px;
     background-color: #fff;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 10px; /* Bordas arredondadas */
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
@@ -598,19 +598,18 @@ select {
 .button {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #f4b400; /* Amarelo */
+    background-color: #4CAF50;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
-    font-family: 'Poppins', sans-serif; /* Aplicando a fonte Poppins */
     text-decoration: none;
     margin: 10px; /* Espaçamento entre botões */
 }
 
 .button:hover {
-    background-color: #d48e00; /* Amarelo mais escuro no hover */
+    background-color: #45a049;
 }
 
 .reset-button {
@@ -642,11 +641,6 @@ select {
 
 #troco {
     font-weight: bold; /* Deixar o troco em negrito */
-}
-
-.lista-pedidos {
-    text-align: left;
-    margin-top: 20px;
 }
 </style>
 <script>
@@ -691,10 +685,8 @@ const precos = {
     bebidaLatinha: 5.00,
     bebidaCerveja: 5.00,
     bebidaSuco: 4.00,
-    bebidaaguagas: 5.00,
+    bebidaaguagas: 5.00  
 };
-
-let pedidos = [];
 
 function resetSelect() {
     document.querySelectorAll('select').forEach(select => select.value = '0');
@@ -708,12 +700,6 @@ function calcularTotal() {
     for (let item in precos) {
         const quantidade = parseFloat(document.getElementById(item).value) || 0;
         total += quantidade * precos[item];
-    }
-
-    const taxa = document.getElementById('taxa').value;
-
-    if (taxa === 'delivery') {
-        total += 4; // Adiciona a taxa de entrega ao total
     }
 
     atualizarTotal(total);
@@ -733,41 +719,9 @@ function calcularTroco() {
     if (troco < 0) {
         alert('O valor pago é insuficiente para cobrir o total dos itens.');
     } else {
-        atualizarTroco(troco); // Atualiza o troco na página
+        alert(`Troco a ser devolvido: R$ ${troco.toFixed(2)}`);
     }
-}
-    
-function adicionarPedido() {
-    let pedido = {};
-
-    for (let item in precos) {
-        const quantidade = parseFloat(document.getElementById(item).value) || 0;
-        if (quantidade > 0) {
-            pedido[item] = quantidade;
-        }
-    }
-
-    if (Object.keys(pedido).length > 0) {
-        pedidos.push(pedido);
-        mostrarPedidos();
-        resetSelect();
-    } else {
-        alert('Selecione ao menos um produto para adicionar ao pedido.');
-    }
-}
-
-function mostrarPedidos() {
-    let listaPedidos = document.getElementById('lista-pedidos');
-    listaPedidos.innerHTML = '';
-
-    pedidos.forEach((pedido, index) => {
-        let pedidoHTML = `<p><strong>Pedido ${index + 1}:</strong><br>`;
-        for (let item in pedido) {
-            pedidoHTML += `${item}: ${pedido[item]} unidades<br>`;
-        }
-        pedidoHTML += `</p>`;
-        listaPedidos.innerHTML += pedidoHTML;
-    });
+    atualizarTroco(troco);
 }
 
 function atualizarTotal(total = 0) {
