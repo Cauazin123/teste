@@ -621,7 +621,7 @@ select {
     background-color: #da190b;
 }
 
-.total {
+.total, .troco {
     margin-top: 20px;
     font-size: 18px;
     color: #333;
@@ -635,6 +635,7 @@ select {
 function resetSelect() {
     document.querySelectorAll('select').forEach(select => select.value = '0');
     atualizarTotal();
+    atualizarTroco();
 }
 
 function calcularTotal() {
@@ -643,6 +644,7 @@ function calcularTotal() {
         total += parseInt(select.value);
     });
     atualizarTotal(total);
+    atualizarTroco();
 }
 
 function calcularTroco() {
@@ -651,22 +653,22 @@ function calcularTroco() {
         total += parseInt(select.value);
     });
 
-    let valorPago = parseFloat(document.getElementById('valor-pago').value);
-    if (isNaN(valorPago)) {
-        alert('Por favor, insira um valor válido para o pagamento.');
-        return;
-    }
-
+    let valorPago = 50; // Defina aqui o valor pago pelo cliente
     let troco = valorPago - total;
     if (troco < 0) {
         alert('O valor pago é insuficiente para cobrir o total dos itens.');
     } else {
         alert(`Troco a ser devolvido: ${troco.toFixed(2)} R$`);
     }
+    atualizarTroco(troco);
 }
 
 function atualizarTotal(total = 0) {
     document.getElementById('total').textContent = `Total: R$ ${total.toFixed(2)}`;
+}
+
+function atualizarTroco(troco = 0) {
+    document.getElementById('troco').textContent = `Troco: R$ ${troco.toFixed(2)}`;
 }
 </script>
 </head>
@@ -1381,7 +1383,9 @@ function atualizarTotal(total = 0) {
         <div class="button" onclick="calcularTroco()">Calcular Troco</div>
     
         <div class="total" id="total" bis_skin_checked="1">Total: R$ 0.00</div>
+        <div class="troco" id="troco">Troco: R$ 0.00</div>
         <div id="listaPedidos" bis_skin_checked="1"></div>   
+    
         <button onclick="gerarRelatorio()">Gerar Relatório do Dia</button>
       </div>
     </body>
