@@ -1590,6 +1590,26 @@ function atualizarTroco(troco = 0) {
           return total;
         }
 
+          function resetSelect() {
+          document.querySelectorAll('select').forEach(select => select.value = '0');
+          pedidos = [];
+          mostrarPedidos(); 
+          atualizarTotal(); 
+          atualizarTroco(); 
+        }
+
+          function calcularTroco() {
+    let total = calcularTotalSemAtualizar(); // Calcular o total sem atualizar na página
+
+    let valorPago = parseFloat(document.getElementById('valor-pago').value);
+    let troco = valorPago - total;
+
+    if (troco < 0) {
+        alert('O valor pago é insuficiente para cobrir o total dos itens.');
+    } else {
+        atualizarTroco(troco); // Atualiza o troco na página
+    }
+}
         function formatarItens(tipo, itens) {
           return Object.entries(itens)
             .filter(([chave, valor]) => valor > 0)
