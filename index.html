@@ -728,14 +728,6 @@ function calcularTroco() {
     }
 }
 
-function calcularTotalSemAtualizar() {
-    let total = 0;
-
-    for (let item in precos) {
-        const quantidade = parseFloat(document.getElementById(item).value) || 0;
-        total += quantidade * precos[item];
-    }
-
     return total;
 }
     
