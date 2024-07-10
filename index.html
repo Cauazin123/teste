@@ -698,8 +698,10 @@ let pedidos = [];
 
 function resetSelect() {
     document.querySelectorAll('select').forEach(select => select.value = '0');
-    atualizarTotal();
-    atualizarTroco();
+    pedidos = [];
+    mostrarPedidos(); 
+    atualizarTotal(); 
+    atualizarTroco(); 
 }
 
 function calcularTotal() {
@@ -714,12 +716,7 @@ function calcularTotal() {
 }
     
 function calcularTroco() {
-    let total = 0;
-
-    for (let item in precos) {
-        const quantidade = parseFloat(document.getElementById(item).value) || 0;
-        total += quantidade * precos[item];
-    }
+    let total = calcularTotalSemAtualizar(); // Calcular o total sem atualizar na página
 
     let valorPago = parseFloat(document.getElementById('valor-pago').value);
     let troco = valorPago - total;
@@ -729,8 +726,17 @@ function calcularTroco() {
     } else {
         atualizarTroco(troco); // Atualiza o troco na página
     }
+}
 
-    atualizarTotal(total);
+function calcularTotalSemAtualizar() {
+    let total = 0;
+
+    for (let item in precos) {
+        const quantidade = parseFloat(document.getElementById(item).value) || 0;
+        total += quantidade * precos[item];
+    }
+
+    return total;
 }
     
 function adicionarPedido() {
@@ -757,11 +763,11 @@ function mostrarPedidos() {
     listaPedidos.innerHTML = '';
 
     pedidos.forEach((pedido, index) => {
-        let pedidoHTML = <p><strong>Pedido ${index + 1}:</strong><br>;
+        let pedidoHTML = `<p><strong>Pedido ${index + 1}:</strong><br>`;
         for (let item in pedido) {
-            pedidoHTML += ${item}: ${pedido[item]} unidades<br>;
+            pedidoHTML += `${item}: ${pedido[item]} unidades<br>`;
         }
-        pedidoHTML += </p>;
+        pedidoHTML += `</p>`;
         listaPedidos.innerHTML += pedidoHTML;
     });
 }
