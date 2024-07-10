@@ -737,11 +737,12 @@ function calcularTroco() {
 
         const taxa = document.getElementById('taxa').value;
 
-    if (taxa === 'delivery') {
-        total += 4; // Adiciona a taxa de entrega ao total
-    }
+        if (taxa === 'delivery') {
+            total += 4; // Adiciona a taxa de entrega ao total
+        }
 
-    atualizarTotal(total);
+        atualizarTotal(total);
+    }
 }
     
 function adicionarPedido() {
@@ -1494,10 +1495,10 @@ function atualizarTroco(troco = 0) {
         <div class="button" onclick="calcularTotal()">Calcular Total</div>
         <div class="total" id="total" bis_skin_checked="1">Total: R$ 0.00</div>
     
-        <div class="button" onclick="calcularTroco()">Calcular Troco</div>
-        <div class="troco" id="troco">Troco: R$ 0.00</div> 
+        <input type="number" id="valor-pago" placeholder="valor-pago">
+        <button class="button" onclick="calcularTroco()">Calcular Troco</button>
     
-        <div class="button reset-button" onclick="resetSelect()">Limpar Seleção</div>
+        <button class="button reset-button" onclick="resetSelect()">Limpar Pedido</button>
         <button onclick="adicionarPedido()">Adicionar Pedido</button>
         <div id="listaPedidos" bis_skin_checked="1"></div>   
         <button onclick="gerarRelatorio()">Gerar Relatório do Dia</button>
