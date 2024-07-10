@@ -710,12 +710,6 @@ function calcularTotal() {
         total += quantidade * precos[item];
     }
 
-    const taxa = document.getElementById('taxa').value;
-
-    if (taxa === 'delivery') {
-        total += 4; // Adiciona a taxa de entrega ao total
-    }
-
     atualizarTotal(total);
 }
     
@@ -734,11 +728,6 @@ function calcularTroco() {
         alert('O valor pago é insuficiente para cobrir o total dos itens.');
     } else {
         atualizarTroco(troco); // Atualiza o troco na página
-
-        const taxa = document.getElementById('taxa').value;
-
-    if (taxa === 'delivery') {
-        total += 4; // Adiciona a taxa de entrega ao total
     }
 
     atualizarTotal(total);
