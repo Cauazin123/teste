@@ -703,25 +703,6 @@ function calcularTotal() {
     atualizarTotal(total);
 }
 
-function adicionarPedido() {
-    let pedido = {};
-
-    for (let item in precos) {
-        const quantidade = parseFloat(document.getElementById(item).value) || 0;
-        if (quantidade > 0) {
-            pedido[item] = quantidade;
-        }
-    }
-
-    if (Object.keys(pedido).length > 0) {
-        pedidos.push(pedido);
-        mostrarPedidos();
-        resetSelect();
-    } else {
-        alert('Selecione ao menos um produto para adicionar ao pedido.');
-    }
-}
-
 function mostrarPedidos() {
     let listaPedidos = document.getElementById('listaPedidos');
     listaPedidos.innerHTML = '';
