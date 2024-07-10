@@ -719,13 +719,22 @@ function calcularTotal() {
 }
 
 // Função para atualizar o troco com base no valor recebido
-function calcularTroco(valorRecebido) {
-    const total = calcularTotal();
-    const troco = valorRecebido - total;
-    
-    // Aqui você fará algo com o troco, como exibir na interface
-    // Por exemplo, exibir em um elemento HTML com id="troco"
-    document.getElementById('troco').textContent = `Troco: R$ ${troco.toFixed(2)}`;
+function calcularTroco() {
+    const total = calcularTotal(); // Calcular o total dos pedidos ativos
+    const valorPago = parseFloat(document.getElementById('valor-pago').value); // Obter o valor pago
+
+    if (isNaN(valorPago)) {
+        alert('Por favor, insira um valor válido para o valor pago.');
+        return;
+    }
+
+    const troco = valorPago - total; // Calcular o troco
+
+    if (troco < 0) {
+        alert('O valor pago é insuficiente para cobrir o total dos itens.');
+    } else {
+        document.getElementById('troco').textContent = `Troco: R$ ${troco.toFixed(2)}`; // Exibir o troco na interface
+    }
 }
 
 function adicionarPedido() {
