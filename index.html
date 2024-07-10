@@ -640,10 +640,6 @@ select {
     text-align: center; /* Centralizar texto */
 }
 
-#troco {
-    font-weight: bold; /* Deixar o troco em negrito */
-}
-
 .lista-pedidos {
     text-align: left;
     margin-top: 20px;
@@ -716,7 +712,7 @@ function calcularTotal() {
 }
     
 function calcularTroco() {
-    let total = calcularTotalSemAtualizar(); // Calcular o total sem atualizar na página
+    let total = calcularTotal(); // Calcular o total atualizado
 
     let valorPago = parseFloat(document.getElementById('valor-pago').value);
     let troco = valorPago - total;
@@ -728,9 +724,6 @@ function calcularTroco() {
     }
 }
 
-    return total;
-}
-    
 function adicionarPedido() {
     let pedido = {};
 
@@ -751,7 +744,7 @@ function adicionarPedido() {
 }
 
 function mostrarPedidos() {
-    let listaPedidos = document.getElementById('lista-pedidos');
+    let listaPedidos = document.getElementById('listaPedidos');
     listaPedidos.innerHTML = '';
 
     pedidos.forEach((pedido, index) => {
@@ -765,11 +758,11 @@ function mostrarPedidos() {
 }
 
 function atualizarTotal(total = 0) {
-    document.getElementById('total').textContent = Total: R$ ${total.toFixed(2)};
+    document.getElementById('total').textContent = `Total: R$ ${total.toFixed(2)}`;
 }
 
 function atualizarTroco(troco = 0) {
-    document.getElementById('troco').textContent = Troco: R$ ${troco.toFixed(2)};
+    document.getElementById('troco').textContent = `Troco: R$ ${troco.toFixed(2)}`;
 }
 </script>
 </head>
@@ -1478,18 +1471,18 @@ function atualizarTroco(troco = 0) {
     <input type="number" id="valor-pago" class="input-field" step="0.01" min="0">
 </div>
     
-        <div class="button" onclick="calcularTotal()">Calcular Total</div>
-        <div class="total" id="total" bis_skin_checked="1">Total: R$ 0.00</div>
+<div class="button" onclick="calcularTotal()">Calcular Total</div>
+<div class="total" id="total">Total: R$ 0.00</div>
     
-        <div class="button" onclick="calcularTroco()">Calcular Troco</div>
-        <div class="troco" id="troco">Troco: R$ 0.00</div>
+<div class="button" onclick="calcularTroco()">Calcular Troco</div>
+<div class="troco" id="troco">Troco: R$ 0.00</div>
     
-        <button class="button reset-button" onclick="resetSelect()">Limpar Pedido</button>
-        <button onclick="adicionarPedido()">Adicionar Pedido</button>
-        <div id="listaPedidos" bis_skin_checked="1"></div>   
-        <button onclick="gerarRelatorio()">Gerar Relatório do Dia</button>
-      </div>
-    </body>
+<button class="button reset-button" onclick="resetSelect()">Limpar Pedido</button>
+<button onclick="adicionarPedido()">Adicionar Pedido</button>
+<div id="listaPedidos"></div>   
+<button onclick="gerarRelatorio()">Gerar Relatório do Dia</button>
+</div>
+</body>
 </html>
   
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
