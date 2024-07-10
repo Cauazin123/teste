@@ -698,6 +698,9 @@ function resetSelect() {
     mostrarPedidos(); 
     atualizarTotal(); 
     atualizarTroco(); 
+
+    // Resetar o valor pago para 0
+    document.getElementById('valor-pago').value = '';
 }
 
 function calcularTotal() {
