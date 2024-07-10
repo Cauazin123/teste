@@ -737,12 +737,11 @@ function calcularTroco() {
 
         const taxa = document.getElementById('taxa').value;
 
-        if (taxa === 'delivery') {
-            total += 4; // Adiciona a taxa de entrega ao total
-        }
-
-        atualizarTotal(total);
+    if (taxa === 'delivery') {
+        total += 4; // Adiciona a taxa de entrega ao total
     }
+
+    atualizarTotal(total);
 }
     
 function adicionarPedido() {
@@ -769,21 +768,21 @@ function mostrarPedidos() {
     listaPedidos.innerHTML = '';
 
     pedidos.forEach((pedido, index) => {
-        let pedidoHTML = `<p><strong>Pedido ${index + 1}:</strong><br>`;
+        let pedidoHTML = <p><strong>Pedido ${index + 1}:</strong><br>;
         for (let item in pedido) {
-            pedidoHTML += `${item}: ${pedido[item]} unidades<br>`;
+            pedidoHTML += ${item}: ${pedido[item]} unidades<br>;
         }
-        pedidoHTML += `</p>`;
+        pedidoHTML += </p>;
         listaPedidos.innerHTML += pedidoHTML;
     });
 }
 
 function atualizarTotal(total = 0) {
-    document.getElementById('total').textContent = `Total: R$ ${total.toFixed(2)}`;
+    document.getElementById('total').textContent = Total: R$ ${total.toFixed(2)};
 }
 
 function atualizarTroco(troco = 0) {
-    document.getElementById('troco').textContent = `Troco: R$ ${troco.toFixed(2)}`;
+    document.getElementById('troco').textContent = Troco: R$ ${troco.toFixed(2)};
 }
 </script>
 </head>
@@ -1495,8 +1494,8 @@ function atualizarTroco(troco = 0) {
         <div class="button" onclick="calcularTotal()">Calcular Total</div>
         <div class="total" id="total" bis_skin_checked="1">Total: R$ 0.00</div>
     
-        <input type="number" id="valor-pago" placeholder="valor-pago">
-        <button class="button" onclick="calcularTroco()">Calcular Troco</button>
+        <div class="button" onclick="calcularTroco()">Calcular Troco</div>
+        <div class="troco" id="troco">Troco: R$ 0.00</div>
     
         <button class="button reset-button" onclick="resetSelect()">Limpar Pedido</button>
         <button onclick="adicionarPedido()">Adicionar Pedido</button>
