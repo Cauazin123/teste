@@ -592,6 +592,7 @@ select, input[type="number"], .input-field {
 
 .input-field {
     text-align: right;
+    padding-right: 10px; /* Espaçamento à direita */
 }
 
 .input-field::placeholder {
@@ -601,7 +602,7 @@ select, input[type="number"], .input-field {
 .button {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #f4b400; /* Amarelo */
+    background-color: #000; /* Cor preta */
     color: white;
     border: none;
     border-radius: 4px;
@@ -610,10 +611,11 @@ select, input[type="number"], .input-field {
     font-family: 'Poppins', sans-serif;
     text-decoration: none;
     margin: 10px;
+    font-weight: bold; /* Texto em negrito */
 }
 
 .button:hover {
-    background-color: #d48e00; /* Amarelo mais escuro no hover */
+    background-color: #333; /* Cor mais escura no hover */
 }
 
 .reset-button {
@@ -632,6 +634,14 @@ select, input[type="number"], .input-field {
     background-color: #ddd;
     border-radius: 5px;
     display: inline-block;
+}
+
+.total {
+    font-weight: bold; /* Texto do total em negrito */
+}
+
+.troco {
+    font-weight: bold; /* Texto do troco em negrito */
 }
 
 .lista-pedidos {
@@ -766,7 +776,7 @@ function atualizarTotal(total = 0) {
 }
 
 function atualizarTroco(troco = 0) {
-    document.getElementById('troco').innerHTML = 'Troco: R$ ' + troco.toFixed(2);
+    document.getElementById('troco').innerHTML = 'Troco: <strong>R$ ' + troco.toFixed(2) + '</strong>';
 }
 
 function mostrarEndereco() {
@@ -1482,13 +1492,13 @@ function mostrarEndereco() {
 </div>
 
 <label for="valor-pago">Valor Pago:</label>
-<input type="number" id="valor-pago" class="input-field" step="0.01" min="0" placeholder="R$ 0.00">
+<input type="number" id="valor-pago" class="input-field" step="0.01" min="0" placeholder="R$">
 
 <div class="button" onclick="calcularTotal()">Calcular Total</div>
 <div class="total" id="total">Total: R$ 0.00</div>
 
 <div class="button" onclick="calcularTroco()">Calcular Troco</div>
-<div class="troco" id="troco">Troco: R$ 0.00</div>
+<div class="troco" id="troco">Troco: <strong>R$ 0.00</strong></div>
 
 <button class="button reset-button" onclick="resetSelect()">Limpar Pedido</button>
 <button onclick="adicionarPedido()">Adicionar Pedido</button>
