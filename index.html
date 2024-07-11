@@ -611,7 +611,7 @@ select, input[type="number"], .input-field {
     text-decoration: none;
     margin: 12px;
     font-weight: bold; /* Texto em negrito */
-    width: 220px; /* Largura aumentada dos botões */
+    width: 220px; /* Largura padronizada */
 }
 
 .button:hover {
@@ -1491,16 +1491,19 @@ function mostrarEndereco() {
 <label for="valor-pago">Valor Pago:</label>
 <input type="number" id="valor-pago" class="input-field" step="0.01" min="0" placeholder="R$">
 
-<button class="button" onclick="adicionarPedido()">Adicionar Pedido</button>
-<button class="button reset-button" onclick="resetSelect()">Limpar Pedido</button>  
-    
-<button class="button" onclick="calcularTotal()">Calcular Total</button>
-<div class="total" id="total">Total: R$ 0.00</div>    
-<button class="button" onclick="calcularTroco()">Calcular Troco</button>
-<div class="troco" id="troco">Troco: <strong>R$ 0.00</strong></div>
+<div class="button-container">
+    <button class="button" onclick="adicionarPedido()">Adicionar Pedido</button>
+    <button class="button reset-button" onclick="resetSelect()">Limpar Pedido</button>  
+</div>
 
+<div class="button-container">
+    <button class="button" style="width: 160px; padding: 10px 20px;" onclick="calcularTotal()">Calcular Total</button>
+    <button class="button" style="width: 160px; padding: 10px 20px;" onclick="calcularTroco()">Calcular Troco</button>
+    <button class="button" onclick="gerarRelatorio()">Gerar Relatório do Dia</button>
+</div>
     
-<button class="button" onclick="gerarRelatorio()">Gerar Relatório do Dia</button>
+<div class="total" id="total">Total: R$ 0.00</div>    
+<div class="troco" id="troco">Troco: <strong>R$ 0.00</strong></div>
 
 <div id="listaPedidos" class="lista-pedidos"></div>
 
