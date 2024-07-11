@@ -582,7 +582,7 @@ label {
 }
 
 select, input[type="number"], .input-field {
-    width: 100%;
+    width: calc(100% - 20px); /* Ajuste para o campo ser um pouco menor */
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 3px;
@@ -591,8 +591,7 @@ select, input[type="number"], .input-field {
 }
 
 .input-field {
-    text-align: right;
-    padding-right: 10px; /* Espaçamento à direita */
+    text-align: left; /* Alinhar texto à esquerda */
 }
 
 .input-field::placeholder {
