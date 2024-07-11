@@ -645,6 +645,7 @@ h1, h2 {
     border-radius: 3px;
     font-size: 16px;
     text-align: center;
+    margin-bottom: 20px;
 }
 
 .lista-pedidos {
@@ -755,7 +756,7 @@ function calcularTotal() {
         }
     });
 
-    return total;
+    atualizarTotal(total);
 }
 
 function calcularTroco() {
@@ -1450,13 +1451,7 @@ function atualizarTroco(troco = 0) {
   </select>
 </div>
     
-  
-        <div class="item">
-        <h2>Observações</h2>
-        <label for="observacoes">Observações:</label>
-        <input type="text" id="observacoes">
-    </div>
-
+<div class="container">
     <div class="item">
         <h2>Forma de Pagamento</h2>
         <label for="pagamento">Escolha a forma de pagamento:</label>
@@ -1483,14 +1478,22 @@ function atualizarTroco(troco = 0) {
     </div>
 
     <div class="item">
+        <h2>Observações</h2>
+        <label for="observacoes">Observações:</label>
+        <input type="text" id="observacoes">
+    </div>
+
+    <div class="item">
         <label for="valor-pago">Valor Pago:</label>
         <input type="number" id="valor-pago" class="input-field" step="0.01" min="0">
     </div>
 
-    <div class="button" onclick="calcularTotal()">Calcular Total</div>
-    <div class="total" id="total">Total: R$ 0.00</div>
+    <div>
+        <div class="button" onclick="calcularTotal()">Calcular Total</div>
+        <div class="button" onclick="calcularTroco()">Calcular Troco</div>
+    </div>
 
-    <div class="button" onclick="calcularTroco()">Calcular Troco</div>
+    <div class="total" id="total">Total: R$ 0.00</div>
     <div class="troco" id="troco">Troco: R$ 0.00</div>
 
     <button class="button reset-button" onclick="resetSelect()">Limpar Pedido</button>
