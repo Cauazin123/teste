@@ -638,6 +638,10 @@ h1, h2 {
     display: inline-block;
 }
 
+.troco {
+    font-weight: bold;
+}
+
 #valor-pago {
     width: 180px;
     padding: 12px;
@@ -645,6 +649,7 @@ h1, h2 {
     border-radius: 3px;
     font-size: 16px;
     text-align: center;
+    margin-bottom: 10px;
 }
 
 .lista-pedidos {
@@ -785,7 +790,6 @@ function atualizarTroco(troco = 0) {
 </script>
 </head>
 <body>
-    
 <h2> Salgados</h2>
 <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
     <label for="salgadoCoxinha"> Coxinha de Frango</label>
@@ -1489,11 +1493,15 @@ function atualizarTroco(troco = 0) {
         <input type="number" id="valor-pago" class="input-field" step="0.01" min="0">
     </div>
 
-    <div class="button" onclick="calcularTotal()">Calcular Total</div>
-    <div class="total" id="total">Total: R$ 0.00</div>
+    <div>
+        <button class="button" onclick="calcularTotal()">Calcular Total</button>
+        <div class="total" id="total">Total: R$ 0.00</div>
+    </div>
 
-    <div class="button" onclick="calcularTroco()">Calcular Troco</div>
-    <div class="troco" id="troco">Troco: R$ 0.00</div>
+    <div>
+        <button class="button" onclick="calcularTroco()">Calcular Troco</button>
+        <div class="troco" id="troco">Troco: R$ 0.00</div>
+    </div>
 
     <button class="button reset-button" onclick="resetSelect()">Limpar Pedido</button>
     <button class="button" onclick="adicionarPedido()">Adicionar Pedido</button>
