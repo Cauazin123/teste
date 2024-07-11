@@ -1464,17 +1464,6 @@ function atualizarTroco(troco = 0) {
     </div>
 
     <div class="item">
-        <h2>Forma de Pagamento</h2>
-        <label for="pagamento">Escolha a forma de pagamento:</label>
-        <select id="pagamento">
-            <option value="dinheiro">Dinheiro</option>
-            <option value="cartao">Cartão</option>
-            <option value="pix">Pix</option>
-            <option value="uairango">UaiRango</option>
-        </select>
-    </div>
-
-    <div class="item">
         <h2>Taxa</h2>
         <label for="taxa">Escolha a opção de taxa:</label>
         <select id="taxa" onchange="mostrarEndereco()">
@@ -1488,31 +1477,20 @@ function atualizarTroco(troco = 0) {
         </div>
     </div>
 
-    <div class="item">
-        <label for="valor-pago">Valor Pago:</label>
-        <input type="number" id="valor-pago" class="input-field" step="0.01" min="0">
-    </div>
-
-    <div>
-        <button class="button" onclick="calcularTotal()">Calcular Total</button>
-        <div class="total" id="total">Total: R$ 0.00</div>
-    </div>
-
-    <div>
-        <button class="button" onclick="calcularTroco()">Calcular Troco</button>
-        <div class="troco" id="troco">Troco: R$ 0.00</div>
-    </div>
-
-    <button class="button reset-button" onclick="resetSelect()">Limpar Pedido</button>
-    <button class="button" onclick="adicionarPedido()">Adicionar Pedido</button>
-
     <div class="lista-pedidos" id="listaPedidos"></div>
-    <button class="button" onclick="gerarRelatorio()">Gerar Relatório do Dia</button>
+
+    <div class="item">
+        <button class="button reset-button" onclick="resetSelect()">Limpar Pedido</button>
+        <button class="button" onclick="adicionarPedido()">Adicionar Pedido</button>
+    </div>
+
+    <div class="total" id="total">Total: R$ 0.00</div>
+    <div class="troco" id="troco">Troco: R$ 0.00</div>
 </div>
 
 </body>
 </html>
-  
+        
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
       <script>
         const pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
