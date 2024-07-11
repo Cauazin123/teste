@@ -546,7 +546,7 @@
           <input type="text" id="nomeCliente">
         </div>
   
-<!DOCTYPE html>
+      <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -560,52 +560,46 @@ body {
     margin: 20px;
 }
 
-.container {
-    max-width: 700px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 30px;
-    border-radius: 15px;
-    animation: pulseBorder 2s infinite;
-    box-shadow: 0 0 0 5px rgba(227, 188, 33, 0.5);
-}
-
-h1, h2 {
+h2 {
     margin-top: 30px;
-    color: #333;
 }
 
 .item {
     display: inline-block;
-    width: calc(33% - 20px);
-    margin-right: 20px;
-    margin-bottom: 20px;
-    background-color: #f9f9f9;
-    padding: 15px;
+    width: 200px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    padding: 10px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    text-align: left;
 }
 
-.item label {
+label {
     display: block;
     margin-bottom: 5px;
-    color: #555;
 }
 
-.item select, .item input[type="number"], .item input[type="text"] {
+select {
     width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.input-field {
+    width: 150px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 3px;
-    margin-bottom: 10px;
     font-size: 16px;
+    text-align: center;
 }
 
 .button {
     display: inline-block;
-    padding: 12px 24px;
-    background-color: #f4b400;
+    padding: 10px 20px;
+    background-color: #f4b400; /* Amarelo */
     color: white;
     border: none;
     border-radius: 4px;
@@ -614,11 +608,10 @@ h1, h2 {
     font-family: 'Poppins', sans-serif;
     text-decoration: none;
     margin: 10px;
-    transition: background-color 0.3s ease;
 }
 
 .button:hover {
-    background-color: #d48e00;
+    background-color: #d48e00; /* Amarelo mais escuro no hover */
 }
 
 .reset-button {
@@ -633,29 +626,15 @@ h1, h2 {
     margin-top: 20px;
     font-size: 18px;
     color: #333;
-    padding: 12px;
+    padding: 10px;
     background-color: #ddd;
     border-radius: 5px;
     display: inline-block;
 }
 
-#valor-pago {
-    width: 180px;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    font-size: 16px;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
 .lista-pedidos {
     text-align: left;
     margin-top: 20px;
-    background-color: #f9f9f9;
-    padding: 15px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
@@ -708,11 +687,12 @@ let pedidosAtivos = [];
 
 function resetSelect() {
     document.querySelectorAll('select').forEach(select => select.value = '0');
+    document.getElementById('enderecoContainer').style.display = 'none';
+    document.getElementById('endereco').value = '';
     pedidosAtivos = [];
-    mostrarPedidos(); 
-    atualizarTotal(0); 
-    atualizarTroco(0); 
-    document.getElementById('valor-pago').value = '';
+    mostrarPedidos();
+    atualizarTotal();
+    atualizarTroco();
 }
 
 function adicionarPedido() {
@@ -758,14 +738,12 @@ function calcularTotal() {
     });
 
     atualizarTotal(total);
-    return total;
 }
 
 function calcularTroco() {
-    let totalPedido = calcularTotal();
-
-    let valorPago = parseFloat(document.getElementById('valor-pago').value);
-    let troco = valorPago - totalPedido;
+    let total = calcularTotal();
+    let valorPago = parseFloat(document.getElementById('valor-pago').value) || 0;
+    let troco = valorPago - total;
 
     if (troco < 0) {
         alert('O valor pago é insuficiente para cobrir o total dos itens.');
@@ -779,15 +757,23 @@ function atualizarTotal(total = 0) {
 }
 
 function atualizarTroco(troco = 0) {
-    if (troco <= 0) {
-        document.getElementById('troco').textContent = `Troco: R$ 0.00`;
+    document.getElementById('troco').textContent = `Troco: R$ ${troco.toFixed(2)}`;
+}
+
+function mostrarEndereco() {
+    const taxaSelecionada = document.getElementById('taxa').value;
+    if (taxaSelecionada === 'delivery') {
+        document.getElementById('enderecoContainer').style.display = 'block';
     } else {
-        document.getElementById('troco').textContent = `Troco: R$ ${troco.toFixed(2)}`;
+        document.getElementById('enderecoContainer').style.display = 'none';
+        document.getElementById('endereco').value = '';
     }
 }
 </script>
 </head>
 <body>
+    
+<h2> Salgados</h2>
 <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
     <label for="salgadoCoxinha"> Coxinha de Frango</label>
     <select id="salgadoCoxinha">
@@ -1453,60 +1439,56 @@ function atualizarTroco(troco = 0) {
   </select>
 </div>
     
-<div class="container">
-    <div class="item">
-        <h2>Forma de Pagamento</h2>
-        <label for="pagamento">Escolha a forma de pagamento:</label>
-        <select id="pagamento">
-            <option value="dinheiro">Dinheiro</option>
-            <option value="cartao">Cartão</option>
-            <option value="pix">Pix</option>
-            <option value="uairango">UaiRango</option>
-        </select>
-    </div>
-
-    <div class="item">
-        <h2>Taxa</h2>
-        <label for="taxa">Escolha a opção de taxa:</label>
-        <select id="taxa" onchange="mostrarEndereco()">
-            <option value="retirada">Retirada</option>
-            <option value="mesa">Mesa</option>
-            <option value="delivery">Delivery (R$ 4,00)</option>
-        </select>
-        <div id="enderecoContainer" style="display: none;">
-            <label for="endereco">Endereço:</label>
-            <input type="text" id="endereco">
-        </div>
-    </div>
-
-    <div class="item">
+  
         <h2>Observações</h2>
-        <label for="observacoes">Observações:</label>
-        <input type="text" id="observacoes">
-    </div>
-
-    <div class="item">
-        <label for="valor-pago">Valor Pago:</label>
-        <input type="number" id="valor-pago" class="input-field" step="0.01" min="0">
-    </div>
-
-    <div>
-        <div class="button" onclick="calcularTotal()">Calcular Total</div>
-        <div class="button" onclick="calcularTroco()">Calcular Troco</div>
-    </div>
-
-    <div class="total" id="total">Total: R$ 0.00</div>
-    <div class="troco" id="troco">Troco: R$ 0.00</div>
-
-    <button class="button reset-button" onclick="resetSelect()">Limpar Pedido</button>
-    <button class="button" onclick="adicionarPedido()">Adicionar Pedido</button>
-
-    <div class="lista-pedidos" id="listaPedidos"></div>
-    <button class="button" onclick="gerarRelatorio()">Gerar Relatório do Dia</button>
+<div class="item">
+    <label for="observacoes">Observações:</label>
+    <input type="text" id="observacoes">
 </div>
+
+<h2>Forma de Pagamento</h2>
+<div class="item">
+    <label for="pagamento">Escolha a forma de pagamento:</label>
+    <select id="pagamento">
+        <option value="dinheiro">Dinheiro</option>
+        <option value="cartao">Cartão</option>
+        <option value="pix">Pix</option>
+        <option value="uairango">UaiRango</option>
+    </select>
+</div>
+
+<h2>Taxa</h2>
+<div class="item">
+    <label for="taxa">Escolha a opção de taxa:</label>
+    <select id="taxa" onchange="mostrarEndereco()">
+        <option value="retirada">Retirada</option>
+        <option value="mesa">Mesa</option>
+        <option value="delivery">Delivery (R$ 4,00)</option>
+    </select>
+</div>
+
+<div id="enderecoContainer" style="display: none;" class="item">
+    <label for="endereco">Endereço:</label>
+    <input type="text" id="endereco">
+</div>
+
+<label for="valor-pago">Valor Pago:</label>
+<input type="number" id="valor-pago" class="input-field" step="0.01" min="0">
+
+<div class="button" onclick="calcularTotal()">Calcular Total</div>
+<div class="total" id="total">Total: R$ 0.00</div>
+
+<div class="button" onclick="calcularTroco()">Calcular Troco</div>
+<div class="troco" id="troco">Troco: R$ 0.00</div>
+
+<button class="button reset-button" onclick="resetSelect()">Limpar Pedido</button>
+<button onclick="adicionarPedido()">Adicionar Pedido</button>
+<div id="listaPedidos" class="lista-pedidos"></div>
+<button onclick="gerarRelatorio()">Gerar Relatório do Dia</button>
+
 </body>
 </html>
-        
+  
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
       <script>
         const pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
