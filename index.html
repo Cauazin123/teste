@@ -611,6 +611,7 @@ select, input[type="number"], .input-field {
     text-decoration: none;
     margin: 10px;
     font-weight: bold; /* Texto em negrito */
+    width: 150px; /* Mesma largura para ambos os botões */
 }
 
 .button:hover {
@@ -706,6 +707,13 @@ function resetSelect() {
     document.querySelectorAll('select').forEach(select => select.value = '0');
     document.getElementById('enderecoContainer').style.display = 'none';
     document.getElementById('endereco').value = '';
+    pedidosAtivos = [];
+    mostrarPedidos();
+    atualizarTotal();
+    atualizarTroco();
+}
+
+function limparPedido() {
     pedidosAtivos = [];
     mostrarPedidos();
     atualizarTotal();
@@ -1493,16 +1501,18 @@ function mostrarEndereco() {
 <label for="valor-pago">Valor Pago:</label>
 <input type="number" id="valor-pago" class="input-field" step="0.01" min="0" placeholder="R$">
 
-<div class="button" onclick="calcularTotal()">Calcular Total</div>
+<button class="button" onclick="calcularTotal()">Calcular Total</button>
 <div class="total" id="total">Total: R$ 0.00</div>
 
-<div class="button" onclick="calcularTroco()">Calcular Troco</div>
+<button class="button" onclick="calcularTroco()">Calcular Troco</button>
 <div class="troco" id="troco">Troco: <strong>R$ 0.00</strong></div>
 
 <button class="button reset-button" onclick="resetSelect()">Limpar Pedido</button>
-<button onclick="adicionarPedido()">Adicionar Pedido</button>
+<button class="button" onclick="limparPedido()">Limpar Pedido, Limpar Total e Troco</button>
+
 <div id="listaPedidos" class="lista-pedidos"></div>
-<button onclick="gerarRelatorio()">Gerar Relatório do Dia</button>
+<button class="button" onclick="adicionarPedido()">Adicionar Pedido</button>
+<button class="button" onclick="gerarRelatorio()">Gerar Relatório do Dia</button>
 
 </body>
 </html>
