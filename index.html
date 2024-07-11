@@ -560,8 +560,8 @@ body {
     margin: 20px;
 }
 
-h2 {
-    margin-top: 30px;
+h1, h2 {
+    color: #000;
 }
 
 .item {
@@ -578,22 +578,16 @@ h2 {
 label {
     display: block;
     margin-bottom: 5px;
+    color: #333;
 }
 
-select {
+select, input[type="number"], .input-field {
     width: 100%;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 3px;
-}
-
-.input-field {
-    width: 150px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
     font-size: 16px;
-    text-align: center;
+    color: #333;
 }
 
 .button {
@@ -635,7 +629,13 @@ select {
 .lista-pedidos {
     text-align: left;
     margin-top: 20px;
+    color: #333;
 }
+
+#enderecoContainer {
+    display: none;
+}
+
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 <script>
@@ -719,11 +719,11 @@ function mostrarPedidos() {
     listaPedidos.innerHTML = '';
 
     pedidosAtivos.forEach((pedido, index) => {
-        let pedidoHTML = `<p><strong>Pedido ${index + 1}:</strong><br>`;
+        let pedidoHTML = '<p><strong>Pedido ' + (index + 1) + ':</strong><br>';
         for (let item in pedido) {
-            pedidoHTML += `${item}: ${pedido[item]} unidades<br>`;
+            pedidoHTML += item + ': ' + pedido[item] + ' unidades<br>';
         }
-        pedidoHTML += `</p>`;
+        pedidoHTML += '</p>';
         listaPedidos.innerHTML += pedidoHTML;
     });
 }
@@ -754,11 +754,11 @@ function calcularTroco() {
 }
 
 function atualizarTotal(total = 0) {
-    document.getElementById('total').textContent = `Total: R$ ${total.toFixed(2)}`;
+    document.getElementById('total').innerHTML = 'Total: R$ ' + total.toFixed(2);
 }
 
 function atualizarTroco(troco = 0) {
-    document.getElementById('troco').textContent = `Troco: R$ ${troco.toFixed(2)}`;
+    document.getElementById('troco').innerHTML = 'Troco: R$ ' + troco.toFixed(2);
 }
 
 function mostrarEndereco() {
@@ -1468,7 +1468,7 @@ function mostrarEndereco() {
     </select>
 </div>
 
-<div id="enderecoContainer" style="display: none;" class="item">
+<div id="enderecoContainer" class="item">
     <label for="endereco">Endereço:</label>
     <input type="text" id="endereco">
 </div>
