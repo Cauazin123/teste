@@ -721,8 +721,9 @@ function resetSelect() {
     document.getElementById('endereco').value = '';
     pedidosAtivos = [];
     mostrarPedidos();
-    atualizarTotal();
-    atualizarTroco();
+    atualizarTotal(0); // Zera o total
+    atualizarTroco(0); // Zera o troco
+    document.getElementById('valor-pago').value = ''; // Limpa o valor pago
 }
 
 function adicionarPedido() {
