@@ -600,18 +600,18 @@ select, input[type="number"], .input-field {
 
 .button {
     display: inline-block;
-    padding: 10px 20px; /* Ajuste de padding menor */
+    padding: 12px 24px; /* Aumento do padding para aumentar o tamanho do botão */
     background-color: #000; /* Cor preta */
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 18px; /* Aumento do tamanho da fonte */
     font-family: 'Poppins', sans-serif;
     text-decoration: none;
     margin: 12px;
     font-weight: bold; /* Texto em negrito */
-    width: 180px; /* Largura padronizada */
+    width: 220px; /* Largura aumentada dos botões */
 }
 
 .button:hover {
@@ -1488,8 +1488,6 @@ function mostrarEndereco() {
 
 <button class="button" onclick="adicionarPedido()">Adicionar Pedido</button>
 <button class="button reset-button" onclick="resetSelect()">Limpar Pedido</button>  
-
-
     
 <button class="button" onclick="calcularTotal()">Calcular Total</button>
 <div class="total" id="total">Total: R$ 0.00</div>    
