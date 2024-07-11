@@ -651,6 +651,21 @@ select, input[type="number"], .input-field {
     flex-wrap: wrap;
     justify-content: center;
 }
+
+.button-container .button {
+    width: 180px;
+    padding: 10px 20px;
+}
+
+.button-container .button-calcular {
+    background-color: #007bff;
+    color: white;
+}
+
+.button-container .button-calcular:hover {
+    background-color: #0056b3;
+}
+
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 <script>
@@ -1497,11 +1512,10 @@ function mostrarEndereco() {
 </div>
 
 <div class="button-container">
-    <button class="button" style="width: 160px; padding: 10px 20px;" onclick="calcularTotal()">Calcular Total</button>
-    <button class="button" style="width: 160px; padding: 10px 20px;" onclick="calcularTroco()">Calcular Troco</button>
-    <button class="button" onclick="gerarRelatorio()">Gerar Relatório do Dia</button>
+    <button class="button button-calcular" onclick="calcularTotal()">Calcular Total</button>
+    <button class="button button-calcular" onclick="calcularTroco()">Calcular Troco</button>
 </div>
-    
+
 <div class="total" id="total">Total: R$ 0.00</div>    
 <div class="troco" id="troco">Troco: <strong>R$ 0.00</strong></div>
 
