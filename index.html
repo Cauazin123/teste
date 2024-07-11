@@ -1,115 +1,535 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
+<html lang="pt-br" dir="ltr"><script src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/content/location/location.js" id="eppiocemhmnlbhjplcgkofciiegomcon"></script><script src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/libs/extend-native-history-api.js"></script><script src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/libs/requests.js"></script><head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Casa do Pastel</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="https://i.imgur.com/dBaLJbE.png">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css.css">
-    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet">
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #fafaf8;
-            color: #333;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-        }
+      body {
+          font-family: 'Poppins', sans-serif;
+          background-color: #fafaf8;
+          color: #333;
+          padding: 20px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          min-height: 100vh;
+          margin: 0;
+      }
 
-        .container {
-            max-width: 700px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 0 0 5px rgba(227, 188, 33, 0.5);
-            animation: pulseBorder 2s infinite;
-        }
+      @keyframes pulseBorder {
+        0% { box-shadow: 0 0 0 5px rgba(227, 188, 33, 0.5); }
+        50% { box-shadow: 0 0 0 10px rgba(227, 188, 33, 1); }
+        100% { box-shadow: 0 0 0 5px rgba(227, 188, 33, 0.5); }
+      }
 
-        @keyframes pulseBorder {
-            0% { box-shadow: 0 0 0 5px rgba(227, 188, 33, 0.5); }
-            50% { box-shadow: 0 0 0 10px rgba(227, 188, 33, 1); }
-            100% { box-shadow: 0 0 0 5px rgba(227, 188, 33, 0.5); }
-        }
+      .container {
+          max-width: 700px;
+          width: 100%;
+          margin: 0 auto;
+          padding: 30px;
+          border-radius: 15px;
+          animation: pulseBorder 2s infinite;
+          box-shadow: 0 0 0 5px rgba(227, 188, 33, 0.5);
+      }
 
-        h1 {
-            text-align: center;
-            color: #e3bc21;
-            margin-bottom: 20px;
-            font-size: 2.5em;
-            text-transform: uppercase;
-            animation: pulse 2s infinite alternate;
-        }
+      h1 {
+          text-align: center;
+          color: #e3bc21;
+          margin-bottom: 20px;
+          font-size: 2.5em;
+          text-transform: uppercase;
+      }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
+      h2 {
+          color: #e3bc21;
+          border-bottom: 2px solid #e3bc21;
+          padding-bottom: 5px;
+          margin-top: 30px;
+          margin-bottom: 20px;
+          font-size: 1.8em;
+      }
 
-        .item {
-            margin-bottom: 20px;
-        }
+      .item {
+          margin-bottom: 20px;
+      }
 
-        .item label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #555;
-        }
+      .item label {
+          display: block;
+          margin-bottom: 8px;
+          font-weight: 600;
+          color: #555;
+      }
 
-        .item input[type="text"] {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ced4da;
-            border-radius: 8px;
-            box-sizing: border-box;
-            margin-bottom: 10px;
-            font-size: 1em;
-            transition: border-color 0.3s;
-            outline: none;
-        }
+      .item input[type="number"],
+      .item input[type="text"],
+      .item select {
+          width: 100%;
+          padding: 12px;
+          border: 1px solid #ced4da;
+          border-radius: 8px;
+          box-sizing: border-box;
+          margin-bottom: 10px;
+          font-size: 1em;
+          transition: border-color 0.3s;
+      }
 
-        .item input[type="text"]:focus {
-            border-color: #e3bc21;
-        }
+      .item input[type="number"]:focus,
+      .item input[type="text"]:focus,
+      .item select:focus {
+          border-color: #e3bc21;
+      }
 
-        button {
-            width: 100%;
-            padding: 15px;
-            background-color: #e3bc21;
-            border: none;
-            border-radius: 8px;
-            color: #fff;
-            font-size: 1.2em;
-            cursor: pointer;
-            margin-bottom: 15px;
-            transition: background-color 0.3s ease, transform 0.2s;
-        }
+      button {
+          width: 100%;
+          padding: 15px;
+          background-color: #e3bc21;
+          border: none;
+          border-radius: 8px;
+          color: #fff;
+          font-size: 1.2em;
+          cursor: pointer;
+          margin-bottom: 15px;
+          transition: background-color 0.3s ease, transform 0.2s;
+      }
 
-        button:hover {
-            background-color: #c1a41a;
-            transform: scale(1.02);
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1><img src="https://i.imgur.com/dBaLJbE.png" alt="Ícone Casa do Pastel" style="vertical-align: middle; width: 40px; height: auto;"> CASA DO PASTEL</h1>
-    
-        <div class="item">
-            <label for="nomeCliente">Nome do Cliente:</label>
-            <input type="text" id="nomeCliente">
-        </div>
-        
+      button:hover {
+          background-color: #c1a41a;
+          transform: scale(1.02);
+      }
+
+      .total {
+          margin-top: 20px;
+          font-size: 1.8em;
+          text-align: center;
+          color: #e3bc21;
+          font-weight: bold;
+      }
+
+      .pedido {
+          margin-top: 20px;
+          padding: 15px;
+          background-color: #f1f3f5;
+          border: 1px solid #ddd;
+          border-radius: 10px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          transition: background-color 0.3s ease;
+      }
+
+      .pedido .info {
+          flex-grow: 1;
+      }
+
+      .pedido button {
+          background-color: #28a745;
+          color: #fff;
+          margin-left: 10px;
+          padding: 10px 15px;
+          border-radius: 5px;
+          font-size: 1em;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+      }
+
+      .pedido button:hover {
+          background-color: #218838;
+      }
+
+      input:focus,
+      button:focus {
+          outline: none;
+          box-shadow: 0 0 5px rgba(220, 53, 69, 0.5);
+      }
+
+      .item input[type="number"]::-webkit-outer-spin-button,
+      .item input[type="number"]::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+      }
+
+      .item input[type="number"] {
+          -moz-appearance: textfield;
+      }
+
+      .logo {
+          text-align: center;
+          margin-bottom: 20px;
+      }
+
+      .logo img {
+          max-width: 100px;
+      }
+
+      @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+      }
+
+      h1 {
+          text-align: center;
+          color: #e3bc21;
+          margin-bottom: 20px;
+          font-size: 2.5em;
+          animation: pulse 2s infinite alternate;
+      }
+
+      /* ======= DROPDOWN ===========*/
+      .nav_dropwdown {
+          overflow: hidden;
+          max-height: 21px;
+          transition: 0.4s ease-in-out;
+      }
+      .nav_dropdown-collapse {
+          background-color: var(--first-color-light);
+          border-radius: 0.25rem;
+          margin-top: 1rem;
+      }
+      .nav_dropwdown-content {
+          display: grid;
+          row-gap: 0.5rem;
+          padding: 0.75rem 2.5rem 0.75rem 1.8rem;
+      }
+      .nav_dropdown-item {
+          font-size: var(--smaller-font-size);
+          font-weight: var(--font-medium);
+          color: var(--text-color);
+      }
+      .nav_dropdown-item:hover {
+          color: var(--first-color);
+      }
+      .nav_dropwdown-icon {
+          margin-left: auto;
+          transition: 0.4s;
+      }
+
+      /* ======= NAVBAR ===========*/
+      .nav {
+          position: fixed;
+          top: 0;
+          left: 0;
+          height: 100vh;
+          padding: 1rem 1rem 3rem;
+          background-color: var(--container-color);
+          box-shadow: 1px 0 0 rgba(22, 8, 43, 0.1);
+          z-index: var(--z-fixed);
+          transition: left 0.4s;
+          display: none;
+      }
+
+      .nav.show-menu {
+          display: block;
+      }
+
+      @media screen and (max-width: 519px) {
+          .header_container span {
+              color: var(--text-color);
+              font-size: 1.1rem;
+              position: absolute;
+              right: calc(70px + 40px);
+              margin-left: 45px;
+          }
+      }
+            
+      .nav_container {
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          overflow: auto;
+      }
+      .nav_container::-webkit-scrollbar {
+          background: transparent;
+          width: 3px;
+      }
+      .nav_container::-webkit-scrollbar-thumb {
+          background-color: var(--tittle-background);
+          box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+          border-radius: 20px;
+      }
+      .nav_logo {
+          font-weight: var(--font-semi-bold);
+          margin-bottom: 2.5rem;
+          font-size: 24px;
+      }
+      .nav_logo span {
+          margin-left: 10px;
+      }
+      .nav_list,
+      .nav_items {
+          display: grid;
+      }
+      .nav_list {
+          row-gap: 2.5rem;
+      }
+      .nav_items {
+          row-gap: 1.5rem;
+      }
+      .nav_subtitle {
+          font-size: 1rem;
+          text-transform: uppercase;
+          letter-spacing: 0.1rem;
+          color: var(--text-color-light);
+      }
+      .nav_link {
+          display: flex;
+          align-items: center;
+          color: var(--text-color);
+      }
+      .nav_link:hover {
+          color: var(--first-color);
+      }
+      .nav_icon {
+          font-size: 1.2rem;
+          margin-right: 0.5rem;
+      }
+      .nav_name {
+          font-size: var(--small-font-size);
+          font-weight: var(--font-medium);
+          white-space: nowrap;
+      }
+      .nav_developed {
+          margin-top: 5rem;
+      }
+
+      @media screen and (max-width: 1050px) {
+          :root {
+              --font-title: 60px;
+              --font-32px: 30px;
+              --font-26px: 24px;
+              --font-24px: 22px;
+              --font-22px: 20px;
+              --font-20px: 18px;
+              --font-18px: 16px;
+              --font-17px: 17px;
+              --font-16px: 14px;
+          }
+      }
+      @media screen and (max-width: 850px) {
+          :root {
+              --font-title: 52px;
+              --font-32px: 28px;
+              --font-26px: 22px;
+              --font-24px: 20px;
+              --font-22px: 18px;
+              --font-20px: 16px;
+              --font-18px: 14px;
+              --font-17px: 13px;
+              --font-16px: 12px;
+          }
+          .card img {
+              width: 60px;
+          }
+          form .details .input-box {
+              width: 100%;
+          }
+          form .button {
+              height: 35px;
+              width: 100%;
+              margin: 5px 0 20px 0;
+          }
+          #select_options {
+              width: 95%;
+              margin: 15px 2.5%;
+          }
+      }
+      @media screen and (max-width: 600px) {
+          :root {
+              --font-title: 48px;
+              --font-32px: 27px;
+              --font-26px: 21px;
+              --font-24px: 19px;
+              --font-22px: 17px;
+              --font-20px: 15px;
+              --font-18px: 14px;
+              --font-17px: 13px;
+              --font-16px: 12px;
+          }
+          .card img {
+              width: 55px;
+          }
+      }
+      @media screen and (max-width: 500px) {
+          :root {
+              --font-title: 38px;
+              --font-32px: 24px;
+              --font-26px: 18px;
+              --font-24px: 18px;
+              --font-22px: 16px;
+              --font-20px: 14px;
+              --font-18px: 12px;
+              --font-17px: 11px;
+              --font-16px: 10px;
+          }
+          .card img {
+              width: 47px;
+          }
+      }
+
+      body {
+          overflow: overlay;
+      }
+      ::-webkit-scrollbar {
+          background: transparent;
+          width: 5px;
+      }
+      ::-webkit-scrollbar-thumb {
+          background-color: var(--tittle-background);
+          box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+          border-radius: 20px;
+      }
+      footer {
+          width: 100%;
+          background-color: var(--container-color);
+          color: #fff;
+      }
+      .footer_header {
+          padding: 20px;
+          display: flex;
+          width: 100%;
+          justify-content: center;
+      }
+      .footer_center {
+          width: 100%;
+          margin: auto;
+          text-align: center;
+      }
+      .footer_header .header_title {
+          width: auto;
+          display: inline-block;
+          padding-bottom: 20px;
+          font-size: var(--font-24px);
+      }
+      .footer_header .btn_hd {
+          display: inline-block;
+          cursor: pointer;
+          background-color: #000000;
+          padding: 5px;
+          border-radius: 5px;
+          width: 20%;
+          font-size: var(--font-16px);
+      }
+      .footer_header .btn_hd:hover {
+          background-color: #000000;
+      }
+      .footer_header .btn_hd i {
+          display: block;
+          margin: 0;
+      }
+      .title {
+          text-align: center;
+          background-color: var(--first-color-light);
+          color: #fff;
+          padding: 10px 8px;
+          font-weight: 500;
+      }
+      .footer_header .btn_hd .nav_name {
+          margin: auto;
+      }
+      .footer_base {
+          font-size: var(--font-16px);
+          padding: 20px;
+          background-color: #000000;
+          text-align: center;
+      }
+      .footer_base .developed .nav_name,
+      .footer_base .developed .nav_icon {
+          font-size: var(--font-16px);
+      }
+      @media screen and (max-width: 650px) {
+          .footer_header .btn_hd {
+              width: 30%;
+          }
+      }
+      @media screen and (max-width: 450px) {
+          .footer_header .btn_hd {
+              width: 31%;
+          }
+      }
+
+      #loading-screen {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: #e3bc21;
+          z-index: 9999;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: white;
+          font-size: 2em;
+          transition: opacity 0.5s ease, visibility 0.5s ease;
+      }
+
+      #loading-screen.hidden {
+          opacity: 0;
+          visibility: hidden;
+      }
+
+      @keyframes fadeInOut {
+          0%, 100% {
+              opacity: 1;
+          }
+          50% {
+              opacity: 0.5;
+          }
+      }
+
+      #loading-screen span {
+          animation: fadeInOut 1s infinite;
+      }
+
+      @keyframes fadeInUp {
+          0% {
+              opacity: 0;
+              transform: translateY(20px);
+          }
+          100% {
+              opacity: 1;
+              transform: translateY(0);
+          }
+      }
+
+      select {
+          appearance: none;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          padding: 8px;
+          font-size: 16px;
+          border: 1px solid #ccc;
+          cursor: pointer;
+          outline: none;
+          transition: border-color 0.3s;
+      }
+
+      select:focus {
+          border-color: #474b4f;
+      }
+
+      select option {
+          transition: background-color 0.3s;
+      }
+
+      select:hover, select:focus {
+          animation: fadeIn 0.3s ease-in-out;
+      }
+
+      @keyframes fadeIn {
+          from {
+              opacity: 0.5;
+          }
+          to {
+              opacity: 1;
+          }
+      }
     </style>
 <script bis_use="true" type="text/javascript" charset="utf-8" data-bis-config="[&quot;facebook.com/&quot;,&quot;twitter.com/&quot;,&quot;youtube-nocookie.com/embed/&quot;,&quot;//vk.com/&quot;,&quot;//www.vk.com/&quot;,&quot;linkedin.com/&quot;,&quot;//www.linkedin.com/&quot;,&quot;//instagram.com/&quot;,&quot;//www.instagram.com/&quot;,&quot;//www.google.com/recaptcha/api2/&quot;,&quot;//hangouts.google.com/webchat/&quot;,&quot;//www.google.com/calendar/&quot;,&quot;//www.google.com/maps/embed&quot;,&quot;spotify.com/&quot;,&quot;soundcloud.com/&quot;,&quot;//player.vimeo.com/&quot;,&quot;//disqus.com/&quot;,&quot;//tgwidget.com/&quot;,&quot;//js.driftt.com/&quot;,&quot;friends2follow.com&quot;,&quot;/widget&quot;,&quot;login&quot;,&quot;//video.bigmir.net/&quot;,&quot;blogger.com&quot;,&quot;//smartlock.google.com/&quot;,&quot;//keep.google.com/&quot;,&quot;/web.tolstoycomments.com/&quot;,&quot;moz-extension://&quot;,&quot;chrome-extension://&quot;,&quot;/auth/&quot;,&quot;//analytics.google.com/&quot;,&quot;adclarity.com&quot;,&quot;paddle.com/checkout&quot;,&quot;hcaptcha.com&quot;,&quot;recaptcha.net&quot;,&quot;2captcha.com&quot;,&quot;accounts.google.com&quot;,&quot;www.google.com/shopping/customerreviews&quot;,&quot;buy.tinypass.com&quot;,&quot;gstatic.com&quot;,&quot;secureir.ebaystatic.com&quot;,&quot;docs.google.com&quot;,&quot;contacts.google.com&quot;,&quot;github.com&quot;,&quot;mail.google.com&quot;,&quot;chat.google.com&quot;,&quot;audio.xpleer.com&quot;,&quot;keepa.com&quot;,&quot;static.xx.fbcdn.net&quot;,&quot;sas.selleramp.com&quot;,&quot;1plus1.video&quot;,&quot;console.googletagservices.com&quot;,&quot;//lnkd.demdex.net/&quot;,&quot;//radar.cedexis.com/&quot;,&quot;//li.protechts.net/&quot;,&quot;challenges.cloudflare.com/&quot;]" src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/../executers/vi-tr.js"></script></head>
 <body __processed_4b8e0f5a-2396-453c-865b-84c7ca0afd51__="true" bis_register="W3sibWFzdGVyIjp0cnVlLCJleHRlbnNpb25JZCI6ImVwcGlvY2VtaG1ubGJoanBsY2drb2ZjaWllZ29tY29uIiwiYWRibG9ja2VyU3RhdHVzIjp7IkRJU1BMQVkiOiJkaXNhYmxlZCIsIkZBQ0VCT09LIjoiZGlzYWJsZWQiLCJUV0lUVEVSIjoiZGlzYWJsZWQiLCJSRURESVQiOiJkaXNhYmxlZCIsIlBJTlRFUkVTVCI6ImRpc2FibGVkIiwiSU5TVEFHUkFNIjoiZGlzYWJsZWQiLCJMSU5LRURJTiI6ImRpc2FibGVkIiwiQ09ORklHIjoiZGlzYWJsZWQifSwidmVyc2lvbiI6IjIuMC4xNSIsInNjb3JlIjoyMDAxNX1d">
@@ -117,6 +537,15 @@
         <img src="https://i.imgur.com/dBaLJbE.png" alt="Ícone Casa do Pastel" style="width: 40px; height: auto;">
         <span style="margin-left: 10px;">#CASADOPASTEL #CompartilhandoMomentos</span>
     </div>
+
+    <div class="container" bis_skin_checked="1">
+        <h1><img src="https://i.imgur.com/dBaLJbE.png" alt="Ícone Casa do Pastel" style="vertical-align: middle; width: 40px; height: auto;"> CASA DO PASTEL
+        <img src="https://imgur.com/a/uP3bmNq"</h1>
+    
+        <div class="item" bis_skin_checked="1">
+          <label for="nomeCliente">Nome do Cliente:</label>
+          <input type="text" id="nomeCliente">
+        </div>
   
       <!DOCTYPE html>
 <html lang="pt-BR">
