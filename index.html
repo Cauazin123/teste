@@ -781,17 +781,32 @@ function concluirEdicao() {
 }
 
 function mostrarPedidos() {
-    let listaPedidos = document.getElementById('listaPedidos');
-    listaPedidos.innerHTML = '';
+    const listaPedidos = document.getElementById('listaPedidos');
+    listaPedidos.innerHTML = ''; // Limpa o conteúdo atual da lista antes de atualizar
 
-    pedidosAtivos.forEach((pedido, index) => {
-        let pedidoHTML = '<p><strong>Pedido ' + (index + 1) + ':</strong><br>';
-        for (let item in pedido) {
-            pedidoHTML += item + ': ' + pedido[item] + ' unidades <button onclick="editarPedido(' + index + ', \'' + item + '\')">Editar</button><br>';
-        }
-        pedidoHTML += '</p>';
-        listaPedidos.innerHTML += pedidoHTML;
-    });
+    for (let i = 0; i < pedidosAtivos.length; i++) {
+        const pedido = pedidosAtivos[i];
+        const itemPedido = document.createElement('li');
+        itemPedido.textContent = `Nome: ${pedido.nome}, Quantidade: ${pedido.quantidade}`;
+
+        // Botão de editar pedido
+        const btnEditar = document.createElement('button');
+        btnEditar.textContent = 'Editar';
+        btnEditar.onclick = function() {
+            editarPedido(i, pedido.nome);
+        };
+        itemPedido.appendChild(btnEditar);
+
+        // Botão de concluir edição
+        const btnConcluir = document.createElement('button');
+        btnConcluir.textContent = 'Concluir';
+        btnConcluir.onclick = function() {
+            concluirEdicao();
+        };
+        itemPedido.appendChild(btnConcluir);
+
+        listaPedidos.appendChild(itemPedido);
+    }
 }
 
 function calcularTotal() {
