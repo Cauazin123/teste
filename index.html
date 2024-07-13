@@ -763,52 +763,58 @@ function adicionarPedido() {
     }
 }
 
-function editarPedido(index, item) {
-    // Carrega os detalhes do pedido de volta para os campos de seleção ou outros campos de edição
-    const quantidade = pedidosAtivos[index][item];
-    document.getElementById(item).value = quantidade;
-    
-    // Não remover o pedido da lista de pedidos ativos após editar
-    // pedidosAtivos.splice(index, 1); <-- Removido
-
-    mostrarPedidos(); // Mostrar os pedidos atualizados na lista
+function editarPedido(index) {
+    const pedido = pedidosAtivos[index];
+    for (let item in pedido) {
+        document.getElementById(item).value = pedido[item];
+    }
 }
 
 function concluirEdicao() {
-    adicionarPedido(); // Adicionar o pedido editado de volta à lista de pedidos ativos
-    calcularTotal(); // Recalcular o total após a edição
-    mostrarPedidos(); // Mostrar os pedidos atualizados na lista
+    const pedido = {};
+    for (let item in precos) {
+        const quantidade = parseFloat(document.getElementById(item).value) || 0;
+        if (quantidade > 0) {
+            pedido[item] = quantidade;
+        }
+    }
+
+    if (Object.keys(pedido).length > 0) {
+        pedidosAtivos.push(pedido);
+        mostrarPedidos();
+        resetSelect();
+    } else {
+        alert('Selecione ao menos um produto para adicionar ao pedido.');
+    }
 }
 
 function mostrarPedidos() {
     const listaPedidos = document.getElementById('listaPedidos');
-    listaPedidos.innerHTML = ''; // Limpa o conteúdo atual da lista antes de atualizar
+    listaPedidos.innerHTML = '';
 
-    for (let i = 0; i < pedidosAtivos.length; i++) {
-        const pedido = pedidosAtivos[i];
-        const itemPedido = document.createElement('li');
-        itemPedido.textContent = `Nome: ${pedido.nome}, Quantidade: ${pedido.quantidade}`;
+    pedidosAtivos.forEach((pedido, index) => {
+        const itemPedido = document.createElement('div');
+        itemPedido.classList.add('item-pedido');
+        let pedidoText = '';
 
-        // Botão de editar pedido
+        for (let item in pedido) {
+            if (pedido.hasOwnProperty(item)) {
+                pedidoText += `${item}: ${pedido[item]} `;
+            }
+        }
+        
         const btnEditar = document.createElement('button');
         btnEditar.textContent = 'Editar';
         btnEditar.onclick = function() {
-            editarPedido(i, pedido.nome);
+            editarPedido(index);
         };
+
+        itemPedido.textContent = pedidoText;
         itemPedido.appendChild(btnEditar);
-
-        // Botão de concluir edição
-        const btnConcluir = document.createElement('button');
-        btnConcluir.textContent = 'Concluir';
-        btnConcluir.onclick = function() {
-            concluirEdicao();
-        };
-        itemPedido.appendChild(btnConcluir);
-
         listaPedidos.appendChild(itemPedido);
-    }
+    });
 }
-
+    
 function calcularTotal() {
     let total = 0;
 
@@ -1606,14 +1612,13 @@ function mostrarEndereco() {
 </div>
     
 <div class="button-container">
-    <button class="button button-calcular" onclick="calcularTotal()" style="background-color: #007bff; color: white; border-color: #007bff; padding: 8px 16px; font-size: 14px;">Calcular Total</button>
-    <button class="button button-calcular" onclick="calcularTroco()" style="background-color: #28a745; color: white; border-color: #28a745; padding: 8px 16px; font-size: 14px;">Calcular Troco</button>
+<button class="button button-calcular" onclick="calcularTotal()" style="background-color: #007bff; color: white; border-color: #007bff; padding: 8px 16px; font-size: 14px;">Calcular Total</button>
+<button class="button button-calcular" onclick="calcularTroco()" style="background-color: #28a745; color: white; border-color: #28a745; padding: 8px 16px; font-size: 14px;">Calcular Troco</button>
+<button class="button button-calcular" onclick="concluirEdicao()" style="background-color: #ffc107; color: black; border-color: #ffc107; padding: 8px 16px; font-size: 14px;">Concluir Edição</button>
 </div>
 
 <div class="total" id="total">Total: R$ 0.00</div>    
 <div class="troco" id="troco">Troco: <strong>R$ 0.00</strong></div>
-
-<button class="button button-calcular" onclick="concluirEdicao()">Concluir Edição</button>
     
 <div id="listaPedidos" class="lista-pedidos"></div>
 
