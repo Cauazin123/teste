@@ -783,17 +783,61 @@ function mostrarPedidos() {
 }
 
 function editarPedido(index) {
-    const pedido = pedidosAtivos[index];
+    // Obter o pedido a ser editado
+    const pedidoEditavel = pedidosConcluidos[index];
 
-    for (let item in pedido) {
-        document.getElementById(item).value = pedido[item];
-    }
+    // Preencher os campos com os dados do pedido
+    document.getElementById('nomeCliente').value = pedidoEditavel.nome;
+    document.getElementById('pagamento').value = pedidoEditavel.pagamento;
+    document.getElementById('taxa').value = pedidoEditavel.taxa;
+    document.getElementById('endereco').value = pedidoEditavel.endereco;
 
-    // Remover o pedido da lista ativa
-    pedidosAtivos.splice(index, 1);
+    // Preencher os campos dos itens do pedido
+    const pasteis = pedidoEditavel.pastel.split(', ');
+    pasteis.forEach(item => {
+        const [nome, quantidade] = item.split(': ');
+        document.getElementById(`pastel${nome}`).value = quantidade;
+    });
 
-    mostrarPedidos();
+    const adicionais = pedidoEditavel.adicionais.split(', ');
+    adicionais.forEach(item => {
+        const [nome, quantidade] = item.split(': ');
+        document.getElementById(`adicional${nome}`).value = quantidade;
+    });
+
+    const bebidas = pedidoEditavel.bebidas.split(', ');
+    bebidas.forEach(item => {
+        const [nome, quantidade] = item.split(': ');
+        document.getElementById(`bebida${nome}`).value = quantidade;
+    });
+
+    // Atualizar o total com base nos itens editados
     calcularTotal();
+    
+    // Remover o pedido editado da lista de pedidos concluídos
+    pedidosConcluidos.splice(index, 1);
+    localStorage.setItem('pedidosConcluidos', JSON.stringify(pedidosConcluidos));
+
+    // Atualizar a lista de pedidos concluídos na interface
+    atualizarListaPedidos();
+}
+
+function atualizarListaPedidos() {
+    const listaPedidos = document.getElementById('listaPedidos');
+    listaPedidos.innerHTML = '';
+
+    pedidosConcluidos.forEach((pedido, index) => {
+        const div = document.createElement('div');
+        div.className = 'pedido';
+        div.innerHTML = `
+            <div class="info">
+                <strong>${pedido.nome}</strong> - ${pedido.horario} <br>
+                Total: R$ ${pedido.total}
+            </div>
+            <button onclick="editarPedido(${index})">Editar</button>
+        `;
+        listaPedidos.appendChild(div);
+    });
 }
 
 function removerPedido(index) {
