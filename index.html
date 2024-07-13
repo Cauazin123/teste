@@ -755,9 +755,12 @@ function adicionarPedido() {
     }
 
     if (Object.keys(pedido).length > 0) {
-        pedidosAtivos.push(pedido);
-        mostrarPedidos();
-        resetSelect();
+        // Exibir modal ou confirmação
+        if (confirm('Deseja adicionar este pedido?')) {
+            pedidosAtivos.push(pedido);
+            mostrarPedidos();
+            resetSelect();
+        }
     } else {
         alert('Selecione ao menos um produto para adicionar ao pedido.');
     }
@@ -773,9 +776,31 @@ function mostrarPedidos() {
             pedidoHTML += item + ': ' + pedido[item] + ' unidades<br>';
         }
         pedidoHTML += '</p>';
+        pedidoHTML += '<button onclick="editarPedido(' + index + ')">Editar</button>';
+        pedidoHTML += '<button onclick="removerPedido(' + index + ')">Remover</button>';
         listaPedidos.innerHTML += pedidoHTML;
     });
 }
+
+function editarPedido(index) {
+    const pedido = pedidosAtivos[index];
+
+    for (let item in pedido) {
+        document.getElementById(item).value = pedido[item];
+    }
+
+    // Remover o pedido da lista ativa
+    pedidosAtivos.splice(index, 1);
+
+    mostrarPedidos();
+    calcularTotal();
+}
+
+function removerPedido(index) {
+    pedidosAtivos.splice(index, 1);
+    mostrarPedidos();
+    calcularTotal();
+}    
 
 function calcularTotal() {
     let total = 0;
