@@ -29,7 +29,7 @@
 
       .container {
           max-width: 700px;
-          width: 100%;
+          width: 80%;
           margin: 0 auto;
           padding: 30px;
           border-radius: 15px;
@@ -556,6 +556,10 @@
           <label for="nomeCliente">Nome do Cliente:</label>
           <input type="text" id="nomeCliente">
         </div>
+
+    <div class="button-container">
+    <button class="button reset-button" onclick="resetSelect()" style="background-color: #dc3545; color: white; border-color: #dc3545; padding: 8px 16px; font-size: 14px;">Limpar Pedido</button>
+</div>
   
       <!DOCTYPE html>
 <html lang="pt-BR">
@@ -664,7 +668,7 @@ select, input[type="number"], .input-field {
 }
 
 .button-container .button {
-    width: 180px;
+    width: 160px;
     padding: 10px 20px;
 }
 
@@ -684,7 +688,9 @@ const precos = {
     salgadoCoxinha: 7.00,
     salgadoRisoleCarne: 7.00,
     salgadoRisolePresuntoQueijo: 7.00,
-    salgadoCoxinhaPernil: 7.00,  
+    salgadoCoxinhaPernil: 7.00,
+    salgadoCoxinhaCostela: 9.00,
+    salgadoSalsicha: 7.00,
     salgadoBolinhaQueijo: 9.00,  
     pastelCarne: 8.00,
     pastelQueijoPresunto: 8.00,
@@ -704,7 +710,8 @@ const precos = {
     pastelCostelacomQueijo: 20.00,
     pastelDuplo: 18.00,
     pastelHamburguer: 12.00,
-    pastelHotDog: 12.00,  
+    pastelHotDog: 12.00,
+    pastelPernil: 12.00,
     pastelChocolateNinho: 12.00,
     pastelDoceLeiteBanana: 12.00,
     adicionalBombom: 3.00,
@@ -721,7 +728,7 @@ const precos = {
     bebidaLatinha: 5.00,
     bebidaCerveja: 5.00,
     bebidaSuco: 4.00,
-    bebidaaguagas: 5.00,
+    bebidaaguagas: 5.00
 };
 
 let pedidosAtivos = [];
@@ -763,12 +770,28 @@ function mostrarPedidos() {
     pedidosAtivos.forEach((pedido, index) => {
         let pedidoHTML = '<p><strong>Pedido ' + (index + 1) + ':</strong><br>';
         for (let item in pedido) {
-            pedidoHTML += item + ': ' + pedido[item] + ' unidades<br>';
+            pedidoHTML += item + ': ' + pedido[item] + ' unidades <button onclick="editarPedido(' + index + ', \'' + item + '\')">Editar</button><br>';
         }
         pedidoHTML += '</p>';
         listaPedidos.innerHTML += pedidoHTML;
     });
 }
+
+function editarPedido(index, item) {
+    // Carrega os detalhes do pedido de volta para os campos de seleção ou outros campos de edição
+    const quantidade = pedidosAtivos[index][item];
+    document.getElementById(item).value = quantidade;
+    
+    // Remove o pedido da lista de pedidos ativos após editar
+    pedidosAtivos.splice(index, 1);
+    mostrarPedidos();
+    calcularTotal();
+}
+
+function concluirEdicao() {
+    adicionarPedido();
+    calcularTotal();
+}    
 
 function calcularTotal() {
     let total = 0;
@@ -882,8 +905,40 @@ function mostrarEndereco() {
   </select>
 </div>
     <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
+  <label for="salgadoCoxinhaCostela">Coxinha de Costela</label>
+  <select id="salgadoCoxinhaCostela">
+    <option value="0">Selecione...</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+  </select>
+</div>
+    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
   <label for="salgadoBolinhaQueijo">Bolinha de Queijo</label>
   <select id="salgadoBolinhaQueijo">
+    <option value="0">Selecione...</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+  </select>
+</div>
+    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
+  <label for="salgadoSalsicha">Salsicha</label>
+  <select id="salgadoSalsicha">
     <option value="0">Selecione...</option>
     <option value="1">1</option>
     <option value="2">2</option>
@@ -1206,6 +1261,22 @@ function mostrarEndereco() {
   </select>
 </div>
     <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
+  <label for="pastelPernil">Pernil</label>
+  <select id="pastelPernil">
+    <option value="0">Selecione...</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+  </select>
+</div>
+    <div class="item" bis_skin_checked="1" style="display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px;">
   <label for="pastelChocolateNinho">Chocolate com Ninho</label>
   <select id="pastelChocolateNinho">
     <option value="0">Selecione...</option>
@@ -1481,56 +1552,52 @@ function mostrarEndereco() {
     <option value="10">10</option>
   </select>
 </div>
-    
-  
-        <h2>Observações</h2>
-<div class="item">
-    <label for="observacoes">Observações:</label>
-    <input type="text" id="observacoes">
-</div>
 
-<h2>Forma de Pagamento</h2>
-<div class="item">
-    <label for="pagamento">Escolha a forma de pagamento:</label>
-    <select id="pagamento">
-        <option value="dinheiro">Dinheiro</option>
-        <option value="cartao">Cartão</option>
-        <option value="pix">Pix</option>
-        <option value="uairango">UaiRango</option>
-    </select>
-</div>
+<div class="container">
+    <div class="item">
+        <h2>Pagamento</h2>
+        <label for="pagamento">Escolha a forma de pagamento:</label>
+        <select id="pagamento">
+            <option value="dinheiro">Dinheiro</option>
+            <option value="cartao">Cartão</option>
+            <option value="pix">Pix</option>
+            <option value="uairango">UaiRango</option>
+        </select>
+    </div>
 
-<h2>Taxa</h2>
-<div class="item">
-    <label for="taxa">Escolha a opção de taxa:</label>
-    <select id="taxa" onchange="mostrarEndereco()">
-        <option value="retirada">Retirada</option>
-        <option value="mesa">Mesa</option>
-        <option value="delivery">Delivery (R$ 4,00)</option>
-    </select>
+    <div class="item">
+        <h2>Taxa</h2>
+        <label for="taxa">Escolha a opção de taxa:</label>
+        <select id="taxa" onchange="mostrarEndereco()">
+            <option value="retirada">Retirada</option>
+            <option value="mesa">Mesa</option>
+            <option value="delivery">Delivery (R$ 4,00)</option>
+        </select>
+    </div>
 </div>
 
 <div id="enderecoContainer" class="item">
     <label for="endereco">Endereço:</label>
     <input type="text" id="endereco">
 </div>
+
     
-<label for="valor-pago">Valor Pago:</label>
-<input type="number" id="valor-pago" class="input-field" step="0.01" min="0" placeholder="R$">
-
+<label for="valor-pago" style="margin-top: 10px;">Valor Pago:</label>
+<input type="number" id="valor-pago" class="input-field" style="font-size: 14px; padding: 8px; width: 120px;" step="0.01" min="0" placeholder="R$">
+    
     <div class="button-container">
-    <button class="button" onclick="adicionarPedido()">Adicionar Pedido</button>
-    <button class="button reset-button" onclick="resetSelect()">Limpar Pedido</button>  
+    <button class="button" onclick="adicionarPedido()" style="background-color: #4CAF50; color: white; border-color: #4CAF50;">Adicionar Pedido</button>
 </div>
-
+    
 <div class="button-container">
-    <button class="button button-calcular" onclick="calcularTotal()">Calcular Total</button>
-    <button class="button button-calcular" onclick="calcularTroco()">Calcular Troco</button>
+    <button class="button button-calcular" onclick="calcularTotal()" style="background-color: #007bff; color: white; border-color: #007bff; padding: 8px 16px; font-size: 14px;">Calcular Total</button>
+    <button class="button button-calcular" onclick="calcularTroco()" style="background-color: #28a745; color: white; border-color: #28a745; padding: 8px 16px; font-size: 14px;">Calcular Troco</button>
 </div>
 
 <div class="total" id="total">Total: R$ 0.00</div>    
 <div class="troco" id="troco">Troco: <strong>R$ 0.00</strong></div>
 
+<button class="button button-calcular" onclick="concluirEdicao()">Concluir Edição</button>    
 <div id="listaPedidos" class="lista-pedidos"></div>
 
 </body>
@@ -1567,48 +1634,51 @@ function mostrarEndereco() {
 
         function calcularTotal() {
           const precos = {
-            salgadoCoxinha: 7.00,
-            salgadoRisoleCarne: 7.00,
-            salgadoRisolePresuntoQueijo: 7.00,
-            salgadoCoxinhaPernil: 7.00,  
-            salgadoBolinhaQueijo: 9.00,  
-            pastelCarne: 8.00,
-            pastelQueijoPresunto: 8.00,
-            pastelPizza: 8.00,
-            pastelFrango: 8.00,
-            pastelFrangoCatupiry: 8.00,
-            pastelQueijo: 10.00,
-            pastelCarneQueijo: 12.00,
-            pastelFrangoQueijo: 12.00,
-            pastelCalabresa: 10.00,  
-            pastelCalabresaQueijo: 14.00,
-            pastelQueijoBacon: 13.00,
-            pastelCarneSeca: 16.00,  
-            pastelCarneSecaQueijo: 20.00,  
-            pastelCostela: 16.00,
-            pastelCostelaAcebolada: 18.00,
-            pastelCostelacomQueijo: 20.00,
-            pastelDuplo: 18.00,
-            pastelHamburguer: 12.00,
-            pastelHotDog: 12.00,  
-            pastelChocolateNinho: 12.00,
-            pastelDoceLeiteBanana: 12.00,
-            adicionalBombom: 3.00,
-            adicionalCocoRalado: 3.00,
-            adicionalQueijo: 4.00,
-            adicionalCatupiry: 3.00,
-            adicionalCalabresa: 3.00,
-            adicionalBacon: 3.00,
-            adicionalMilho: 3.00,
-            adicionalVinagrete: 3.00,
-            bebidaGuarana: 8.00,
-            bebidaCocaCola: 14.00,
-            bebidaCoca: 7.00,
-            bebidaLatinha: 5.00,
-            bebidaCerveja: 5.00,
-            bebidaSuco: 4.00,
-            bebidaaguagas: 5.00  
-          };
+    salgadoCoxinha: 7.00,
+    salgadoRisoleCarne: 7.00,
+    salgadoRisolePresuntoQueijo: 7.00,
+    salgadoCoxinhaPernil: 7.00,
+    salgadoCoxinhaCostela: 9.00,
+    salgadoSalsicha: 7.00,
+    salgadoBolinhaQueijo: 9.00,  
+    pastelCarne: 8.00,
+    pastelQueijoPresunto: 8.00,
+    pastelPizza: 8.00,
+    pastelFrango: 8.00,
+    pastelFrangoCatupiry: 8.00,
+    pastelQueijo: 10.00,
+    pastelCarneQueijo: 12.00,
+    pastelFrangoQueijo: 12.00,
+    pastelCalabresa: 10.00,  
+    pastelCalabresaQueijo: 14.00,
+    pastelQueijoBacon: 13.00,
+    pastelCarneSeca: 16.00,  
+    pastelCarneSecaQueijo: 20.00,  
+    pastelCostela: 16.00,
+    pastelCostelaAcebolada: 18.00,
+    pastelCostelacomQueijo: 20.00,
+    pastelDuplo: 18.00,
+    pastelHamburguer: 12.00,
+    pastelHotDog: 12.00,
+    pastelPernil: 12.00,
+    pastelChocolateNinho: 12.00,
+    pastelDoceLeiteBanana: 12.00,
+    adicionalBombom: 3.00,
+    adicionalCocoRalado: 3.00,
+    adicionalQueijo: 4.00,
+    adicionalCatupiry: 3.00,
+    adicionalCalabresa: 3.00,
+    adicionalBacon: 3.00,
+    adicionalMilho: 3.00,
+    adicionalVinagrete: 3.00,
+    bebidaGuarana: 8.00,
+    bebidaCocaCola: 14.00,
+    bebidaCoca: 7.00,
+    bebidaLatinha: 5.00,
+    bebidaCerveja: 5.00,
+    bebidaSuco: 4.00,
+    bebidaaguagas: 5.00
+};
 
           let total = 0;
 
@@ -1657,7 +1727,6 @@ function mostrarEndereco() {
         function adicionarPedido() {
           const nomeCliente = document.getElementById('nomeCliente').value.trim();
           const total = calcularTotal();
-          const observacoes = document.getElementById('observacoes').value.trim();
           const pagamento = document.getElementById('pagamento').value;
           const taxa = document.getElementById('taxa').value;
           const endereco = taxa === 'delivery' ? document.getElementById('endereco').value.trim() : '';
@@ -1668,6 +1737,8 @@ function mostrarEndereco() {
               risoleCarne: document.getElementById('salgadoRisoleCarne').value,
               risolePresuntoQueijo: document.getElementById('salgadoRisolePresuntoQueijo').value,
               coxinhapernil: document.getElementById('salgadoCoxinhaPernil').value,
+              coxinhacostela: document.getElementById('salgadoCostela').value,
+              salsicha: document.getElementById('salgadoSalsicha').value,  
               bolinhaqueijo: document.getElementById('salgadoBolinhaQueijo').value,  
               carne: document.getElementById('pastelCarne').value,
               queijoPresunto: document.getElementById('pastelQueijoPresunto').value,
@@ -1688,6 +1759,7 @@ function mostrarEndereco() {
               pastelDuplo: document.getElementById('pastelDuplo').value,
               hamburguer: document.getElementById('pastelHamburguer').value,
               hotDog: document.getElementById('pastelHotDog').value,
+              pernil: document.getElementById('pastelPernil').value,  
               chocolateNinho: document.getElementById('pastelChocolateNinho').value,
               doceLeiteBanana: document.getElementById('pastelDoceLeiteBanana').value
             };
@@ -1719,7 +1791,6 @@ function mostrarEndereco() {
               pastel: formatarItens('pastel', pasteis),
               adicionais: formatarItens('adicional', adicionais),
               bebidas: formatarItens('bebida', bebidas),
-              observacoes: observacoes,
               pagamento: pagamento,
               taxa: taxa,
               endereco: endereco,
@@ -1764,7 +1835,6 @@ function mostrarEndereco() {
 
         function limparCampos() {
           document.getElementById('nomeCliente').value = '';
-          document.getElementById('observacoes').value = '';
           document.getElementById('endereco').value = '';
           const inputs = document.querySelectorAll('input[type="number"]');
           inputs.forEach(input => input.value = 0);
@@ -1786,8 +1856,6 @@ function mostrarEndereco() {
             doc.text(`Adicionais: ${pedido.adicionais}`, 10, yPosition);
             yPosition += 10;
             doc.text(`Bebidas: ${pedido.bebidas}`, 10, yPosition);
-            yPosition += 10;
-            doc.text(`Observações: ${pedido.observacoes}`, 10, yPosition);
             yPosition += 10;
             doc.text(`Forma de Pagamento: ${pedido.pagamento}`, 10, yPosition);
             yPosition += 10;
