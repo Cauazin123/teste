@@ -768,11 +768,17 @@ function editarPedido(index, item) {
     const quantidade = pedidosAtivos[index][item];
     document.getElementById(item).value = quantidade;
     
-    // Remove o pedido da lista de pedidos ativos após editar
-    pedidosAtivos.splice(index, 1);
-    mostrarPedidos();
-    calcularTotal();
-}    
+    // Não remover o pedido da lista de pedidos ativos após editar
+    // pedidosAtivos.splice(index, 1); <-- Removido
+
+    mostrarPedidos(); // Mostrar os pedidos atualizados na lista
+}
+
+function concluirEdicao() {
+    adicionarPedido(); // Adicionar o pedido editado de volta à lista de pedidos ativos
+    calcularTotal(); // Recalcular o total após a edição
+    mostrarPedidos(); // Mostrar os pedidos atualizados na lista
+}
 
 function mostrarPedidos() {
     let listaPedidos = document.getElementById('listaPedidos');
@@ -787,11 +793,6 @@ function mostrarPedidos() {
         listaPedidos.innerHTML += pedidoHTML;
     });
 }
-    
-function concluirEdicao() {
-    adicionarPedido();
-    calcularTotal();
-}    
 
 function calcularTotal() {
     let total = 0;
