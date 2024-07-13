@@ -763,6 +763,17 @@ function adicionarPedido() {
     }
 }
 
+function editarPedido(index, item) {
+    // Carrega os detalhes do pedido de volta para os campos de seleção ou outros campos de edição
+    const quantidade = pedidosAtivos[index][item];
+    document.getElementById(item).value = quantidade;
+    
+    // Remove o pedido da lista de pedidos ativos após editar
+    pedidosAtivos.splice(index, 1);
+    mostrarPedidos();
+    calcularTotal();
+}    
+
 function mostrarPedidos() {
     let listaPedidos = document.getElementById('listaPedidos');
     listaPedidos.innerHTML = '';
@@ -776,18 +787,7 @@ function mostrarPedidos() {
         listaPedidos.innerHTML += pedidoHTML;
     });
 }
-
-function editarPedido(index, item) {
-    // Carrega os detalhes do pedido de volta para os campos de seleção ou outros campos de edição
-    const quantidade = pedidosAtivos[index][item];
-    document.getElementById(item).value = quantidade;
     
-    // Remove o pedido da lista de pedidos ativos após editar
-    pedidosAtivos.splice(index, 1);
-    mostrarPedidos();
-    calcularTotal();
-}
-
 function concluirEdicao() {
     adicionarPedido();
     calcularTotal();
@@ -1597,7 +1597,8 @@ function mostrarEndereco() {
 <div class="total" id="total">Total: R$ 0.00</div>    
 <div class="troco" id="troco">Troco: <strong>R$ 0.00</strong></div>
 
-<button class="button button-calcular" onclick="concluirEdicao()">Concluir Edição</button>    
+<button class="button button-calcular" onclick="concluirEdicao()">Concluir Edição</button>
+    
 <div id="listaPedidos" class="lista-pedidos"></div>
 
 </body>
