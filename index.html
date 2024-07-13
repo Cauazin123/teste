@@ -737,7 +737,6 @@ function resetSelect() {
     document.querySelectorAll('select').forEach(select => select.value = '0');
     document.getElementById('enderecoContainer').style.display = 'none';
     document.getElementById('endereco').value = '';
-    pedidosAtivos = [];
     mostrarPedidos();
     atualizarTotal(0); // Zera o total
     atualizarTroco(0); // Zera o troco
@@ -758,66 +757,107 @@ function adicionarPedido() {
         pedidosAtivos.push(pedido);
         mostrarPedidos();
         resetSelect();
+        enviarPedidoParaPlanilha(pedido); // Envio do pedido para a planilha
     } else {
         alert('Selecione ao menos um produto para adicionar ao pedido.');
     }
 }
 
-function mostrarPedidos() {
-    let listaPedidos = document.getElementById('listaPedidos');
-    listaPedidos.innerHTML = '';
+function editarPedido(index, item) {
+    // Carrega os detalhes do pedido de volta para os campos de seleção ou outros campos de edição
+    const quantidade = pedidosAtivos[index][item];
+    document.getElementById(item).value = quantidade;
+    
+    // Não remover o pedido da lista de pedidos ativos após editar
+    // pedidosAtivos.splice(index, 1); <-- Removido
 
-    pedidosAtivos.forEach((pedido, index) => {
-        let pedidoHTML = '<p><strong>Pedido ' + (index + 1) + ':</strong><br>';
+    mostrarPedidos(); // Mostrar os pedidos atualizados na lista
+}
+
+function removerPedido(index) {
+    pedidosAtivos.splice(index, 1);
+    mostrarPedidos();
+}
+
+function concluirEdicao() {
+    adicionarPedido(); // Adicionar o pedido editado de volta à lista de pedidos ativos
+    calcularTotal(); // Recalcular o total após a edição
+}
+
+function mostrarPedidos() {
+    const listaPedidos = document.getElementById('listaPedidos');
+    listaPedidos.innerHTML = ''; // Limpa o conteúdo atual da lista antes de atualizar
+
+    for (let i = 0; i < pedidosAtivos.length; i++) {
+        const pedido = pedidosAtivos[i];
+        const itemPedido = document.createElement('li');
+        itemPedido.textContent = `Pedido ${i + 1}:`;
+
+        // Exibir detalhes dos itens do pedido
         for (let item in pedido) {
-            pedidoHTML += item + ': ' + pedido[item] + ' unidades<br>';
+            const detalhePedido = document.createElement('p');
+            detalhePedido.textContent = `${item}: ${pedido[item]}`;
+            itemPedido.appendChild(detalhePedido);
         }
-        pedidoHTML += '</p>';
-        listaPedidos.innerHTML += pedidoHTML;
-    });
+
+        // Botão de editar pedido
+        const btnEditar = document.createElement('button');
+        btnEditar.textContent = 'Editar';
+        btnEditar.onclick = function() {
+            editarPedido(i);
+        };
+        itemPedido.appendChild(btnEditar);
+
+        // Botão de remover pedido
+        const btnRemover = document.createElement('button');
+        btnRemover.textContent = 'Remover';
+        btnRemover.onclick = function() {
+            removerPedido(i);
+        };
+        itemPedido.appendChild(btnRemover);
+
+        listaPedidos.appendChild(itemPedido);
+    }
 }
 
 function calcularTotal() {
     let total = 0;
 
-    pedidosAtivos.forEach(pedido => {
+    for (let pedido of pedidosAtivos) {
         for (let item in pedido) {
             total += pedido[item] * precos[item];
         }
-    });
+    }
 
     atualizarTotal(total);
-    return total;
+}
+
+function atualizarTotal(total) {
+    const totalElement = document.getElementById('total');
+    totalElement.textContent = `Total: R$ ${total.toFixed(2)}`;
 }
 
 function calcularTroco() {
-    let total = calcularTotal();
-    let valorPago = parseFloat(document.getElementById('valor-pago').value) || 0;
-    let troco = valorPago - total;
+    const valorPago = parseFloat(document.getElementById('valor-pago').value) || 0;
+    const total = calcularTotal();
+    const troco = valorPago - total;
 
-    if (troco < 0) {
-        alert('O valor pago é insuficiente para cobrir o total dos itens.');
-    } else {
+    if (troco >= 0) {
         atualizarTroco(troco);
-    }
-}
-
-function atualizarTotal(total = 0) {
-    document.getElementById('total').innerHTML = 'Total: R$ ' + total.toFixed(2);
-}
-
-function atualizarTroco(troco = 0) {
-    document.getElementById('troco').innerHTML = 'Troco: <strong>R$ ' + troco.toFixed(2) + '</strong>';
-}
-
-function mostrarEndereco() {
-    const taxaSelecionada = document.getElementById('taxa').value;
-    if (taxaSelecionada === 'delivery') {
-        document.getElementById('enderecoContainer').style.display = 'block';
     } else {
-        document.getElementById('enderecoContainer').style.display = 'none';
-        document.getElementById('endereco').value = '';
+        alert('Valor pago é insuficiente!');
     }
+}
+
+function atualizarTroco(troco) {
+    const trocoElement = document.getElementById('troco');
+    trocoElement.textContent = `Troco: R$ ${troco.toFixed(2)}`;
+}
+
+function enviarPedidoParaPlanilha(pedido) {
+    // Aqui você deve implementar a lógica para enviar o pedido para a planilha
+    // Isso pode envolver uma chamada de API, integração com um serviço externo, etc.
+    console.log('Pedido enviado para a planilha:', pedido);
 }
 </script>
 </head>
@@ -1583,6 +1623,144 @@ function mostrarEndereco() {
 
 <div id="listaPedidos" class="lista-pedidos"></div>
 
+</body>
+</html>
+
+        <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Pedidos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .finalizar-btn {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .finalizar-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h2>Controle de Pedidos</h2>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Quantidade</th>
+            </tr>
+        </thead>
+        <tbody id="pedido-list">
+            <!-- Aqui serão listados os itens do pedido -->
+        </tbody>
+    </table>
+
+    <!-- Formulário para adicionar pedido -->
+    <form onsubmit="adicionarPedido(event)">
+        <label for="folhadoCarne">Folhado Carne:</label>
+        <select id="folhadoCarne" name="folhadoCarne">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select><br>
+
+        <label for="folhadoQueijo">Folhado Queijo:</label>
+        <select id="folhadoQueijo" name="folhadoQueijo">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select><br>
+
+        <!-- Adicione os outros produtos conforme necessário -->
+
+        <input type="submit" value="Adicionar Pedido">
+    </form>
+
+    <button onclick="finalizarPedido()" class="finalizar-btn">Finalizar Pedido</button>
+
+    <script>
+        // Função para adicionar um item ao pedido
+        function adicionarPedido(event) {
+            event.preventDefault(); // Impede o envio do formulário
+
+            // Obter os valores dos selects de cada produto
+            var folhadoCarne = document.getElementById("folhadoCarne").value;
+            var folhadoQueijo = document.getElementById("folhadoQueijo").value;
+            // Adicione os outros produtos aqui
+
+            // Criar o objeto do pedido
+            var pedido = {
+                folhadoCarne: parseInt(folhadoCarne),
+                folhadoQueijo: parseInt(folhadoQueijo),
+                // Adicione os outros produtos aqui
+            };
+
+            // Adicionar o pedido à lista na tabela
+            var tableRef = document.getElementById("pedido-list");
+            var newRow = tableRef.insertRow();
+            var newCellItem = newRow.insertCell(0);
+            var newCellQtd = newRow.insertCell(1);
+
+            // Montar o texto para exibir o pedido na tabela
+            var pedidoTexto = "";
+            if (pedido.folhadoCarne > 0) pedidoTexto += "Folhado Carne: " + pedido.folhadoCarne + "<br>";
+            if (pedido.folhadoQueijo > 0) pedidoTexto += "Folhado Queijo: " + pedido.folhadoQueijo + "<br>";
+            // Adicione os outros produtos aqui
+
+            // Adicionar o texto ao HTML
+            newCellItem.innerHTML = pedidoTexto;
+            // Aqui pode ser adicionada a lógica para exibir o total, se necessário
+            newCellQtd.innerHTML = ""; // Por enquanto, deixei vazio
+
+            // Limpar os campos após adicionar o pedido
+            limparCampos();
+        }
+
+        // Função para limpar os campos após adicionar o pedido
+        function limparCampos() {
+            var selects = document.getElementsByTagName("select");
+            for (var i = 0; i < selects.length; i++) {
+                selects[i].value = "0";
+            }
+        }
+
+        // Função para finalizar o pedido
+        function finalizarPedido() {
+            // Confirmar se o usuário deseja finalizar o pedido
+            if (confirm("Deseja realmente finalizar este pedido?")) {
+                // Limpar todos os itens da tabela
+                var tableRef = document.getElementById("pedido-list");
+                while (tableRef.rows.length > 0) {
+                    tableRef.deleteRow(0);
+                }
+            }
+        }
+    </script>
 </body>
 </html>
   
