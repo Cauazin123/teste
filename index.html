@@ -1679,26 +1679,46 @@ function enviarPedidoParaPlanilha(pedido) {
         </tbody>
     </table>
 
+    <!-- Formulário para adicionar pedido -->
+    <form onsubmit="adicionarPedido(event)">
+        <label for="folhadoCarne">Folhado Carne:</label>
+        <select id="folhadoCarne" name="folhadoCarne">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select><br>
+
+        <label for="folhadoQueijo">Folhado Queijo:</label>
+        <select id="folhadoQueijo" name="folhadoQueijo">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select><br>
+
+        <!-- Adicione os outros produtos conforme necessário -->
+
+        <input type="submit" value="Adicionar Pedido">
+    </form>
+
     <button onclick="finalizarPedido()" class="finalizar-btn">Finalizar Pedido</button>
 
     <script>
         // Função para adicionar um item ao pedido
-        function adicionarPedido() {
+        function adicionarPedido(event) {
+            event.preventDefault(); // Impede o envio do formulário
+
             // Obter os valores dos selects de cada produto
-            var salgadoCoxinha = document.getElementById("salgadoCoxinha").value;
-
-            // Calcular o total de cada item
-            var totalsalgadoCoxinha = folhadoCarne * 4.5;
-
-            // Calcular o total geral do pedido
-            var totalGeral = totalFolhadoCarne + totalFolhadoQueijo + totalBolinhoGourmet +
-                totalSalgadinho + totalSalgadinhoPeixe + totalSonhoCarne + totalSonhoQueijo +
-                totalBoloCarne + totalBoloCarneQueijo;
+            var folhadoCarne = document.getElementById("folhadoCarne").value;
+            var folhadoQueijo = document.getElementById("folhadoQueijo").value;
+            // Adicione os outros produtos aqui
 
             // Criar o objeto do pedido
             var pedido = {
-                salgadoCoxinha: parseInt(salgadoCoxinha),
-                totalGeral: totalGeral.toFixed(2)
+                folhadoCarne: parseInt(folhadoCarne),
+                folhadoQueijo: parseInt(folhadoQueijo),
+                // Adicione os outros produtos aqui
             };
 
             // Adicionar o pedido à lista na tabela
@@ -1707,13 +1727,16 @@ function enviarPedidoParaPlanilha(pedido) {
             var newCellItem = newRow.insertCell(0);
             var newCellQtd = newRow.insertCell(1);
 
-            // Montar o texto para exibir o pedido
+            // Montar o texto para exibir o pedido na tabela
             var pedidoTexto = "";
-            if (pedido.salgadoCoxinha > 0) pedidoTexto += "Coxinha: " + pedido.salgadoCoxinha + "<br>";
+            if (pedido.folhadoCarne > 0) pedidoTexto += "Folhado Carne: " + pedido.folhadoCarne + "<br>";
+            if (pedido.folhadoQueijo > 0) pedidoTexto += "Folhado Queijo: " + pedido.folhadoQueijo + "<br>";
+            // Adicione os outros produtos aqui
 
             // Adicionar o texto ao HTML
             newCellItem.innerHTML = pedidoTexto;
-            newCellQtd.innerHTML = pedido.totalGeral + " R$";
+            // Aqui pode ser adicionada a lógica para exibir o total, se necessário
+            newCellQtd.innerHTML = ""; // Por enquanto, deixei vazio
 
             // Limpar os campos após adicionar o pedido
             limparCampos();
@@ -1731,7 +1754,7 @@ function enviarPedidoParaPlanilha(pedido) {
         function finalizarPedido() {
             // Confirmar se o usuário deseja finalizar o pedido
             if (confirm("Deseja realmente finalizar este pedido?")) {
-                // Remover todos os itens da tabela
+                // Limpar todos os itens da tabela
                 var tableRef = document.getElementById("pedido-list");
                 while (tableRef.rows.length > 0) {
                     tableRef.deleteRow(0);
