@@ -748,8 +748,45 @@ function adicionarPedido() {
 
     pedidos.push(pedido);
 
+    // Atualizar a lista de pedidos na interface
     atualizarListaPedidos();
     limparCampos();
+
+    // Enviar o pedido para o Sheetmonkey API
+    enviarPedidoParaSheetmonkey(pedido);
+}
+
+// Função para enviar o pedido para o Sheetmonkey API
+function enviarPedidoParaSheetmonkey(pedido) {
+    const URL_API_SHEETMONKEY = 'https://api.sheetmonkey.io/form/w2H2FdtF1NbBLgredotSkn'; // URL da API do Sheetmonkey
+
+    // Montar os dados do pedido para enviar
+    let dados = {
+        NomeCliente: pedido.nomeCliente,
+        Salgado: pedido.salgado,
+        FormaPagamento: pedido.formaPagamento,
+        TaxaEntrega: pedido.taxaEntrega,
+        Endereco: pedido.endereco,
+        ValorPago: pedido.valorPago,
+        Total: pedido.total
+    };
+
+    // Configurar a requisição POST para enviar os dados
+    fetch(URL_API_SHEETMONKEY, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dados)
+    }).then(response => {
+        if (response.ok) {
+            console.log('Pedido enviado para o Sheetmonkey API com sucesso!');
+        } else {
+            console.error('Erro ao enviar pedido para o Sheetmonkey API:', response.status);
+        }
+    }).catch(error => {
+        console.error('Erro ao enviar pedido para o Sheetmonkey API:', error);
+    });
 }
 
 // Função para calcular o total individual do pedido
