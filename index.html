@@ -1,132 +1,168 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pastelaria - Sistema de Pedidos</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-        padding: 0;
-    }
-    h1 {
-        text-align: center;
-    }
-    #menu {
-        display: grid;
-        grid-template-columns: auto auto;
-        gap: 10px;
-    }
-    .item {
-        border: 1px solid #ccc;
-        padding: 10px;
-        text-align: center;
-    }
-    button {
-        padding: 5px 10px;
-        cursor: pointer;
-    }
-    #pedido {
-        margin-top: 20px;
-    }
-    #total {
-        margin-top: 10px;
-        font-weight: bold;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Pedidos - Pastelaria</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        form, .pedidos, .pagamento {
+            margin: 20px 0;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .pedidos ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .pedidos li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
 </head>
 <body>
-    <h1>Pastelaria - Faça seu Pedido</h1>
+    <div class="container">
+        <h1>Sistema de Pedidos - Pastelaria</h1>
+        <form id="pedidoForm">
+            <input type="text" id="clienteNome" placeholder="Nome do Cliente" required>
+            <select id="produtoSelect">
+                <option value="">Selecione um produto</option>
+                <option value="5">Pastel de Carne - R$ 5,00</option>
+                <option value="4">Pastel de Queijo - R$ 4,00</option>
+                <option value="6">Pastel de Frango - R$ 6,00</option>
+                <option value="7">Pastel de Pizza - R$ 7,00</option>
+            </select>
+            <button type="submit">Adicionar Pedido</button>
+        </form>
 
-    <div id="menu">
-        <div class="item">
-            <h3>Pastel de Carne</h3>
-            <p>R$ 5,00</p>
-            <button onclick="adicionarItem('Pastel de Carne')">Adicionar</button>
+        <div class="pedidos">
+            <h2>Pedidos</h2>
+            <ul id="pedidoList"></ul>
+            <strong>Total: R$ <span id="total">0.00</span></strong>
         </div>
-        <div class="item">
-            <h3>Pastel de Queijo</h3>
-            <p>R$ 4,50</p>
-            <button onclick="adicionarItem('Pastel de Queijo')">Adicionar</button>
-        </div>
-        <div class="item">
-            <h3>Pastel de Frango</h3>
-            <p>R$ 5,00</p>
-            <button onclick="adicionarItem('Pastel de Frango')">Adicionar</button>
-        </div>
-        <div class="item">
-            <h3>Pastel de Palmito</h3>
-            <p>R$ 5,50</p>
-            <button onclick="adicionarItem('Pastel de Palmito')">Adicionar</button>
-        </div>
-        <div class="item">
-            <h3>Pastel de Camarão</h3>
-            <p>R$ 7,00</p>
-            <button onclick="adicionarItem('Pastel de Camarão')">Adicionar</button>
-        </div>
-    </div>
 
-    <div id="pedido">
-        <h2>Seu Pedido</h2>
-        <ul id="lista-pedido">
-            <!-- Aqui serão adicionados os itens do pedido -->
-        </ul>
-        <div id="total">
-            <p>Total: R$ <span id="total-valor">0.00</span></p>
+        <div class="pagamento">
+            <h2>Pagamento</h2>
+            <input type="number" id="dinheiro" placeholder="Dinheiro Recebido" step="0.01">
+            <button id="finalizarPedido">Finalizar Pedido</button>
+            <div>
+                <strong>Troco: R$ <span id="troco">0.00</span></strong>
+            </div>
         </div>
-        <button onclick="limparPedido()">Limpar Pedido</button>
     </div>
 
     <script>
-        let pedido = {};
+        let total = 0;
 
-        function adicionarItem(item) {
-            if (pedido[item]) {
-                pedido[item]++;
+        document.getElementById('pedidoForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const nome = document.getElementById('clienteNome').value;
+            const produtoSelect = document.getElementById('produtoSelect');
+            const produtoPreco = parseFloat(produtoSelect.value);
+            const produtoNome = produtoSelect.options[produtoSelect.selectedIndex].text;
+
+            if (produtoPreco) {
+                total += produtoPreco;
+                const li = document.createElement('li');
+                li.textContent = `${produtoNome} - R$ ${produtoPreco.toFixed(2)}`;
+                li.appendChild(createEditButton(li, produtoPreco));
+                li.appendChild(createDeleteButton(li, produtoPreco));
+                document.getElementById('pedidoList').appendChild(li);
+                document.getElementById('total').textContent = total.toFixed(2);
+            }
+            
+            resetForm();
+        });
+
+        function createEditButton(li, preco) {
+            const editButton = document.createElement('button');
+            editButton.textContent = 'Editar';
+            editButton.style.marginLeft = '10px';
+            editButton.onclick = function() {
+                total -= preco;
+                li.remove();
+                document.getElementById('total').textContent = total.toFixed(2);
+            };
+            return editButton;
+        }
+
+        function createDeleteButton(li, preco) {
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Zerar Pedido';
+            deleteButton.style.marginLeft = '10px';
+            deleteButton.onclick = function() {
+                li.remove();
+                total -= preco;
+                document.getElementById('total').textContent = total.toFixed(2);
+            };
+            return deleteButton;
+        }
+
+        document.getElementById('finalizarPedido').addEventListener('click', function () {
+            const dinheiroRecebido = parseFloat(document.getElementById('dinheiro').value);
+            
+            if (dinheiroRecebido >= total) {
+                const troco = dinheiroRecebido - total;
+                document.getElementById('troco').textContent = troco.toFixed(2);
+                alert(`Pedido finalizado! Troco: R$ ${troco.toFixed(2)}`);
+                resetAll();
             } else {
-                pedido[item] = 1;
+                alert('Dinheiro insuficiente!');
             }
-            atualizarPedido();
+        });
+
+        function resetForm() {
+            document.getElementById('pedidoForm').reset();
         }
 
-        function atualizarPedido() {
-            const listaPedido = document.getElementById('lista-pedido');
-            listaPedido.innerHTML = '';
-            let total = 0;
-            for (const item in pedido) {
-                if (pedido.hasOwnProperty(item)) {
-                    const quantidade = pedido[item];
-                    const preco = obterPreco(item);
-                    total += quantidade * preco;
-                    const li = document.createElement('li');
-                    li.textContent = `${quantidade} x ${item}`;
-                    listaPedido.appendChild(li);
-                }
-            }
-            document.getElementById('total-valor').textContent = total.toFixed(2);
-        }
-
-        function limparPedido() {
-            pedido = {};
-            atualizarPedido();
-        }
-
-        function obterPreco(item) {
-            switch (item) {
-                case 'Pastel de Carne':
-                    return 5.00;
-                case 'Pastel de Queijo':
-                    return 4.50;
-                case 'Pastel de Frango':
-                    return 5.00;
-                case 'Pastel de Palmito':
-                    return 5.50;
-                case 'Pastel de Camarão':
-                    return 7.00;
-                default:
-                    return 0.00;
-            }
+        function resetAll() {
+            document.getElementById('pedidoList').innerHTML = '';
+            total = 0;
+            document.getElementById('total').textContent = '0.00';
+            document.getElementById('dinheiro').value = '';
+            document.getElementById('troco').textContent = '0.00';
         }
     </script>
 </body>
