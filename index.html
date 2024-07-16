@@ -66,7 +66,7 @@
                 <option value="7">Pastel de Pizza - R$ 7,00</option>
             </select>
             <input type="number" id="produtoQuantidade" placeholder="Quantidade" min="1" required>
-            <button type="submit">Adicionar Pedido</button>
+            <button type="button" id="adicionarPedido">Adicionar Pedido</button>
         </form>
 
         <div class="pedidos">
@@ -93,10 +93,7 @@
     <script>
         let total = 0;
 
-        document.getElementById('pedidoForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            const nome = document.getElementById('clienteNome').value;
+        document.getElementById('adicionarPedido').addEventListener('click', function () {
             const produtoSelect = document.getElementById('produtoSelect');
             const produtoPreco = parseFloat(produtoSelect.value);
             const produtoNome = produtoSelect.options[produtoSelect.selectedIndex].text;
@@ -124,15 +121,15 @@
             editButton.style.marginLeft = '10px';
             editButton.onclick = function() {
                 const preco = parseFloat(li.dataset.preco);
-                const quantidade = parseInt(prompt("Nova quantidade:", "1")) || 1;
+                const novaQuantidade = parseInt(prompt("Nova quantidade:", "1")) || 1;
 
-                if (quantidade > 0) {
+                if (novaQuantidade > 0) {
                     total -= preco; // Remove o preço antigo
                     const produtoPreco = preco / (preco / parseFloat(li.textContent.match(/\d+(\.\d+)?/g)[0])); // Obtém o preço unitário
-                    const novoPrecoTotal = produtoPreco * quantidade;
+                    const novoPrecoTotal = produtoPreco * novaQuantidade;
 
                     li.dataset.preco = novoPrecoTotal; // Atualiza o preço no item
-                    li.textContent = `${li.textContent.split(' - ')[0]} (x${quantidade}) - R$ ${novoPrecoTotal.toFixed(2)}`;
+                    li.textContent = `${li.textContent.split(' - ')[0]} (x${novaQuantidade}) - R$ ${novoPrecoTotal.toFixed(2)}`;
                     total += novoPrecoTotal; // Adiciona o novo preço
 
                     document.getElementById('total').textContent = total.toFixed(2);
