@@ -106,7 +106,7 @@
                 const li = document.createElement('li');
                 li.dataset.preco = precoTotal;
                 li.textContent = `${produtoNome} (x${quantidade}) - R$ ${precoTotal.toFixed(2)}`;
-                li.appendChild(createEditButton(li));
+                li.appendChild(createEditButton(li, produtoPreco));
                 li.appendChild(createDeleteButton(li));
                 document.getElementById('pedidoList').appendChild(li);
                 document.getElementById('total').textContent = total.toFixed(2);
@@ -115,17 +115,17 @@
             resetForm();
         });
 
-        function createEditButton(li) {
+        function createEditButton(li, produtoPreco) {
             const editButton = document.createElement('button');
             editButton.textContent = 'Editar';
             editButton.style.marginLeft = '10px';
             editButton.onclick = function() {
-                const preco = parseFloat(li.dataset.preco);
-                const novaQuantidade = parseInt(prompt("Nova quantidade:", "1")) || 1;
+                const quantidadeAtual = parseInt(li.textContent.match(/x(\d+)/)[1]);
+                const novaQuantidade = parseInt(prompt("Nova quantidade:", quantidadeAtual)) || quantidadeAtual;
 
                 if (novaQuantidade > 0) {
+                    const preco = parseFloat(li.dataset.preco);
                     total -= preco; // Remove o preço antigo
-                    const produtoPreco = preco / (preco / parseFloat(li.textContent.match(/\d+(\.\d+)?/g)[0])); // Obtém o preço unitário
                     const novoPrecoTotal = produtoPreco * novaQuantidade;
 
                     li.dataset.preco = novoPrecoTotal; // Atualiza o preço no item
