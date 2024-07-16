@@ -2,9 +2,13 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Pedidos - Pastelaria</title>
     <style>
+     
+
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
@@ -52,46 +56,169 @@
             justify-content: space-between;
         }
     </style>
+
+<
 </head>
 <body>
     <div class="container">
-        <h1>Sistema de Pedidos - Pastelaria</h1>
-        <form id="pedidoForm">
-            <input type="text" id="clienteNome" placeholder="Nome do Cliente" required>
-            <select id="produtoSelect">
-                <option value="">Selecione um produto</option>
-                <option value="5">Pastel de Carne - R$ 5,00</option>
-                <option value="4">Pastel de Queijo - R$ 4,00</option>
-                <option value="6">Pastel de Frango - R$ 6,00</option>
-                <option value="7">Pastel de Pizza - R$ 7,00</option>
-            </select>
-            <input type="number" id="produtoQuantidade" placeholder="Quantidade" min="1" required>
-            <button type="button" id="adicionarPedido">Adicionar Pedido</button>
-        </form>
+        
+       
+<h1>Sistema de Pedidos - Pastelaria</h1>
+        
+   
+<form id="pedidoForm">
+            
+       
+<input type="text" id="clienteNome" placeholder="Nome do Cliente" required>
+            
+  
+<select id="produtoSelect">
+                
+          
+<option value="">Selecione um produto</option>
+                
+            
+
+ 
+<option value="5">Pastel de Carne - R$ 5,00</option>
+                
+        
+<option value="4">Pastel de Queijo - R$ 4,00</option>
+                
+                <
+
+       
+<option value="6">Pastel de Frango - R$ 6,00</option>
+                
+              
+
+     
+<option value="7">Pastel de Pizza - R$ 7,00</option>
+                
+                <
+
+        
+<option value="5">Pastel de Calabresa - R$ 5,00</option>
+                
+                <
+
+       
+<option value="4">Pastel de Legumes - R$ 4,00</option>
+                
+              
+
+    
+<option value="6">Pastel de Camarão - R$ 6,00</option>
+                
+        
+<option value="8">Pastel de Chocolate - R$ 8,00</option>
+                
+         
+<option value="7">Pastel de Frango com Catupiry - R$ 7,00</option>
+                
+             
+
+       
+
+ 
+<option value="6">Pastel de Espinafre - R$ 6,00</option>
+                
+           
+<option value="9">Pastel de Nutella - R$ 9,00</option>
+                
+            
+
+      
+<option value="5">Pastel de Pato - R$ 5,00</option>
+                
+               
+
+       
+<option value="7">Pastel de Jamburguer - R$ 7,00</option>
+                
+         
+<option value="6">Pastel de Maçã - R$ 6,00</option>
+                
+           
+<option value="4">Pastel de Abóbora - R$ 4,00</option>
+            
+            <
+
+ 
+</select>
+            
+   
+<input type="number" id="produtoQuantidade" placeholder="Quantidade" min="1" required>
+            
+            
+<button type="button" id="adicionarPedido">Adicionar Pedido</button>
+        
+    
+</form>
 
         <div class="pedidos">
-            <h2>Pedidos</h2>
-            <ul id="pedidoList"></ul>
-            <strong>Total: R$ <span id="total">0.00</span></strong>
-        </div>
+            
+      
+<h2>Pedidos</h2>
+            
+  
+<ul id="pedidoList"></ul>
+            
+            
+<strong>Total: R$ <span id="total">0.00</span></strong>
+        
+        </div
+
+ 
+</div>
 
         <div class="pagamento">
-            <h2>Pagamento</h2>
-            <select id="tipoPagamento">
-                <option value="dinheiro">Dinheiro</option>
-                <option value="cartao">Cartão</option>
-                <option value="pix">Pix</option>
-            </select>
-            <input type="number" id="dinheiro" placeholder="Dinheiro Recebido" step="0.01">
-            <button id="finalizarPedido">Finalizar Pedido</button>
-            <div>
-                <strong>Troco: R$ <span id="troco">0.00</span></strong>
-            </div>
+            
+         
+<h2>Pagamento</h2>
+            
+          
+<select id="tipoPagamento">
+                
+    
+<option value="dinheiro">Dinheiro</option>
+                
+                
+<option value="cartao">Cartão</option>
+                
+            
+<option value="pix">Pix</option>
+            
+            </sel
+
+    
+</select>
+            
+         
+<input type="number" id="dinheiro" placeholder="Dinheiro Recebido" step="0.01">
+            
+         
+<button id="finalizarPedido">Finalizar Pedido</button>
+            
+         
+<div>
+                
+                
+
+    
+<strong>Troco: R$ <span id="troco">0.00</span></strong>
+            
+     
+</div>
         </div>
     </div>
 
-    <script>
-        let total = 0;
+    
+
+ 
+<script>
+  let total = 0;
+        let vendasDiarias = 0;
 
         document.getElementById('adicionarPedido').addEventListener('click', function () {
             const produtoSelect = document.getElementById('produtoSelect');
@@ -128,9 +255,9 @@
                     total -= preco; // Remove o preço antigo
                     const novoPrecoTotal = produtoPreco * novaQuantidade;
 
-                    li.dataset.preco = novoPrecoTotal; // Atualiza o preço no item
+                    li.dataset.preco = novoPrecoTotal;
                     li.textContent = `${li.textContent.split(' - ')[0]} (x${novaQuantidade}) - R$ ${novoPrecoTotal.toFixed(2)}`;
-                    total += novoPrecoTotal; // Adiciona o novo preço
+                    total += novoPrecoTotal;
 
                     document.getElementById('total').textContent = total.toFixed(2);
                 }
@@ -158,9 +285,16 @@
                 const troco = dinheiroRecebido - total;
                 document.getElementById('troco').textContent = troco.toFixed(2);
                 alert(`Pedido finalizado! Troco: R$ ${troco.toFixed(2)}`);
+                
+                vendasDiarias += total;
+                console.log(`Total de vendas do dia: R$ ${vendasDiarias.toFixed(2)}`);
+                
                 resetAll();
             } else if (tipoPagamento !== 'dinheiro') {
                 alert(`Pagamento via ${tipoPagamento.charAt(0).toUpperCase() + tipoPagamento.slice(1)} realizado com sucesso!`);
+                vendasDiarias += total;
+                console.log(`Total de vendas do dia: R$ ${vendasDiarias.toFixed(2)}`);
+                
                 resetAll();
             } else {
                 alert('Dinheiro insuficiente!');
@@ -180,4 +314,6 @@
         }
     </script>
 </body>
+
+</ht
 </html>
