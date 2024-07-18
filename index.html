@@ -1714,7 +1714,7 @@ function adicionarPedido() {
   const taxa = document.getElementById('taxa').value;
   const endereco = taxa === 'delivery' ? document.getElementById('endereco').value.trim() : '';
 
-  if (nomeCliente && total > 0) {
+  if (nomeCliente) {
     const pasteis = {
       coxinha: document.getElementById('salgadoCoxinha').value,
       risoleCarne: document.getElementById('salgadoRisoleCarne').value,
@@ -1780,13 +1780,22 @@ function adicionarPedido() {
       total: total.toFixed(2)
     };
 
-    pedidos.push(pedido);
+    // Verificar se já existe um pedido editado, identificando-o pela posição na lista de pedidos
+    const index = pedidos.findIndex(p => p.nome === nomeCliente);
+    if (index !== -1) {
+      // Se encontrou um pedido existente com o mesmo nome, atualiza-o
+      pedidos[index] = pedido;
+    } else {
+      // Caso contrário, adiciona um novo pedido
+      pedidos.push(pedido);
+    }
+
     localStorage.setItem('pedidos', JSON.stringify(pedidos));
     enviarPedidoParaPlanilha(pedido);
     atualizarListaPedidos();
     limparCampos();
   } else {
-    alert('Por favor, insira o nome do cliente e adicione itens ao pedido.');
+    alert('Por favor, insira o nome do cliente.');
   }
 }
 
@@ -1808,7 +1817,7 @@ function atualizarListaPedidos() {
     listaPedidos.appendChild(div);
   });
 }
-          function editarPedido(index) {
+function editarPedido(index) {
   const pedidoEditado = pedidos[index];
 
   // Preencher os campos do formulário com os dados do pedido a ser editado
@@ -1866,22 +1875,15 @@ function atualizarListaPedidos() {
   document.getElementById('bebidaCerveja').value = pedidoEditado.bebidas.cerveja;
   document.getElementById('bebidaSuco').value = pedidoEditado.bebidas.suco;
   document.getElementById('bebidaaguagas').value = pedidoEditado.bebidas.aguagas;
-
-  // Remover o pedido editado da lista de pedidos em aberto
-  pedidos.splice(index, 1);
-  localStorage.setItem('pedidos', JSON.stringify(pedidos));
-
-  // Atualizar a lista de pedidos na interface
-  atualizarListaPedidos();
 }
 
         function concluirPedido(index) {
-          const pedidoConcluido = pedidos.splice(index, 1)[0];
-          pedidosConcluidos.push(pedidoConcluido);
-          localStorage.setItem('pedidos', JSON.stringify(pedidos));
-          localStorage.setItem('pedidosConcluidos', JSON.stringify(pedidosConcluidos));
-          atualizarListaPedidos();
-        }
+  const pedidoConcluido = pedidos.splice(index, 1)[0];
+  pedidosConcluidos.push(pedidoConcluido);
+  localStorage.setItem('pedidos', JSON.stringify(pedidos));
+  localStorage.setItem('pedidosConcluidos', JSON.stringify(pedidosConcluidos));
+  atualizarListaPedidos();
+}
 
         function limparCampos() {
           document.getElementById('nomeCliente').value = '';
