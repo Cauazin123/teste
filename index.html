@@ -1,109 +1,144 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abertura/Fechamento de Caixa - Pastelaria</title>
-    <link rel="icon" href="https://i.imgur.com/tInJUsb.png">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css"> <!-- Arquivo CSS separado para estilos customizados -->
     <style>
         body {
-            background: #eee;
+            background: #f8f9fa; /* Fundo cinza claro */
             font-family: Arial, sans-serif;
-            font-size: 16px;
+            padding: 20px;
         }
+
         .container {
-            max-width: 600px;
-            margin: 50px auto;
-            background: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width: 800px; /* Largura máxima do conteúdo */
+            margin: 0 auto; /* Centraliza o conteúdo na página */
         }
-        h1 {
-            text-align: center;
+
+        form {
+            background: #fff; /* Fundo branco */
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra leve */
+            border-radius: 8px;
             margin-bottom: 30px;
         }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
         label {
             font-weight: bold;
         }
-        input[type="text"], input[type="number"], select {
+
+        input[type="text"],
+        input[type="number"],
+        select {
             width: 100%;
             padding: 10px;
-            margin-bottom: 20px;
+            margin-top: 5px;
+            margin-bottom: 15px;
             border: 1px solid #ccc;
             border-radius: 4px;
             box-sizing: border-box;
+            font-size: 16px;
         }
+
         input[type="submit"] {
-            background-color: #007bff;
+            background-color: #007bff; /* Cor de fundo azul */
             color: white;
             border: none;
-            padding: 15px 20px;
-            cursor: pointer;
+            padding: 12px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
             border-radius: 4px;
-            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
         }
+
         input[type="submit"]:hover {
-            background-color: #0056b3;
+            background-color: #0056b3; /* Cor de fundo azul mais escura ao passar o mouse */
+        }
+
+        .btn-voltar {
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        .btn-voltar a {
+            color: #6c757d; /* Cor do texto cinza */
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .btn-voltar a:hover {
+            color: #495057; /* Cor do texto cinza mais escuro ao passar o mouse */
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            display: block;
+            margin: 0 auto;
+            max-width: 200px; /* Largura máxima da imagem */
+            margin-bottom: 20px;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
-        <h1>Abertura/Fechamento de Caixa - Pastelaria</h1>
-        <form id="aberturaFechamentoForm">
+        <img src="https://i.imgur.com/tInJUsb.png" alt="Logo Pastelaria" class="logo">
+        <form id="aberturaFechamentoForm" action="https://docs.google.com/forms/u/1/d/e/1FAIpQLSdTR" method="post">
+            <h1>Abertura/Fechamento de Caixa</h1>
+
             <div class="form-group">
-                <label for="data">Data</label>
-                <input type="date" id="data" name="data" required>
-            </div>
-            <div class="form-group">
-                <label for="tipo">Tipo de Movimento</label>
-                <select id="tipo" name="tipo" required>
-                    <option value="">Selecione o tipo</option>
-                    <option value="abertura">Abertura de Caixa</option>
-                    <option value="fechamento">Fechamento de Caixa</option>
+                <label for="opcao">Selecione a operação:</label>
+                <select name="opcao" id="opcao" class="form-control">
+                    <option value="Abertura">Abertura de Caixa</option>
+                    <option value="Fechamento">Fechamento de Caixa</option>
                 </select>
             </div>
+
             <div class="form-group">
-                <label for="valor">Valor</label>
-                <input type="number" id="valor" name="valor" step="0.01" required>
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required>
             </div>
+
             <div class="form-group">
-                <label for="responsavel">Responsável</label>
-                <input type="text" id="responsavel" name="responsavel" required>
+                <label for="valor">Valor em Caixa:</label>
+                <input type="number" id="valor" name="valor" required>
             </div>
+
             <div class="form-group">
-                <input type="submit" value="Enviar">
+                <label for="observacoes">Observações:</label>
+                <textarea id="observacoes" name="observacoes" rows="4"></textarea>
             </div>
+
+            <input type="submit" value="Enviar">
+
         </form>
+
+        <div class="btn-voltar">
+            <a href="#" onclick="history.go(-1);">« Voltar</a>
+        </div>
     </div>
 
-    <!-- Scripts para enviar dados para o Google Sheets -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(function() {
-            $('#aberturaFechamentoForm').submit(function(e) {
-                e.preventDefault();
-                var formData = $(this).serialize();
-                var url = 'https://script.google.com/macros/s/AKfycbzHMo4BT6m0hZK7bPp7oXEx9Pwr7Np7KM0P7Ew/exec'; // URL do script do Google Sheets
-
-                $.ajax({
-                    url: url,
-                    method: "GET",
-                    dataType: "json",
-                    data: formData,
-                    success: function(response) {
-                        alert('Dados enviados com sucesso!');
-                        $('#aberturaFechamentoForm')[0].reset(); // Limpa o formulário após o envio
-                    },
-                    error: function(err) {
-                        alert('Ocorreu um erro ao enviar os dados. Tente novamente mais tarde.');
-                        console.error(err);
-                    }
-                });
-            });
-        });
-    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>
